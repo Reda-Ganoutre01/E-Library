@@ -1,0 +1,16 @@
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\BackendApplication.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\config\AuthConfiguration.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\config\ResourceConfiguration.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\AuthController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\BookController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\BorrowRecordController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\CategoryController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\LibraryController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\controller\v1\UserController.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\Book.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\BorrowRecord.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\Category.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\enums\Role.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\enums\Status.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\Library.java
+c:\Users\reda\Downloads\project\p2\Advanced-Library-Management-System\backend\src\main\java\dev\library\backend\entity\User.java
