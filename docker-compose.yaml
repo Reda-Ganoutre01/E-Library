@@ -1,0 +1,21 @@
+services:
+  DB:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+      
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 6060:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  database:
