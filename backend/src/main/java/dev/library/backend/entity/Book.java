@@ -20,6 +20,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String cover;
     private String title;
     @ManyToOne
     private Category category;

@@ -1,4 +1,4 @@
-package dev.library.backend.controller.v1;
+package dev.library.backend.controller;
 
 public class BorrowRecordController {
     

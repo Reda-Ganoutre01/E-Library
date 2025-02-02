@@ -1,4 +1,4 @@
-package dev.library.backend.controller.v1;
+package dev.library.backend.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
