@@ -1,6 +1,7 @@
 services:
-  DB:
+  MySQL:
     image: mysql:latest
+    container_name: MySQL
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_DATABASE: ${DATABASE_NAME}
@@ -8,9 +9,9 @@ services:
       - "3306:3306"
     volumes:
       - database:/var/lib/mysql
-      
-  phpmyadmin:
+  Admin:
     image: phpmyadmin
+    container_name: Admin
     restart: always
     ports:
       - 6060:80

@@ -13,8 +13,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(registry -> {
-            registry.requestMatchers("/home").permitAll();
-            registry.requestMatchers("/admin/**").hasRole("LIBRARIAN");
+            registry.requestMatchers("/api/v1/**").permitAll();
         }).build();
     }
 }
