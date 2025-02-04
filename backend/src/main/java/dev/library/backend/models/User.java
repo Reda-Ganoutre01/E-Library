@@ -1,7 +1,8 @@
-package dev.library.backend.entity;
+package dev.library.backend.models;
 
 import java.util.List;
-import dev.library.backend.entity.enums.Role;
+
+import dev.library.backend.models.enums.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

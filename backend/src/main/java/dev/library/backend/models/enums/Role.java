@@ -1,4 +1,4 @@
-package dev.library.backend.entity.enums;
+package dev.library.backend.models.enums;
 
 public enum Role {
     USER,

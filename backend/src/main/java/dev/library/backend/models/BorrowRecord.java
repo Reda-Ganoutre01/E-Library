@@ -1,4 +1,4 @@
-package dev.library.backend.entity;
+package dev.library.backend.models;
 
 import java.io.ObjectInputFilter.Status;
 import java.sql.Date;
