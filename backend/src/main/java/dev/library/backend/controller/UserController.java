@@ -14,10 +14,36 @@ import dev.library.backend.service.UserService;
 @CrossOrigin
 @RequestMapping("/api/v1/users")
 public class UserController {
-    public final UserService userService;
     @Autowired
+    private UserService userService;
+    // Constructor-based dependency injection
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.getUser(id);
+    }
+
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    @PutMapping
+    public User updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        ;
     }
     @GetMapping("/{username}")
     public User showUser(@PathVariable String username) {
