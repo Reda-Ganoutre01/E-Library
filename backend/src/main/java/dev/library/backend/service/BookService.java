@@ -1,20 +1,27 @@
 package dev.library.backend.service;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.library.backend.repository.BookRepository;
+import jakarta.persistence.EntityNotFoundException;
+import dev.library.backend.models.Book;
+
 
 
 @Service
 public class BookService {
-    
+
     @Autowired
     private BookRepository bookRepository;
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return bookRepository.findAll();
     }
+
 
     public Book getBook(Long id) {
         return bookRepository.findById(id)

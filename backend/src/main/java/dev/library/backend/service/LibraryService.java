@@ -1,6 +1,13 @@
 package dev.library.backend.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import dev.library.backend.models.Library;
+import dev.library.backend.repository.LibraryRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
