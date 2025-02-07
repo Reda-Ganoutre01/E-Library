@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState} from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from '@mui/icons-material/Search';
 import BookIcon from '@mui/icons-material/Book';
 import "../../styles/Navbar.css";
-
+// const image=lazy(()=>import('./logo/book.png'))
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="nav">
+      {/* <img src={image} alt="image1" /> */}
       <div className="logo">
         Books <span>Library</span>
       </div>
