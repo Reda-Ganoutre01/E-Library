@@ -2,10 +2,11 @@ import {Provider} from "react-redux";
 import {Storage}  from "./storage/Storage.jsx";
 import Loader from './components/Loader'; 
 import { lazy, Suspense, useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 
-// const NavBar = lazy(() => import('./components/Navbar/Navbar'));
+const NavBar = lazy(() => import('.//components/Navbar/Navbar.jsx'));
 // const Auth=lazy(()=> import('./components/Auth.jsx'));
-const Books=lazy(()=>import('.//components/Books.jsx'))
+// const Books=lazy(()=>import('.//components/Books.jsx'))
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -14,19 +15,28 @@ function App() {
     return () => clearTimeout(timer); 
   }, []);
   return (
-    <Provider store={Storage}>
- <div>
+
+    <>
+     <Provider store={Storage}>
+      <BrowserRouter>
+      <div>
       {loading ? (
         <Loader /> 
       ) : (
         <Suspense fallback={<Loader />}>
-          {/* <NavBar/> */}
+          <NavBar/>
           {/* <Auth/> */}
-          <Books/>
+          {/* <Books/> */}
         </Suspense>
       )}
     </div>
+      
+      </BrowserRouter>
+ 
     </Provider>
+    
+    </>
+   
   )
 }
 

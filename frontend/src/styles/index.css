@@ -1,4 +1,12 @@
- /*:root {
+body{
+  color: #0a0a0a;
+}
+a {
+  font-weight: 500;
+  color:#0a0a0a;
+  text-decoration: inherit;
+}
+ /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,8 +19,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
+} */
+/*
 a {
   font-weight: 500;
   color: #646cff;
