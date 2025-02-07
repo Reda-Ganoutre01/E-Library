@@ -1,23 +1,32 @@
+import {Provider} from "react-redux";
+import {Storage}  from "./storage/Storage.jsx";
+import Loader from './components/Loader'; 
+import { lazy, Suspense, useEffect, useState } from "react";
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
-import Home from './Component/Home'
-import Nav from './Component/nav/Nav'
-import Layout from './Component/Layout'
-import Nbr from './Component/Nbr'
+// const NavBar = lazy(() => import('./components/Navbar/Navbar'));
+// const Auth=lazy(()=> import('./components/Auth.jsx'));
+const Books=lazy(()=>import('.//components/Books.jsx'))
 function App() {
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer); 
+  }, []);
   return (
-    <>
-  <BrowserRouter>
-  <Nav/>
-  <Routes>
-    <Route element={<Home/>} path='/'></Route>
-    <Route element={<Layout/>} path='/layout'></Route>
-    <Route element={<Nbr/>} path='/nbr'></Route>
-  </Routes>
-  </BrowserRouter>
-    </>
+    <Provider store={Storage}>
+ <div>
+      {loading ? (
+        <Loader /> 
+      ) : (
+        <Suspense fallback={<Loader />}>
+          {/* <NavBar/> */}
+          {/* <Auth/> */}
+          <Books/>
+        </Suspense>
+      )}
+    </div>
+    </Provider>
   )
 }
 

@@ -1,26 +1,28 @@
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\BackendApplication.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\config\ResourceConfiguration.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\config\SecurityConfiguration.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\AuthController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\BookController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\BorrowRecordController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\CategoryController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\LibraryController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\controller\UserController.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\handler\GlobalExceptionHandler.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\Book.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\BorrowRecord.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\Category.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\enums\Role.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\enums\Status.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\Library.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\models\User.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\repository\BookRepository.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\repository\CategoryRepository.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\repository\UserRepository.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\rules\UserRule.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\service\AuthService.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\service\BookService.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\service\CategoryService.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\service\LibraryService.java
-c:\Users\bgano\OneDrive\Documents\IT\ALMS\backend\src\main\java\dev\library\backend\service\UserService.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\BackendApplication.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\config\ResourceConfiguration.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\config\SecurityConfiguration.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\config\WebConfig.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\AuthController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\BookController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\BorrowRecordController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\CategoryController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\LibraryController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\controllers\UserController.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\Book.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\BorrowRecord.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\Category.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\enums\Role.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\enums\Status.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\Library.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\models\User.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\repositories\BookRepository.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\repositories\CategoryRepository.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\repositories\LibraryRepository.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\repositories\UserRepository.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\requests\LoginRequest.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\requests\RegisterRequest.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\services\AuthService.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\services\BookService.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\services\CategoryService.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\services\LibraryService.java
+c:\Users\bgano\Downloads\New folder (2)\Moha\ALMS\backend\src\main\java\dev\library\backend\services\UserService.java

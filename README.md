@@ -1,120 +1,150 @@
-## Introduction
+# Advanced Library Management System
 
-A **Library Management System (LMS)** is a comprehensive software solution designed to simplify and optimize the day-to-day operations of libraries. Its primary purpose is to assist librarians and library members in managing various aspects of library activities, such as book inventory, user memberships, and book transactions.
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![SonarQube](https://img.shields.io/badge/SonarQube-4E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)
 
-By focusing on essential features, an LMS ensures a user-friendly experience, quick setup, and efficient functionality for all stakeholders.
+This project is an advanced library management system designed to streamline library operations, including book search, reservations, user management, and more. The backend is built using **Spring Boot**, and the frontend is developed with **React**. Below is an overview of the project structure, features, and setup instructions.
 
-## Core Features
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Backend (Spring Boot)](#backend-spring-boot)
+5. [Frontend (React)](#frontend-react)
+6. [Database](#database)
+7. [Setup Instructions](#setup-instructions)
+8. [Contributing](#contributing)
+9. [License](#license)
 
-### **1. Book Management**
+## Project Overview
 
-This feature enables librarians to effectively manage the library's collection of books. It includes functionalities such as:
+The **Advanced Library Management System** is a web application that provides functionalities for both library users and librarians. It allows users to search for books, view details, and reserve books online. Librarians can manage books, users, and track borrowings and returns.
 
-- Adding new books to the inventory.
-- Removing books that are no longer available.
-- Searching for books based on specific criteria like title, author, or ISBN.
-- Tracking the availability of books in real time, ensuring members can easily find what they need.
+## Features
 
-### **2. User Management**
+### User Features
+- Search for books by title, author, category, or availability.
+- View book details (summary, author, available copies).
+- Reserve books online.
 
-The system facilitates the management of two distinct user types: **Librarian** and **Member**. Key functionalities include:
+### Librarian Features
+- Add, update, and delete books in the library.
+- Manage users (register, delete).
+- Track book borrowings and returns.
 
-- Registering new users and maintaining their profiles.
-- Managing borrowing privileges, such as setting limits on the number of books a member can borrow.
-- Ensuring secure access through authentication mechanisms.
+### System Features
+- Book reservation with time limits.
+- Notifications for overdue books.
+- Secure authentication and role-based access control.
 
-### **3. Borrowing and Returning**
 
-The borrowing and returning feature streamlines book transactions by:
+## Technologies Used
 
-- Allowing librarians to issue books to members.
-- Recording the return of borrowed books.
-- Tracking due dates to ensure timely returns and minimize overdue instances.
+### Backend (Spring Boot)
+- **Dependencies**:
+  - Spring Security
+  - Spring Web
+  - Lombok
+  - Spring Data JPA
+  - MySQL Connector/J
+  - Spring DevTools
 
-### **4. Fines**
+### Frontend (React)
+- **Dependencies**:
+  - React Router DOM
+  - Redux Toolkit
+  - React Redux
+  - Axios
 
-The system automatically calculates fines for overdue books to encourage timely returns. Key functionalities include:
+### Database
+- MySQL
 
-- Tracking overdue books and applying monetary penalties.
-- Maintaining a record of fine payments.
-- Displaying the payment status to both librarians and members.
 
-## Key Objects
+## Backend (Spring Boot)
 
-The following objects represent the core components of the Library Management System:
+The backend is built using Spring Boot and provides RESTful APIs for the frontend. Key functionalities include:
+- User authentication and authorization using Spring Security.
+- CRUD operations for books and users.
+- Integration with MySQL for data persistence.
 
-### **1. Book**
 
-Each book in the library is represented by a set of attributes that provide detailed information about it:
+## Frontend (React)
 
-| **Attribute** | **Description** |
-| --- | --- |
-| **Title** | The title or name of the book. |
-| **Author** | The author(s) who wrote the book. |
-| **Resume** | A brief summary or description of the book's content. |
-| **Cover** | The cover image of the book, providing a visual representation. |
-| **Copies Available** | The number of copies of the book currently available for borrowing. |
-| **ISBN** | A unique identifier assigned to the book for cataloging and tracking. |
+The frontend is a single-page application (SPA) built with React. Key features include:
+- Dynamic routing with React Router DOM.
+- State management using Redux Toolkit.
+- API communication using Axios.
+- Responsive and user-friendly UI.
 
-### **2. User**
 
-Users are individuals interacting with the library system. Their attributes include:
 
-| **Attribute** | **Description** |
-| --- | --- |
-| **Username** | The unique name used by the user to log in or identify themselves. |
-| **Password** | A secure credential required for user authentication. |
-| **Email** | The user's email address for communication purposes. |
-| **Phone** | The user's contact number for further communication or verification. |
+## Database
 
-### **3. Member**
+The application uses a MySQL database to store:
+- User information (credentials, roles).
+- Book details (title, author, summary, available copies).
+- Borrowing and reservation records.
 
-Members are users who borrow books from the library. They have additional attributes:
 
-| **Attribute** | **Description** |
-| --- | --- |
-| **Full Name** | The member's complete name. |
-| **Borrowed Books** | A list of books currently borrowed by the member, with a limit of three. |
 
-### **4. Librarian**
+## Setup Instructions
 
-Librarians are users with administrative responsibilities within the library system. Their attributes include:
+### Prerequisites
+- Java Development Kit (JDK) 17 or higher.
+- Node.js and npm installed.
+- MySQL Server installed and running.
 
-| **Attribute** | **Description** |
-| --- | --- |
-| **Full Name** | The librarian's complete name. |
-| **Role** | A description of the librarian's duties, such as managing books and transactions. |
+### Backend Setup
+1. Clone the repository:
+   
+   ```bash
+   git clone https://github.com/0xSikrox/ALMS.git
+   ```
+3. Navigate to the backend directory:
+   
+   ```bash
+   cd backend
+   ```
+5. Update the `application.properties` file with your MySQL credentials:
+   
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/library_db
+   spring.datasource.username=your-username
+   spring.datasource.password=your-password
+   ```
+7. Run the Spring Boot application:
+   
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
-### **5. Transaction**
+### Frontend Setup
+1. Navigate to the frontend directory:
+   
+   ```bash
+   cd frontend
+   ```
+3. Install dependencies:
+   
+   ```bash
+   npm install
+   ```
+5. Start the React development server:
+   
+   ```bash
+   npm start
+   ```
 
-A transaction records the details of borrowing or returning a book. The attributes include:
+## Contributing
 
-| **Attribute** | **Description** |
-| --- | --- |
-| **Book ID** | The unique identifier of the borrowed book. |
-| **Member ID** | The unique identifier of the member involved in the transaction. |
-| **Issue Date** | The date when the book was borrowed. |
-| **Due Date** | The date by which the book must be returned. |
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Submit a pull request.
 
-### **6. Fine**
+## License
 
-Fines are applied to members for overdue books. The attributes include:
-
-| **Attribute** | **Description** |
-| --- | --- |
-| **Member ID** | The unique identifier of the member who incurred the fine. |
-| **Amount** | The monetary penalty imposed for overdue books. |
-| **Payment Status** | Indicates whether the fine has been paid or is still pending. |
-
-### **7. Catalog**
-
-The catalog is a comprehensive record of the library's collection, enabling users to browse available books and their details. Attributes include:
-
-| **Attribute** | **Description** |
-| --- | --- |
-| **Book ID** | The unique identifier of each book in the library. |
-| **Title** | The title or name of the book. |
-| **Author** | The author(s) of the book. |
-| **Copies Available** | The number of copies currently available for borrowing. |
-
-![image.png](attachment:eb4b83ae-7d13-4880-bf54-59ff9f33f81d:image.png)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
