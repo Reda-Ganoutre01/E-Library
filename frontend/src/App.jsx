@@ -1,5 +1,4 @@
-import {Provider} from "react-redux";
-import {Storage}  from "./storage/Storage.jsx";
+
 import Loader from './components/Loader'; 
 import {  lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -16,7 +15,6 @@ function App() {
   return (
 
     <>
-     <Provider store={Storage}>
       <BrowserRouter>
       <div>
       {loading ? (
@@ -32,7 +30,6 @@ function App() {
       
       </BrowserRouter>
  
-    </Provider>
     
     </>
    
