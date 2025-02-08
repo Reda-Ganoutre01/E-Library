@@ -1,9 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+:root{
+  --p1-color:#21324b;
+  --p2-color:#7;
+  --p3-color:#21324b;
+  --p4-color:#21324b;
+
+}
+
+
+
+
+/* 
 a {
   font-weight: 500;
   color:#0a0a0a;
   text-decoration: inherit;
-}
+} */
  /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

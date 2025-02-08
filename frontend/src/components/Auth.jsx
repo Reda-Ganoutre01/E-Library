@@ -1,4 +1,4 @@
-import "../styles/Auth.css";
+// import "../styles/Auth.css";
 
 import logo from '../styles/logo/book_logo.png';
 const Auth = () => {

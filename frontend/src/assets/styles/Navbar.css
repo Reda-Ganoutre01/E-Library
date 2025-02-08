@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --secondary-color: red;
     --bg-color: rgba(29, 27, 27, 0.815);
     --primary-color: #0f4d92;
@@ -23,7 +23,6 @@ body {
     padding: 0;
 }
 
-/* ✅ Navbar Styling */
 .nav {
     display: flex;
     justify-content: space-between;
@@ -48,7 +47,6 @@ body {
     font-family: var(--font-family, sans-serif);
 }
 
-/* ✅ Navigation Links */
 .nav ul {
     list-style: none;
     display: flex;
@@ -63,7 +61,7 @@ body {
 
 .nav ul li a {
     text-decoration: none;
-    color: var(--text-color); /* ✅ Fixed missing color */
+    color: var(--text-color);
     font-size: 16px;
     transition: color 0.3s ease-in-out;
 }
@@ -72,7 +70,6 @@ body {
     color: var(--primary-color);
 }
 
-/* ✅ Icons Styling */
 .icons {
     display: flex;
     gap: 10px;
@@ -87,10 +84,10 @@ body {
 
 #icon:hover {
     transform: scale(1.1);
-}
+} */
 
 /* ✅ Mobile Menu Toggle */
-.menu-toggle {
+/* .menu-toggle {
     display: none;
     cursor: pointer;
 }
@@ -101,10 +98,10 @@ body {
     background-color: var(--text-color);
     margin: 5px;
     transition: transform 0.3s ease-in-out;
-}
+} */
 
 /* ✅ Responsive Design for Mobile */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .nav {
         flex-direction: column;
         height: auto;
@@ -135,4 +132,4 @@ body {
     .icons {
         margin-top: 10px;
     }
-}
+} */
