@@ -4,8 +4,7 @@ import Vector from "../../assets/images/website/blue-pattern.png";
 import { booksList } from '../../constants/BooksConstant';
 import { getImgUrl } from '../../utils/getImgUrl';
 
-import Aos from "./aos"
-import 'aos/dist/aos.css'
+
 export const Hero = () => {
     const [bookslist, setBookslist] = useState(booksList);
     const [imageid, setImageId] = useState(booksList[0]?.cover || Book1);
@@ -15,10 +14,7 @@ export const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
 
-    // animation
-    useEffect(()=>{
-        Aos.init();
-    },[])
+ 
     useEffect(() => {
         if (booksList.length > 0) {
             setImageId(booksList[0].cover);
@@ -53,14 +49,14 @@ export const Hero = () => {
         <>
             <div
                 className="min-h-[550px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200"
-                style={bgImage}
+                style={bgImage} data-aos="zoom-out-up"
             >
                 <div className="container pb-8 sm:pb-0">
                     <div className="grid grid-cols-1 sm:grid-cols-2">
                         {/* Text content section */}
                         <div
-                            data-aos-once="true"
-                            className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1"
+data-aos="fade-down-right"
+                        className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1"
                         >
                             <h1
                                 data-aos="zoom-out"
@@ -95,7 +91,9 @@ export const Hero = () => {
                             </div>
                         </div>
                         {/* Image section */}
-                        <div className="min-h-[450px] sm:min-h-[450px] flex justify-center items-center relative order-1 sm:order-2">
+                        <div className="min-h-[450px] sm:min-h-[450px] flex justify-center items-center relative order-1 sm:order-2"
+                        data-aos="fade-down-left"
+                        >
                             <div className="h-[300px] sm:h-[450px]  flex justify-center items-center">
                                 <img
         

@@ -10,7 +10,9 @@ export const TopBooks = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="py-10">
-      <h2 className="text-3xl font-semibold mb-6 text-center underline decoration-primary">
+      <h2 className="text-3xl font-semibold mb-6 text-center underline decoration-primary"
+      data-aos="zoom-in-down"
+      >
   Top Books
 </h2>
 
@@ -36,7 +38,7 @@ export const TopBooks = () => {
           {booksList2.length > 0 &&
             booksList2.map((book, index) => (
               <SwiperSlide key={index} className='flex justify-center'>
-                <BookCard book={book} />
+                <BookCard book={book}  />
               </SwiperSlide>
             ))}
         </Swiper>

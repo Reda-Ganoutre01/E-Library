@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export const BookCard = ({ book }) => {
   return (
-    <div
+    <div data-aos="zoom-in-up"
     className='rounded-lg shadow-lg p-4
     w-[200px]
     bg-white hover:shadow-xl transition-all duration-300'
