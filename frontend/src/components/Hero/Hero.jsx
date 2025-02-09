@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import Book1 from "../../assets/images/books/book1.jpg";
 import Vector from "../../assets/images/website/blue-pattern.png";
 import { booksList } from '../../constants/BooksConstant';
+import { getImgUrl } from '../../utils/getImgUrl';
 
 export const Hero = () => {
     const [bookslist, setBookslist] = useState(booksList);
     const [imageid, setImageId] = useState(booksList[0]?.cover || Book1);
+    const [author, setAuthor] = useState(booksList[0]?.author || "Anonymous");
     const [title, setTitle] = useState(booksList[0]?.title || "Effective Java");
     const [description, setDescription] = useState(booksList[0]?.description || "A comprehensive guide to Java programming.");
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         if (booksList.length > 0) {
@@ -15,10 +18,21 @@ export const Hero = () => {
             setTitle(booksList[0].title);
             setDescription(booksList[0].description);
         }
-        setTimeout(() => {
-            
-        }, 2000);
-    }, []);
+        
+        // Set an interval to change the book every 3 seconds
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => {
+                const nextIndex = (prevIndex + 1) % booksList.length;
+                setImageId(booksList[nextIndex].cover);
+                setTitle(booksList[nextIndex].title);
+                setDescription(booksList[nextIndex].description);
+                return nextIndex;
+            });
+        }, 2500);
+
+        // Clear the interval on component unmount
+        return () => clearInterval(interval);
+    }, [booksList]);
 
     const bgImage = {
         backgroundImage: `url(${Vector})`,
@@ -48,8 +62,8 @@ export const Hero = () => {
                                 className="text-5xl sm:text-6xl lg:text-7xl font-bold"
                             >
                                 {title}
-                                <p className="bg-clip-text text-transparent bg-gradient-to-b from-primary text-right text-sm to-secondary">
-                                    by Anonymous
+                                <p className="bg-clip-text text-transparent bg-gradient-to-b  from-primary text-right text-sm to-secondary">
+                              <span className='text-gray-950'> by</span> {author}
                                 </p>
                             </h1>
                             <p
@@ -71,18 +85,18 @@ export const Hero = () => {
                         </div>
                         {/* Image section */}
                         <div className="min-h-[450px] sm:min-h-[450px] flex justify-center items-center relative order-1 sm:order-2">
-                            <div className="h-[300px] sm:h-[450px] overflow-hidden flex justify-center items-center">
+                            <div className="h-[300px] sm:h-[450px]  flex justify-center items-center">
                                 <img
         
-                                    src={imageid}
+                                    src={`${getImgUrl(imageid)}`}
                                     alt={title}
-                                    className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-125 object-contain mx-auto"
+                                    className="w-[200px] h-[200px] sm:h-[350px] sm:w-[350px] sm:scale-125 object-contain mx-auto"
                                 />
                             </div>
                             <div className="flex lg:flex-col lg:top-1/2 lg:-translate-y-1/2 lg:py-2 justify-center gap-4 absolute -bottom-[40px] lg:-right-1 bg-white rounded-full">
                                 {bookslist.map((e, index) => (
                                     <img
-                                        src={e.cover}
+                                        src={`${getImgUrl(e.cover)}`}
                                         key={index}
                                         className="max-w-[100px] h-[100px] object-contain inline-block hover:scale-110 duration-200"
                                         alt={e.title}

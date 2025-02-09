@@ -8,7 +8,7 @@ import im3 from "../assets/images/BooksImgaes/book3.jpg"
 export const booksList = [
   {
     id: 0,
-    cover: im1,
+    cover: "book1.jpg",
     title: "Effective Java",
     author: "Joshua Bloch",
     description: "A comprehensive guide to Java programming.",
@@ -18,7 +18,7 @@ export const booksList = [
   },
   {
     id: 1,
-    cover: im2,
+    cover: "book2.jpg",
     title: "Clean Code",
     author: "Robert C. Martin",
     description: "A handbook of agile software craftsmanship.",
@@ -28,7 +28,7 @@ export const booksList = [
   },
   {
     id: 2,
-    cover: im3,
+    cover: "book3.jpg",
     title: "The Pragmatic Programmer",
     author: "Andrew Hunt, David Thomas",
     description: "Your journey to mastery, pragmatic advice for programmers.",
