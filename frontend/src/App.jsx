@@ -2,11 +2,10 @@
 import Loader from './components/Loader'; 
 import {  lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-
 const Home=lazy(()=>import('./pages/Home.jsx'))
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);

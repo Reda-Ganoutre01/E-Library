@@ -1,6 +1,7 @@
 import { FiShoppingCart } from 'react-icons/fi'
 import { getImgUrl } from '../../utils/getImgUrl'
 import { Link } from 'react-router-dom'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export const BookCard = ({book}) => {
   return (
@@ -13,7 +14,9 @@ export const BookCard = ({book}) => {
         <img
           src={`${getImgUrl(book?.cover)}`}
           alt=""
-          className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
+          className="w-[200px] bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
+          // className="w-[200px] h-[200px] sm:h-[350px] sm:w-[350px] sm:scale-125 object-contain mx-auto"
+
         />
       </Link>
     </div>
@@ -27,8 +30,10 @@ export const BookCard = ({book}) => {
       <p className="font-medium mb-5">
       categories:<span className=" font-normal ml-2">{book?.categories[0]}</span>
       </p>
-      <button className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
-        <FiShoppingCart className="" />
+      <button className="bg-primary text-white py-2 px-4 rounded-full
+      hover:scale-105 duration-200
+      px-6 space-x-1 flex items-center gap-1 ">
+        <ArrowForwardIosIcon className="" />
         <span>Show More</span>
       </button>
     </div>
