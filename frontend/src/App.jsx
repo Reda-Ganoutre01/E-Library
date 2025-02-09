@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 const Home=lazy(()=>import('./pages/Home.jsx'))
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);

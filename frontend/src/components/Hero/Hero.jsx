@@ -4,6 +4,8 @@ import Vector from "../../assets/images/website/blue-pattern.png";
 import { booksList } from '../../constants/BooksConstant';
 import { getImgUrl } from '../../utils/getImgUrl';
 
+import Aos from "./aos"
+import 'aos/dist/aos.css'
 export const Hero = () => {
     const [bookslist, setBookslist] = useState(booksList);
     const [imageid, setImageId] = useState(booksList[0]?.cover || Book1);
@@ -12,6 +14,11 @@ export const Hero = () => {
     const [description, setDescription] = useState(booksList[0]?.description || "A comprehensive guide to Java programming.");
     const [currentIndex, setCurrentIndex] = useState(0);
 
+
+    // animation
+    useEffect(()=>{
+        Aos.init();
+    },[])
     useEffect(() => {
         if (booksList.length > 0) {
             setImageId(booksList[0].cover);
@@ -63,7 +70,11 @@ export const Hero = () => {
                             >
                                 {title}
                                 <p className="bg-clip-text text-transparent bg-gradient-to-b  from-primary text-right text-sm to-secondary">
-                              <span className='text-gray-950'> by</span> {author}
+                              <span className='text-gray-950'> by </span> 
+                              <span className='font-medium underline decoration-primary'>
+                                {author}
+                              </span>
+                              
                                 </p>
                             </h1>
                             <p
@@ -79,7 +90,7 @@ export const Hero = () => {
                                     onClick={() => {}}
                                     className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
                                 >
-                                    Show More
+                                    Show Details
                                 </button>
                             </div>
                         </div>
