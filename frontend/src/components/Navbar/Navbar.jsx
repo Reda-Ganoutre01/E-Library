@@ -7,7 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 
 const Menu = [
-  { id: 1, name: "Home", link: "/home" },
+  { id: 1, name: "Books", link: "/Books" },
   { id: 2, name: "News", link: "/News" },
   { id: 4, name: "Contact", link: "/Contact" }
 ];
@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="container flex justify-between items-center py-3 px-4 md:px-6">
         {/* Logo */}
         <div>
-          <Link to={"/home"} className="flex items-center gap-2 font-bold text-2xl text-zinc-800 sm:text-3xl">
+          <Link to={"/"} className="flex items-center gap-2 font-bold text-2xl text-zinc-800 sm:text-3xl">
             <img src={logo} className="w-10" alt="logo" />
             B-Library
           </Link>

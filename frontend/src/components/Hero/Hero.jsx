@@ -5,6 +5,7 @@ import { booksList } from '../../constants/BooksConstant';
 import { getImgUrl } from '../../utils/getImgUrl';
 
 
+
 export const Hero = () => {
     const [bookslist, setBookslist] = useState(booksList);
     const [imageid, setImageId] = useState(booksList[0]?.cover || Book1);
@@ -21,6 +22,8 @@ export const Hero = () => {
             setTitle(booksList[0].title);
             setDescription(booksList[0].description);
         }
+       
+    
         
         // Set an interval to change the book every 3 seconds
         const interval = setInterval(() => {

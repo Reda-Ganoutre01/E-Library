@@ -1,38 +1,32 @@
+import Loader from "./components/Loader";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Loader from './components/Loader'; 
-import {  lazy, Suspense, useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
-const Home=lazy(()=>import('./pages/Home.jsx'))
+const Home = lazy(() => import("./pages/Home.jsx"));
+const Login = lazy(() => import("./pages/Login.jsx"));
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
-  return (
 
-    <>
-      <BrowserRouter>
-      <div>
+  return (
+    <BrowserRouter>
       {loading ? (
-        <Loader /> 
+        <Loader />
       ) : (
         <Suspense fallback={<Loader />}>
-         <Home/>
-      
-  
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login/>}></Route>
+          </Routes>
         </Suspense>
       )}
-    </div>
-      
-      </BrowserRouter>
- 
-    
-    </>
-   
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -18,7 +18,7 @@ import dev.library.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -27,23 +27,18 @@ public class UserService implements UserDetailsService{
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
     public User getUser(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
     }
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
-
     public User updateUser(User user) {
         if (!userRepository.existsById(user.getId())) {
             throw new EntityNotFoundException("User not found with id: " + user.getId());
         }
         return userRepository.save(user);
     }
-
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             throw new EntityNotFoundException("User not found with id: " + id);

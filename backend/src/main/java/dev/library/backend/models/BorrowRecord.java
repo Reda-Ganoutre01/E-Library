@@ -1,6 +1,7 @@
 package dev.library.backend.models;
 
 import java.io.ObjectInputFilter.Status;
+import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "borrow_records")
-public class BorrowRecord {
+public class BorrowRecord implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

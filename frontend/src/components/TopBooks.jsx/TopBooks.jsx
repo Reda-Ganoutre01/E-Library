@@ -5,8 +5,20 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useEffect, useState } from 'react';
 
 export const TopBooks = () => {
+  const [bookslist,setBookslist]=useState(booksList2)
+
+  useEffect(()=>{
+    
+    fetch("http://localhost:8080/api/v1/books/")
+    .then((rep)=>rep.json())
+    .then((data)=>setBookslist(data))
+    .then((error)=>console.log(error))
+
+     console.log("work")
+  },[])
   return (
     <div className="container mx-auto px-4">
       <div className="py-10">
@@ -35,8 +47,8 @@ export const TopBooks = () => {
           modules={[Navigation, Pagination, Autoplay]}  // Include Autoplay module
           className="mySwiper"
         >
-          {booksList2.length > 0 &&
-            booksList2.map((book, index) => (
+          {bookslist.length > 0 &&
+            bookslist.map((book, index) => (
               <SwiperSlide key={index} className='flex justify-center'>
                 <BookCard book={book}  />
               </SwiperSlide>

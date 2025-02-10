@@ -1,14 +1,12 @@
 package dev.library.backend.models;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,18 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "books")
-public class Book {
+public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cover;
     private String title;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
-    @ManyToOne
-    private Library library;
-    @OneToMany(mappedBy = "book")
-    private List<BorrowRecord> borrowRecords;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BorrowRecord> borrowRecords = new ArrayList<>();
+
     private String author;
     private String description;
     private String isbn;
