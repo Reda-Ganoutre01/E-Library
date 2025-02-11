@@ -20,6 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @RestController
 @CrossOrigin(origins="http://localhost:5173/")
 @RequestMapping("/api/v1/books")
@@ -49,6 +50,13 @@ public class BookController {
     public ResponseEntity<BookResponseDto> createBook(@RequestBody BookRequestDto bookRequestDto) throws IOException {
         return new ResponseEntity<>(this.bookService.createBook(bookRequestDto) , HttpStatus.CREATED);
     }
+
+    // get last three books
+    @GetMapping("/latest")
+    public List<Book> getLatestBooks() {
+        return bookService.getLatestBooks();
+    }
+    
 //    @PreAuthorize("hasRole('LIBRARIAN')")
 //    @PutMapping("/update/{id}")
 //    public Book updateBook( @RequestBody Book book) {

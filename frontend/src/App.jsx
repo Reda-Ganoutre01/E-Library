@@ -6,7 +6,7 @@ const Home = lazy(() => import("./pages/Home.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
@@ -14,6 +14,7 @@ function App() {
   }, []);
 
   return (
+   
     <BrowserRouter>
       {loading ? (
         <Loader />

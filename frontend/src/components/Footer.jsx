@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo/logo_ALMS.png";
+import {useEffect, useState } from "react";
+import CategoriesService from "../services/CategoriesService";
 function Footer() {
+    const [categoriesList,setcategoriesList]=useState([])
+
+  useEffect(()=>{
+    CategoriesService.getCategories()
+    .then((response)=>setcategoriesList(response.data))
+  },[])
   return (
     // <footer className="bg-gray-900 text-gray-300 py-12">
     <footer className="bg-gray-900 text-gray-300 py-12">
@@ -22,6 +30,7 @@ function Footer() {
           <nav>
             <h6 className="text-lg font-semibold text-white mb-4">Services</h6>
             <ul className="space-y-3">
+              
               <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Home</a></li>
               <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Books</a></li>
               <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Contact</a></li>
@@ -33,10 +42,11 @@ function Footer() {
           <nav>
             <h6 className="text-lg font-semibold text-white mb-4">Categories</h6>
             <ul className="space-y-3">
-              <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">About us</a></li>
-              <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Contact</a></li>
-              <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Jobs</a></li>
-              <li><a className="link link-hover  cursor-pointer text-gray-400 hover:text-white transition duration-200">Press kit</a></li>
+              {categoriesList.map((e)=>(
+              <li key={e.id}><Link className="link link-hover  cursor-pointer
+               text-gray-400 hover:text-white transition duration-200">{e.name}</Link></li>
+
+              ))}
             </ul>
           </nav>
 

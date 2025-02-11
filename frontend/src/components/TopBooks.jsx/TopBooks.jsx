@@ -7,17 +7,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useEffect, useState } from 'react';
 
+import bookService from '../../services/bookService';
 export const TopBooks = () => {
   const [bookslist,setBookslist]=useState(booksList2)
 
   useEffect(()=>{
+    bookService.getBooks()
+    .then((response)=>setBookslist(response.data.content))
     
-    fetch("http://localhost:8080/api/v1/books/")
-    .then((rep)=>rep.json())
-    .then((data)=>setBookslist(data))
-    .then((error)=>console.log(error))
-
-     console.log("work")
   },[])
   return (
     <div className="container mx-auto px-4">

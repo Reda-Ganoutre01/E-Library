@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import dev.library.backend.repositories.BookRepository;
@@ -60,5 +61,11 @@ public class BookService {
     }
     public List<BookResponseDto> getBooksBySearch(String search) {
         return this.bookResponseMapperService.toDataTransferObjects(this.bookRepository.searchBooks(search));
+    }
+
+
+     // Find 3 new books
+     public List<Book> getLatestBooks() {
+        return this.bookRepository.findThreeLatestBooks();
     }
 }

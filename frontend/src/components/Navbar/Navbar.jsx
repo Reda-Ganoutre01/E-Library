@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo/logo_ALMS.png";
-import { categoriesList } from "../../constants/CategoriesConstant";
 import { FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
+import CategoriesService from "../../services/CategoriesService";
 
 const Menu = [
   { id: 1, name: "Books", link: "/Books" },
@@ -13,10 +13,17 @@ const Menu = [
 ];
 
 const Navbar = () => {
+
+  const [categoriesList,setcategoriesList]=useState([])
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+ 
+
   useEffect(() => {
+    // for categories
+    CategoriesService.getCategories()
+    .then((response)=>setcategoriesList(response.data))
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
     };
