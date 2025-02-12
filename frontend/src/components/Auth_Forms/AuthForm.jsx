@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LockClosedIcon, EnvelopeIcon } from "@heroicons/react/24/solid"; // Correct imports
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function AuthForm() {
   const {
@@ -78,7 +79,7 @@ export default function AuthForm() {
 
         {/* Lien vers l'inscription */}
         <p className="text-center text-sm text-gray-600">
-          Pas de compte ? <a href="/register" className="text-blue-600 hover:underline">Inscrivez-vous</a>
+          Pas de compte ? <Link to={"/register"} className="text-blue-600 hover:underline">Inscrivez-vous</Link>
         </p>
       </div>
     </div>
