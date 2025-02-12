@@ -1,0 +1,55 @@
+/* Centering the auth form
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  #image {
+    width: 80px;
+    margin-bottom: 20px;
+  } */
+  /* Styling the form */
+  /* .form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  } */
+  
+  /* Labels and Inputs */
+  /* .form label {
+    margin-bottom: 3px;
+    font-weight: bold;
+  }
+  
+  .form input,
+  .form select {
+    padding: 7px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  } */
+  
+  /* Button Styling */
+  /* .login-btn {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-btn:hover {
+    background-color: #2563eb;
+  } */
+  

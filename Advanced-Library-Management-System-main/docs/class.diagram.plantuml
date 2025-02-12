@@ -1,0 +1,62 @@
+@startuml "Class Diagram For ALMS"
+!theme plain
+skinparam linetype ortho
+
+class Library {
+  - id: Long
+  - name: String
+  - telephone: String
+  - address: String
+  - books: List<Book>
+}
+
+class Book {
+  - id: Long
+  - author: String
+  - title: String
+  - description: String
+  - category: Category
+  - copies: int
+  - ISBN: String
+}
+
+class Category {
+  - id: Long
+  - name: String
+  - books: List<Book>
+}
+
+class User {
+  - id: Long
+  - username: String
+  - password: String
+  - fullName: String
+  - role: Role
+}
+
+class BorrowRecord {
+  - id: Long
+  - borrowDate: Date
+  - returnDate: Date
+  - status: Status
+}
+
+enum Status {
+  BORROWED
+  RETURNED
+  OVERDUE
+}
+
+enum Roles {
+  USER
+  LIBRARIAN
+}
+
+User -- Roles
+BorrowRecord -- User : "1" 
+BorrowRecord -- Book : "1..*"
+Library -- Book : "1..*"
+Book --* Category : "1..*"
+Status -- BorrowRecord
+
+@enduml

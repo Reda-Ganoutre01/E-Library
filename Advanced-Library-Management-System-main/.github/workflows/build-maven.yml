@@ -1,0 +1,40 @@
+name: Build Java Backend
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Java environment
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'  # Specify the Java version
+          distribution: 'temurin'  # Use Temurin JDK
+
+      # Navigate to the backend directory
+      - name: Navigate to backend directory
+        run: cd backend
+
+      # Build the Java project using Maven
+      - name: Build with Maven
+        run: mvn clean package  # This will create the target directory
+
+      # Optionally, you can upload the target directory as an artifact
+      - name: Upload target directory as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: target
+          path: backend/target
