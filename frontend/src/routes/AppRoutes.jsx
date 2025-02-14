@@ -1,63 +1,50 @@
-// import { lazy, Suspense, useEffect, useState } from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
-// const Loader=lazy(()=>import("../components/Loader.jsx"))
+// User pages
+const Home = lazy(() => import("../pages/Home.jsx"));
+const Login = lazy(() => import("../pages/Login.jsx"));
+const Register = lazy(() => import("../pages/Register.jsx"));
+const Books = lazy(() => import("../pages/Books.jsx"));
+const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
+const Profile = lazy(() => import("../pages/UserProfile.jsx"));
+const Contact = lazy(() => import("../pages/Contact.jsx"));
+const Search = lazy(() => import("../pages/Search.jsx"));
 
-// // user
-// const Home=lazy(()=>import("../pages/Home.jsx"));
-// const Login=lazy(()=>import("../pages/Login.jsx"));
-// const Register=lazy(()=>import("../pages/Register.jsx"));
-// const Books=lazy(()=>import("../pages/Books.jsx"));
-// const BookDetail=lazy(()=>import("../pages/BookDetails.jsx"));
-// // admin
-// const Dashboard=lazy(()=>import("../pages/admin/Dashboard.jsx"));
-// const ManageUsers=lazy(()=>import("../pages/admin/ManageUsers.jsx"))
-// import Profile from "../pages/Profile.jsx"
+// Admin pages
+const Dashboard = lazy(() => import("../pages/admin/Dashboard.jsx"));
+const ManageUsers = lazy(() => import("../pages/admin/ManageUsers.jsx"));
+const ManageBooks = lazy(() => import("../pages/admin/ManageBooks.jsx"));
 
-// const AppRoutes = () => {
-//   const [loading,setLoading]=useState(true)
-//   useEffect(()=>{
-//     const timer=setTimeout(()=>setLoading(false),1000);
-//     return ()=> clearTimeout(timer);
-//   },[]);
-//   return (
-//     <Router>
-//       {loading ? (
-//         <Loader/>
-//       ):
-//       (
-//         <Suspense fallback={<Loader />}>
+// Components
+const Loader = lazy(() => import("../components/Loader/Loader.jsx"));
+const Nav = lazy(() => import("../components/Navbar/Navbar.jsx"));
+const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
 
-//          <Routes>
-//         {/* Routes Utilisateurs */}
-//         <Route path="/" element={<Home />} />
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/books" element={<Books />} />
-//         <Route path="/books/:id" element={<BookDetail />} />
-//         <Route path="/profile" element={<Profile />} />
-
-
-
-//         {/* Routes Admin */}
-//         <Route path="/admin/dashboard" element={<Dashboard />} />
-//         <Route path="/admin/users" element={<ManageUsers />} />
-//       </Routes>
-//       </Suspense>
-//       )
-//     }
-      
-     
-//     </Router>
-//   );
-// };
-
-// export default AppRoutes;
-
-import React from 'react'
-
-export const AppRoutes = () => {
+const AppRoutes = () => {
   return (
-    <div>AppRoutes</div>
-  )
-}
+    <Suspense fallback={<Loader />}>
+      <Nav />
+      <Routes>
+        {/* Routes Utilisateurs */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/books/:search" element={<Search />} />
+        <Route path="/books/:categorie" element={<Search />} />
+        <Route path="/books/bookdetails/:id" element={<BookDetails />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+
+        {/* Routes Admin */}
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/users" element={<ManageUsers />} />
+        <Route path="/admin/books" element={<ManageBooks />} />
+      </Routes>
+      <Footer />
+    </Suspense>
+  );
+};
+
+export default AppRoutes;

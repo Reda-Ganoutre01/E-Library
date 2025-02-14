@@ -51,12 +51,23 @@ public class BookController {
         return new ResponseEntity<>(this.bookService.createBook(bookRequestDto) , HttpStatus.CREATED);
     }
 
-    // get last three books
     @GetMapping("/latest")
-    public List<Book> getLatestBooks() {
-        return bookService.getLatestBooks();
+    public ResponseEntity<List<BookResponseDto>> getLatestBooks() {
+        List<BookResponseDto> latestBooks = bookService.getLatestBooks();
+        return new ResponseEntity<>(latestBooks, HttpStatus.OK);
+    }
+
+    @GetMapping("/topbooks")
+    public ResponseEntity<List<BookResponseDto>> getTopBooks(){
+        List<BookResponseDto> topbooks=bookService.getTopBooks();
+        return new ResponseEntity<>(topbooks,HttpStatus.OK);
     }
     
+    @GetMapping("/categorie={categorie}")
+    public ResponseEntity <List<BookResponseDto>> getBooksByCategories(@PathVariable String categorie){
+        return new ResponseEntity<>(this.bookService.getBooksByCategories(categorie),HttpStatus.OK);
+
+    }
 //    @PreAuthorize("hasRole('LIBRARIAN')")
 //    @PutMapping("/update/{id}")
 //    public Book updateBook( @RequestBody Book book) {

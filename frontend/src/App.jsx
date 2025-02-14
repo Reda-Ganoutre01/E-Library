@@ -1,34 +1,14 @@
 import { BrowserRouter } from "react-router-dom";
+import { lazy } from "react";
 
-
-import AppRoutes from "./routes/AppRoutes copy";
+const AppRoutes=lazy(()=>import("./routes/AppRoutes.jsx"))
 function App() {
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setLoading(false), 2000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   return (
-   <>
-   <BrowserRouter>
+    <BrowserRouter>
+     
       <AppRoutes/>
-
-   </BrowserRouter>
-   </>
-    // <BrowserRouter>
-    //   {loading ? (
-    //     <Loader />
-    //   ) : (
-    //     <Suspense fallback={<Loader />}>
-    //       <Routes>
-    //         <Route path="/" element={<Home />} />
-    //         <Route path="/login" element={<Login/>}></Route>
-    //       </Routes>
-    //     </Suspense>
-    //   )}
-    // </BrowserRouter>
+      {/* <Home/> */}
+    </BrowserRouter>
   );
 }
 

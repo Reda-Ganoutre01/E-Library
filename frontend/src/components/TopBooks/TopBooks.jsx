@@ -1,4 +1,3 @@
-import { booksList2 } from '../../constants/BooksConstant';
 import { BookCard } from "../Book/BookCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -8,12 +7,15 @@ import 'swiper/css/pagination';
 import { useEffect, useState } from 'react';
 
 import bookService from '../../services/bookService';
-export const TopBooks = () => {
-  const [bookslist,setBookslist]=useState(booksList2)
+
+export default function TopBooks (){
+  const [topBookslist,setTopBookslist]=useState([])
 
   useEffect(()=>{
-    bookService.getBooks()
-    .then((response)=>setBookslist(response.data.content))
+    bookService.getTopBrrowRecordsBooks()
+    .then((response)=>
+       setTopBookslist(response.data)
+      )
     
   },[])
   return (
@@ -44,8 +46,8 @@ export const TopBooks = () => {
           modules={[Navigation, Pagination, Autoplay]}  // Include Autoplay module
           className="mySwiper"
         >
-          {bookslist.length > 0 &&
-            bookslist.map((book, index) => (
+          {topBookslist.length > 0 &&
+            topBookslist.map((book, index) => (
               <SwiperSlide key={index} className='flex justify-center'>
                 <BookCard book={book}  />
               </SwiperSlide>

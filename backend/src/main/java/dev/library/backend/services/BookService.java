@@ -63,9 +63,22 @@ public class BookService {
         return this.bookResponseMapperService.toDataTransferObjects(this.bookRepository.searchBooks(search));
     }
 
+    // GET THREE lATEST BOOKS
+    public List<BookResponseDto> getLatestBooks() {
+        List<Book> latestBooks = this.bookRepository.findThreeLatestBooks();
+        return this.bookResponseMapperService.toDataTransferObjects(latestBooks);
+    }
 
-     // Find 3 new books
-     public List<Book> getLatestBooks() {
-        return this.bookRepository.findThreeLatestBooks();
+    // GET TOP BOOKS
+    public List<BookResponseDto> getTopBooks(){
+        List<Book> topBooks=this.bookRepository.getTopBooks();
+        return this.bookResponseMapperService.toDataTransferObjects(topBooks);
+    }
+
+    // Get  Books By Categories
+    public List<BookResponseDto> getBooksByCategories(String categorie){
+        return this.bookResponseMapperService.toDataTransferObjects(
+            this.bookRepository.getBooksByCategories(categorie));
+
     }
 }

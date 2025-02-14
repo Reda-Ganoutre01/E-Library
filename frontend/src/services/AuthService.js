@@ -1,17 +1,14 @@
 import axios from "axios";
 
+const API_BASE_URL = 'http://localhost:8080/api/v1/auth'; // adjust the port as needed
+
 class AuthService {
-    constructor() {
-        this.http = axios.create({baseURL : "http://localhost:8080"});
+    login(email, password) {
+        return axios.post(`${API_BASE_URL}/authenticate`, { email, password });
     }
-    async login(username, password) {
-        return this.http.post("/api/v1/auth/login", {username, password});
-    }
-    async logout() {
-        return this.http.post("/api/v1/auth/logout");
-    }
-    async register(username, password , fullName , email) {
-        return this.http.post("/api/v1/auth/register", {username, password , fullName , email});
+
+    register(email, password) {
+        return axios.post(`${API_BASE_URL}/register`, { email, password });
     }
 }
 

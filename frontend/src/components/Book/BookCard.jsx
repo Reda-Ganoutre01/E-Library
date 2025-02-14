@@ -12,7 +12,7 @@ export const BookCard = ({ book }) => {
     >
       {/* Book Image */}
       <div className="w-full h-60 flex justify-center items-center rounded-lg overflow-hidden">
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/bookdetails/${book.id}`}>
           <img
             src={getImgUrl(book?.cover)}
             alt={book?.title}
@@ -23,7 +23,7 @@ export const BookCard = ({ book }) => {
 
       {/* Book Title */}
       <div className="mt-4 text-start">
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/bookdetails/${book.id}`}>
           <h3 className="text-sm font-semibold text-gray-800 hover:text-blue-600 transition duration-200">
             {book?.title.length>20?  `${book.title.slice(0,20)}...`:book.title}
           </h3>
@@ -35,7 +35,7 @@ export const BookCard = ({ book }) => {
         </p>
 
         {/* Button to Show Details */}
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/bookdetails/${book.id}`}>
           <button 
           
           // className='bg-primary
