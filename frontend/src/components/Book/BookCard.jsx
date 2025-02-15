@@ -1,7 +1,6 @@
 import { getImgUrl } from '../../utils/getImgUrl';
 import { Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
 export const BookCard = ({ book }) => {
   return (
     <div data-aos="zoom-in-up"
@@ -14,7 +13,9 @@ export const BookCard = ({ book }) => {
       <div className="w-full h-60 flex justify-center items-center rounded-lg overflow-hidden">
         <Link to={`/books/bookdetails/${book.id}`}>
           <img
+            // src={getImgUrl(book?.cover)}
             src={getImgUrl(book?.cover)}
+
             alt={book?.title}
             className="w-[200px] h-[200px] object-contain cursor-pointer"
           />
