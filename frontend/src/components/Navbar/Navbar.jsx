@@ -34,7 +34,7 @@ export default function Navbar() {
   useEffect(() => {
     // Fetch categories
     CategoriesService.getCategories()
-      .then((response) => setCategoriesList(response.data));
+      .then((response) => setCategoriesList(response.data.content));
 
     // Handle sticky navbar on scroll
     const handleScroll = () => {
@@ -101,14 +101,16 @@ export default function Navbar() {
               {/* Dropdown Menu */}
               <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-md p-2 rounded-md w-40">
                 <ul>
-                  {categoriesList.map((category) => (
+                  {categoriesList.length>0 ?(
+                  categoriesList.map((category) => (
                     <li
                       key={category.id}
                       className="p-2 hover:text-primary rounded-md"
                     >
                     <Link to={`/books/categorie=${category.name}`}>{category.name}</Link>
                     </li>
-                  ))}
+                  ))):''
+                }
                 </ul>
               </div>
             </li>
@@ -156,7 +158,8 @@ export default function Navbar() {
             </button>
             <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-md p-2 rounded-md w-40">
               <ul>
-                {categoriesList.map((category) => (
+                {categoriesList.length>0 ?(
+                categoriesList.map((category) => (
                   <li
                     key={category.id}
                     className="p-2 hover:bg-gray-200 rounded-md"
@@ -168,7 +171,7 @@ export default function Navbar() {
                       {category.name}
                     </Link>
                   </li>
-                ))}
+                ))):''}
               </ul>
             </div>
           </li>

@@ -1,6 +1,6 @@
 package dev.library.backend.config;
 
-import dev.library.backend.config.security.JwtAuthenticationFilter;
+import dev.library.backend.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,13 +12,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import dev.library.backend.services.UserService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration {
+public class SecurityConfiguration
+{
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
@@ -27,12 +27,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests.anyRequest().permitAll();
+
+                }).sessionManagement(sessionManagement -> {
+                    sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 })
-                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
+
                 .addFilterBefore(jwtAuthenticationFilter , UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 }

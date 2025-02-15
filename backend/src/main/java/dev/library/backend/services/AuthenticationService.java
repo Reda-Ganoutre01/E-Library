@@ -1,6 +1,8 @@
 package dev.library.backend.services;
 
-import dev.library.backend.config.security.JwtService;
+import dev.library.backend.dto.mappers.UserMapper;
+import dev.library.backend.dto.requests.UserRequestDto;
+import dev.library.backend.security.JwtService;
 import dev.library.backend.dto.requests.AuthenticationRequestDto;
 import dev.library.backend.dto.requests.RegisterRequestDto;
 import dev.library.backend.dto.response.AuthenticationResponseDto;
@@ -20,25 +22,31 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     @Autowired
-    public AuthenticationService(
-            UserRepository userRepository,
-            PasswordEncoder passwordEncoder,
-            AuthenticationManager authenticationManager,
-            JwtService jwtService
-    )
+    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtService jwtService)
     {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
     }
-    public AuthenticationResponseDto register(RegisterRequestDto request) {
-        var user = User.builder().username(request.getUsername()).password(this.passwordEncoder.encode(request.getPassword())).role(Role.USER).build();
+    public AuthenticationResponseDto register(RegisterRequestDto registerRequestDto)
+    {
+
+        User user = User.builder()
+                .role(Role.USER)
+                .username(registerRequestDto.getUsername())
+                .email(registerRequestDto.getEmail())
+                .fullName(registerRequestDto.getFullName())
+                .password(this.passwordEncoder.encode(registerRequestDto.getPassword()))
+                .build();
+
         this.userRepository.save(user);
-        var jwtToken = this.jwtService.generateToken(user);
+
+        String jwtToken = this.jwtService.generateToken(user);
         return AuthenticationResponseDto.builder().token(jwtToken).build();
     }
-    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
+    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request)
+    {
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername() , request.getPassword())
         );

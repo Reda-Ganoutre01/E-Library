@@ -46,12 +46,12 @@ export default function TopBooks (){
           modules={[Navigation, Pagination, Autoplay]}  // Include Autoplay module
           className="mySwiper"
         >
-          {topBookslist.length > 0 &&
-            topBookslist.map((book, index) => (
+          {topBookslist.length > 0 ? ( topBookslist.map((book, index) => (
               <SwiperSlide key={index} className='flex justify-center'>
                 <BookCard book={book}  />
               </SwiperSlide>
-            ))}
+            ))):''
+           }
         </Swiper>
       </div>
     </div>

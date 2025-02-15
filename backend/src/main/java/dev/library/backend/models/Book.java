@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -20,14 +21,11 @@ public class Book implements Serializable {
     private Long id;
     private String cover;
     private String title;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private Category category;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<BorrowRecord> borrowRecords = new ArrayList<>();
-
     private String author;
     private String description;
     private String isbn;

@@ -19,6 +19,7 @@ public class FileUploadService {
     }
     public String uploadFile(MultipartFile file) throws IOException {
         Path uploadPath = Paths.get(this.staticResourceService.getStaticResourcePathString());
+        System.out.println(uploadPath);
         if (!Files.exists(uploadPath))
         {
             Files.createDirectories(uploadPath);

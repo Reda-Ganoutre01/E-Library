@@ -1,30 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le : mer. 12 fév. 2025 à 00:51
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `alms`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `books`
 --
 
 CREATE TABLE `books` (
@@ -38,9 +12,7 @@ CREATE TABLE `books` (
   `category_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `books`
---
+
 
 INSERT INTO `books` (`id`, `author`, `copies`, `cover`, `description`, `isbn`, `title`, `category_id`) VALUES
 (1, 'Isaac Asimov', 5, 'book1.jpg', 'A classic sci-fi novel.', '978-1234567890', 'Foundation', 1),
@@ -54,11 +26,7 @@ INSERT INTO `books` (`id`, `author`, `copies`, `cover`, `description`, `isbn`, `
 (9, 'Sigmund Freud', 6, 'b6.jpeg', 'Psychological theories.', '978-7788990011', 'The Ego and the Id', 9),
 (10, 'Leonardo da Vinci', 4, 'book01.jpg', 'Art and science.', '978-8899001122', 'Codex Leicester', 10);
 
--- --------------------------------------------------------
 
---
--- Structure de la table `borrow_records`
---
 
 CREATE TABLE `borrow_records` (
   `id` bigint(20) NOT NULL,
@@ -69,9 +37,6 @@ CREATE TABLE `borrow_records` (
   `user_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `borrow_records`
---
 
 INSERT INTO `borrow_records` (`id`, `borrow_date`, `return_date`, `status`, `book_id`, `user_id`) VALUES
 (1, '2024-01-10', '2024-01-20', 'ALLOWED', 1, 3),

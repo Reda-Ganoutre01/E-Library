@@ -33,10 +33,10 @@ export default function Search() {
     }, [booksSearch]);
 
     return (
-        <div className="container mx-auto px-4">
-            <div data-aos="zoom-in-down" className="flex text-3xl justify-center p-4 underline decoration-primary">
-                Tous les Livres
-            </div>
+        <div className="container mx-auto px-4 py-10">
+            {/* <div data-aos="zoom-in-down" className="flex text-3xl justify-center p-4">
+                Searching for ..{search}
+            </div> */}
 
             {/* Error message display */}
             {error && (

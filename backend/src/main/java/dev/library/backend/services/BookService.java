@@ -4,6 +4,7 @@ import dev.library.backend.dto.mappers.BookMapperService;
 import dev.library.backend.dto.requests.BookRequestDto;
 import dev.library.backend.dto.response.BookResponseDto;
 import dev.library.backend.models.Book;
+import dev.library.backend.models.Category;
 import dev.library.backend.repositories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import dev.library.backend.repositories.BookRepository;
@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BookService {
+public class BookService
+{
     private final BookMapperService bookResponseMapperService;
     private final FileUploadService fileUploadService;
     private final CategoryRepository categoryRepository;
@@ -47,22 +48,30 @@ public class BookService {
         Book book = this.bookRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return this.bookResponseMapperService.toDataTransferObject(book);
     }
-    public BookResponseDto createBook(BookRequestDto bookRequestDto) {
-        Book book = new Book();
-        book.setAuthor(bookRequestDto.getAuthor());
-        book.setTitle(bookRequestDto.getTitle());
-        book.setIsbn(bookRequestDto.getIsbn());
-        book.setCopies(bookRequestDto.getCopies());
-        book.setCover(null);
-        book.setCategory(
-                this.categoryRepository.findById(bookRequestDto.getCategoryId()).orElseThrow(EntityNotFoundException::new)
-        );
-        return this.bookResponseMapperService.toDataTransferObject(this.bookRepository.save(book));
+    public BookResponseDto createBook(BookRequestDto bookRequestDto , MultipartFile file) throws IOException {
+        try {
+            Book book = new Book();
+            Category category = this.categoryRepository.findById(bookRequestDto.getCategoryId()).orElseThrow(EntityNotFoundException::new);
+            System.out.println(category);
+            String cover = this.fileUploadService.uploadFile(file);
+            book.setAuthor(bookRequestDto.getAuthor());
+            book.setTitle(bookRequestDto.getTitle());
+            book.setIsbn(bookRequestDto.getIsbn());
+            book.setCopies(bookRequestDto.getCopies());
+            book.setCover(cover);
+            book.setCategory(category);
+            return this.bookResponseMapperService.toDataTransferObject(this.bookRepository.save(book));
+        } catch (Exception e) {
+            System.out.println("Exception : " + e.getMessage());
+            System.out.println("Caused By : " + e.getCause());
+            System.out.println(bookRequestDto);
+            return null;
+        }
     }
     public List<BookResponseDto> getBooksBySearch(String search) {
-        return this.bookResponseMapperService.toDataTransferObjects(this.bookRepository.searchBooks(search));
+        return this.bookResponseMapperService
+                .toDataTransferObjects(this.bookRepository.searchBooks(search));
     }
-
     // GET THREE lATEST BOOKS
     public List<BookResponseDto> getLatestBooks() {
         List<Book> latestBooks = this.bookRepository.findThreeLatestBooks();
@@ -78,7 +87,7 @@ public class BookService {
     // Get  Books By Categories
     public List<BookResponseDto> getBooksByCategories(String categorie){
         return this.bookResponseMapperService.toDataTransferObjects(
-            this.bookRepository.getBooksByCategories(categorie));
+                this.bookRepository.getBooksByCategories(categorie));
 
     }
 }

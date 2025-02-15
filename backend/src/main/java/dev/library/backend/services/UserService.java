@@ -4,12 +4,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import dev.library.backend.dto.mappers.UserMapper;
+import dev.library.backend.dto.requests.UserRequestDto;
+import dev.library.backend.dto.response.UserResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import dev.library.backend.models.User;
@@ -18,45 +22,59 @@ import dev.library.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService
+{
+
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserRepository userRepository , UserMapper userMapper , PasswordEncoder passwordEncoder)
+    {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository  = userRepository;
+        this.userMapper      = userMapper;
     }
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+
+    public List<UserResponseDto> getAllUsers()
+    {
+        return this.userMapper.toDataTransferObjects(this.userRepository.findAll());
     }
-    public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+
+    public UserResponseDto getUser(Long id)
+    {
+        return this.userRepository.existsById(id) ? this.userMapper.toDataTransferObject(this.userRepository.findById(id).orElseThrow()) : null;
     }
-    public User createUser(User user) {
-        return userRepository.save(user);
+
+    public UserResponseDto createUser(UserRequestDto userRequestDto)
+    {
+        User user = this.userMapper.toEntity(userRequestDto, this.passwordEncoder);
+        return this.userMapper.toDataTransferObject(this.userRepository.save(user));
     }
-    public User updateUser(User user) {
-        if (!userRepository.existsById(user.getId())) {
-            throw new EntityNotFoundException("User not found with id: " + user.getId());
-        }
-        return userRepository.save(user);
+
+    public UserResponseDto updateUser(UserRequestDto userRequestDto , Long id)
+    {
+        User user = this.userRepository.findById(id).orElseThrow();
+        this.userMapper.updateUser(user , userRequestDto , this.passwordEncoder);
+        return this.userMapper.toDataTransferObject(this.userRepository.save(user));
     }
-    public void deleteUser(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new EntityNotFoundException("User not found with id: " + id);
-        }
-        userRepository.deleteById(id);
+
+    public void deleteUser(Long id)
+    {
+        this.userRepository.deleteById(id);
     }
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+    {
         User user = this.userRepository.findByUsername(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername() , user.getPassword() , this.mapRolesToAuthorities(user.getRole()));
+        return new org.springframework.security.core.userdetails
+                .User(user.getUsername(),user.getPassword(),this.mapRolesToAuthorities(user.getRole()));
     }
-    private Collection<GrantedAuthority> mapRolesToAuthorities(Role role) {
+
+    private Collection<GrantedAuthority> mapRolesToAuthorities(Role role)
+    {
         return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
-    }
-    public User create(User user) {
-        return this.userRepository.save(user);
-    }
-    public User findUser(String username) {
-        return this.userRepository.findByUsername(username);
     }
 }

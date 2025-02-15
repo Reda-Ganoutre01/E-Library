@@ -28,7 +28,6 @@ public class BookMapperService {
         {
             bookResponseDto.setCategory(book.getCategory().getName());
         }
-
         return bookResponseDto;
     }
     public List<BookResponseDto> toDataTransferObjects(List<Book> books)

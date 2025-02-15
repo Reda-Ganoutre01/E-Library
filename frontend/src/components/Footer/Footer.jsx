@@ -14,7 +14,7 @@ function Footer() {
   ];
 
   useEffect(() => {
-    CategoriesService.getCategories().then((response) => setCategoriesList(response.data));
+    CategoriesService.getCategories().then((response) => setCategoriesList(response.data.content));
   }, []);
 
   return (

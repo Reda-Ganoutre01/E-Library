@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: backend
+  output:
+    ansi:
+      enabled: ALWAYS
+  datasource:
+    url: jdbc:mysql://localhost:3306/ALMS
+    username: root
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example: INFO
+    org.hibernate.SQL: INFO
+    root: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO

@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 // User pages
 const Home = lazy(() => import("../pages/Home.jsx"));
-const Login = lazy(() => import("../pages/Login.jsx"));
-const Register = lazy(() => import("../pages/Register.jsx"));
+const Login = lazy(() => import("../pages/Auth/LoginPage.jsx"))
+const Register = lazy(() => import("../pages/Auth/RegisterPage.jsx"));
 const Books = lazy(() => import("../pages/Books.jsx"));
 const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
 const Profile = lazy(() => import("../pages/UserProfile.jsx"));

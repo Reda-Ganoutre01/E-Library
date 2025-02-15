@@ -20,9 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @RestController
-@CrossOrigin(origins="http://localhost:5173/")
 @RequestMapping("/api/v1/books")
 public class BookController {
     private final BookService bookService;
@@ -31,8 +29,10 @@ public class BookController {
        this.bookService = bookService;
     }
     @GetMapping("/")
-    public ResponseEntity<Page<BookResponseDto>> getBooks(@RequestParam(defaultValue = "0") int page ,
-            @RequestParam(defaultValue = "10") int size , @RequestParam(defaultValue = "title") String sortBy,
+    public ResponseEntity<Page<BookResponseDto>> getBooks(
+            @RequestParam(defaultValue = "0") int page ,
+            @RequestParam(defaultValue = "10") int size ,
+            @RequestParam(defaultValue = "title") String sortBy,
             @RequestParam(defaultValue = "asc") String direction
     ) {
         return new ResponseEntity<>(this.bookService.getBooks(page , size , sortBy , direction), HttpStatus.OK);
@@ -47,10 +47,17 @@ public class BookController {
     }
     @PreAuthorize("hasRole('LIBRARIAN')")
     @PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<BookResponseDto> createBook(@RequestBody BookRequestDto bookRequestDto) throws IOException {
-        return new ResponseEntity<>(this.bookService.createBook(bookRequestDto) , HttpStatus.CREATED);
-    }
+    public ResponseEntity<BookResponseDto> createBook(
+            @ModelAttribute BookRequestDto bookRequestDto ,
+            @RequestPart("file") MultipartFile file
+    ) throws IOException {
 
+        if (file.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(this.bookService.createBook(bookRequestDto , file) , HttpStatus.CREATED);
+    }
     @GetMapping("/latest")
     public ResponseEntity<List<BookResponseDto>> getLatestBooks() {
         List<BookResponseDto> latestBooks = bookService.getLatestBooks();
@@ -62,7 +69,7 @@ public class BookController {
         List<BookResponseDto> topbooks=bookService.getTopBooks();
         return new ResponseEntity<>(topbooks,HttpStatus.OK);
     }
-    
+
     @GetMapping("/categorie={categorie}")
     public ResponseEntity <List<BookResponseDto>> getBooksByCategories(@PathVariable String categorie){
         return new ResponseEntity<>(this.bookService.getBooksByCategories(categorie),HttpStatus.OK);
