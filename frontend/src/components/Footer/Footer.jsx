@@ -58,7 +58,9 @@ function Footer() {
             <ul className="space-y-3">
               {categoriesList.map((e) => (
                 <li key={e.id}>
-                  <Link className="link link-hover cursor-pointer text-gray-400 hover:text-white transition duration-200">
+                  <Link 
+                  to={`/books/categorie=${e.name}`}
+                  className="link link-hover cursor-pointer text-gray-400 hover:text-white transition duration-200">
                     {e.name}
                   </Link>
                 </li>

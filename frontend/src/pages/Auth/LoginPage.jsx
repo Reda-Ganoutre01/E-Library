@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../services/UserService";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('bgadaokd122o@gmail.com');
+  const [password, setPassword] = useState('1234');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function LoginPage() {
       console.log(error);
       setErrors({ general: error.message });
       setTimeout(() => {
-        setErrors({});
+        setErrors('');
       }, 5000);
     }
   }
@@ -36,7 +36,7 @@ export default function LoginPage() {
         <h2 className="text-center text-2xl font-bold text-gray-900">Login</h2>
 
         {/* Display form errors */}
-        {errors.general && (
+        {errors && (
           <p className="text-sm text-red-500 bg-red-100 p-2 rounded-md">
             {errors.general}
           </p>
