@@ -1,15 +1,10 @@
 package dev.library.backend.dto.mappers;
 
 import dev.library.backend.dto.response.BookResponseDto;
-import dev.library.backend.dto.response.CategoryResponseDto;
-import dev.library.backend.models.Book;
-import dev.library.backend.models.Category;
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.library.backend.entities.Book;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

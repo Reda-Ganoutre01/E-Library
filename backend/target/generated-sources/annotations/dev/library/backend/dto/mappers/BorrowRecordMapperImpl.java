@@ -1,9 +1,9 @@
 package dev.library.backend.dto.mappers;
 
 import dev.library.backend.dto.response.BorrowRecordResponseDto;
-import dev.library.backend.models.Book;
-import dev.library.backend.models.BorrowRecord;
-import dev.library.backend.models.User;
+import dev.library.backend.entities.Book;
+import dev.library.backend.entities.BorrowRecord;
+import dev.library.backend.entities.User;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-15T16:24:47+0100",
+    date = "2025-02-15T17:01:51+0100",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 @Component

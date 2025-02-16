@@ -1,9 +1,8 @@
 package dev.library.backend.dto.mappers;
 
 import dev.library.backend.dto.response.CategoryResponseDto;
-import dev.library.backend.models.Category;
+import dev.library.backend.entities.Category;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

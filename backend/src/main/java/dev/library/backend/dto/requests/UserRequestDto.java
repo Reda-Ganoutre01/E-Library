@@ -1,6 +1,6 @@
 package dev.library.backend.dto.requests;
 
-import dev.library.backend.models.enums.Role;
+import dev.library.backend.entities.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

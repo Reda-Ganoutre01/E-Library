@@ -1,13 +1,15 @@
-package dev.library.backend.services;
+package dev.library.backend.utils;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 import java.nio.file.Paths;
 
-@Service
-public class StaticResourceService
+@Component
+public class StaticResourceResolver
 {
-    public String getStaticResourcePathString() {
+    public String getStaticResourcePathString()
+    {
         String projectRoot = System.getProperty("user.dir");
         return Paths.get(projectRoot ,"src", "main", "resources", "static" , "storage").toString();
     }

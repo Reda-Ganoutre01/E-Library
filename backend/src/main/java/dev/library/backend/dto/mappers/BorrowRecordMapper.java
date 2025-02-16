@@ -1,7 +1,7 @@
 package dev.library.backend.dto.mappers;
 
 import dev.library.backend.dto.response.BorrowRecordResponseDto;
-import dev.library.backend.models.BorrowRecord;
+import dev.library.backend.entities.BorrowRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

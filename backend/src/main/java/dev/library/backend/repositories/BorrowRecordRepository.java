@@ -1,6 +1,6 @@
 package dev.library.backend.repositories;
 
-import dev.library.backend.models.BorrowRecord;
+import dev.library.backend.entities.BorrowRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

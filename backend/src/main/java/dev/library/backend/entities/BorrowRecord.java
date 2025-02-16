@@ -1,14 +1,11 @@
-package dev.library.backend.models;
+package dev.library.backend.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import dev.library.backend.models.enums.Status;
+import dev.library.backend.entities.enums.Status;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;

@@ -1,24 +1,23 @@
-package dev.library.backend.services;
+package dev.library.backend.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-@Service
-public class FileUploadService {
-    private final StaticResourceService staticResourceService;
+@Component
+public class FileUploader {
+    private final StaticResourceResolver staticResourceResolver;
     @Autowired
-    public FileUploadService(StaticResourceService staticResourceService) {
-        this.staticResourceService = staticResourceService;
+    public FileUploader(StaticResourceResolver staticResourceResolver) {
+        this.staticResourceResolver = staticResourceResolver;
     }
     public String uploadFile(MultipartFile file) throws IOException {
-        Path uploadPath = Paths.get(this.staticResourceService.getStaticResourcePathString());
+        Path uploadPath = Paths.get(this.staticResourceResolver.getStaticResourcePathString());
         System.out.println(uploadPath);
         if (!Files.exists(uploadPath))
         {

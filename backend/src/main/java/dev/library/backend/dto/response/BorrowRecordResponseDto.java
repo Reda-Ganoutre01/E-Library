@@ -1,6 +1,6 @@
 package dev.library.backend.dto.response;
 
-import dev.library.backend.models.enums.Status;
+import dev.library.backend.entities.enums.Status;
 import lombok.Data;
 
 import java.util.Date;

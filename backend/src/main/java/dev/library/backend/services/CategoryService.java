@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
-import dev.library.backend.models.Category;
+import dev.library.backend.entities.Category;
 import dev.library.backend.repositories.CategoryRepository;
 
 @Service

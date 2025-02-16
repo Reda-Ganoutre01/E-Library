@@ -26,7 +26,8 @@ public class BorrowRecordController {
         try
         {
             return new ResponseEntity<>(this.borrowRecordService.getBorrowRecords(), HttpStatus.OK);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

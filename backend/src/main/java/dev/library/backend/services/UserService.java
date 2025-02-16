@@ -16,10 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.library.backend.models.User;
-import dev.library.backend.models.enums.Role;
+import dev.library.backend.entities.User;
+import dev.library.backend.entities.enums.Role;
 import dev.library.backend.repositories.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService implements UserDetailsService

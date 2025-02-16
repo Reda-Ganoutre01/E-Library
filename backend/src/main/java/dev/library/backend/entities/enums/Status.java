@@ -1,4 +1,4 @@
-package dev.library.backend.models.enums;
+package dev.library.backend.entities.enums;
 
 public enum Status {
     BORROWED,

@@ -1,14 +1,10 @@
 package dev.library.backend.controllers;
 
-import dev.library.backend.dto.mappers.BookMapperService;
 import dev.library.backend.dto.requests.BookRequestDto;
 import dev.library.backend.dto.response.BookResponseDto;
-import dev.library.backend.models.Book;
-import dev.library.backend.repositories.BookRepository;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import dev.library.backend.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;

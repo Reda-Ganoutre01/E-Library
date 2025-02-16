@@ -1,7 +1,7 @@
 package dev.library.backend.security;
 
 import dev.library.backend.constants.SecurityConstants;
-import dev.library.backend.models.User;
+import dev.library.backend.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

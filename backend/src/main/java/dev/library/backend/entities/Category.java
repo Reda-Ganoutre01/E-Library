@@ -1,4 +1,4 @@
-package dev.library.backend.models;
+package dev.library.backend.entities;
 
 import java.io.Serializable;
 import java.util.Set;

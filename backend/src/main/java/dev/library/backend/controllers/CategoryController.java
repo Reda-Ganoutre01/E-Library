@@ -18,7 +18,9 @@ import dev.library.backend.services.CategoryService;
 @RestController
 @CrossOrigin 
 @RequestMapping("/api/v1/categories")
-public class CategoryController {
+public class CategoryController
+{
+
     private final CategoryService categoryService;
     @Autowired
     public CategoryController(CategoryService categoryService)
@@ -26,60 +28,68 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping("/")
-    public ResponseEntity<Page<CategoryResponseDto>> getCategories(
-            @RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size ,
-            @RequestParam(defaultValue = "name") String sortBy, @RequestParam(defaultValue = "asc") String direction)
+    public ResponseEntity<?> getCategories(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size , @RequestParam(defaultValue = "name") String sortBy, @RequestParam(defaultValue = "asc") String direction)
     {
         try
         {
             return new ResponseEntity<>(this.categoryService.getCategories(page , size , sortBy , direction), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDto> getCategory(@PathVariable("id") Long id)
+    public ResponseEntity<?> getCategory(@PathVariable("id") Long id)
     {
-        try {
+        try
+        {
             return new ResponseEntity<>(this.categoryService.getCategory(id), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('LIBRARIAN')")
+
     @PostMapping("/create")
-    public ResponseEntity<CategoryResponseDto> createCategory(@Validated @RequestBody CategoryRequestDto request)
+    public ResponseEntity<?> createCategory(@Validated @RequestBody CategoryRequestDto request)
     {
-        try {
+        try
+        {
             return new ResponseEntity<>(this.categoryService.createCategory(request), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('LIBRARIAN')")
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<CategoryResponseDto> updateCategory(@RequestBody CategoryRequestDto request, @PathVariable("id") Long id)
+    public ResponseEntity<?> updateCategory(@RequestBody CategoryRequestDto request , @PathVariable Long id)
     {
-        try {
-            if (this.categoryService.getCategory(id) == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(this.categoryService.updateCategory(id,request) , HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        try
+        {
+            return new ResponseEntity<>(this.categoryService.updateCategory(id , request) , HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('LIBRARIAN')")
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
-        try {
-            if (this.categoryService.getCategory(id) == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id)
+    {
+        try
+        {
             this.categoryService.deleteCategory(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null , HttpStatus.NO_CONTENT);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

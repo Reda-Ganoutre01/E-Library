@@ -1,13 +1,11 @@
 package dev.library.backend.services;
 
-import dev.library.backend.dto.mappers.UserMapper;
-import dev.library.backend.dto.requests.UserRequestDto;
 import dev.library.backend.security.JwtService;
 import dev.library.backend.dto.requests.AuthenticationRequestDto;
 import dev.library.backend.dto.requests.RegisterRequestDto;
 import dev.library.backend.dto.response.AuthenticationResponseDto;
-import dev.library.backend.models.User;
-import dev.library.backend.models.enums.Role;
+import dev.library.backend.entities.User;
+import dev.library.backend.entities.enums.Role;
 import dev.library.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

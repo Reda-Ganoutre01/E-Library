@@ -2,7 +2,7 @@ package dev.library.backend.dto.mappers;
 
 import dev.library.backend.dto.requests.UserRequestDto;
 import dev.library.backend.dto.response.UserResponseDto;
-import dev.library.backend.models.User;
+import dev.library.backend.entities.User;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,10 +29,12 @@ public interface UserMapper {
     }
 
     @Mapping(target = "password", ignore = true)
-    default void updateUser(@MappingTarget User user, UserRequestDto userRequestDto , @Context PasswordEncoder passwordEncoder)
-    {
+    void updateUser(@MappingTarget User user, UserRequestDto userRequestDto , @Context PasswordEncoder passwordEncoder);
+
+    @AfterMapping
+    default void encodePassword(@MappingTarget User user, UserRequestDto userRequestDto, @Context PasswordEncoder passwordEncoder) {
         if (userRequestDto.getPassword() != null && !userRequestDto.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
         }
-    };
+    }
 }
