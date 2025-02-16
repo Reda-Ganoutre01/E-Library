@@ -1,4 +1,30 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 16 fév. 2025 à 15:51
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.0.30
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `alms`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `books`
 --
 
 CREATE TABLE `books` (
@@ -12,7 +38,9 @@ CREATE TABLE `books` (
   `category_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+--
+-- Déchargement des données de la table `books`
+--
 
 INSERT INTO `books` (`id`, `author`, `copies`, `cover`, `description`, `isbn`, `title`, `category_id`) VALUES
 (1, 'Isaac Asimov', 5, 'book1.jpg', 'A classic sci-fi novel.', '978-1234567890', 'Foundation', 1),
@@ -26,29 +54,36 @@ INSERT INTO `books` (`id`, `author`, `copies`, `cover`, `description`, `isbn`, `
 (9, 'Sigmund Freud', 6, 'b6.jpeg', 'Psychological theories.', '978-7788990011', 'The Ego and the Id', 9),
 (10, 'Leonardo da Vinci', 4, 'book01.jpg', 'Art and science.', '978-8899001122', 'Codex Leicester', 10);
 
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `borrow_records`
+--
 
 CREATE TABLE `borrow_records` (
   `id` bigint(20) NOT NULL,
-  `borrow_date` date DEFAULT NULL,
-  `return_date` date DEFAULT NULL,
+  `borrow_date` datetime(6) DEFAULT NULL,
+  `return_date` datetime(6) DEFAULT NULL,
   `status` enum('ALLOWED','REJECTED','UNDECIDED') DEFAULT NULL,
   `book_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `borrow_records`
+--
 
 INSERT INTO `borrow_records` (`id`, `borrow_date`, `return_date`, `status`, `book_id`, `user_id`) VALUES
-(1, '2024-01-10', '2024-01-20', 'ALLOWED', 1, 3),
-(2, '2024-02-05', '2024-02-15', 'ALLOWED', 2, 4),
-(3, '2024-03-12', '2024-03-22', 'ALLOWED', 3, 5),
-(4, '2024-04-08', '2024-04-18', 'ALLOWED', 4, 6),
-(5, '2024-05-15', '2024-05-25', 'ALLOWED', 5, 7),
-(6, '2024-06-01', '2024-06-11', 'ALLOWED', 6, 8),
-(7, '2024-07-07', '2024-07-17', 'ALLOWED', 7, 9),
-(8, '2024-08-14', '2024-08-24', 'ALLOWED', 8, 10),
-(9, '2024-09-20', '2024-09-30', 'REJECTED', 9, 3),
-(10, '2024-10-05', '2024-10-15', 'UNDECIDED', 10, 4);
+(1, '2024-01-10 00:00:00.000000', '2024-01-20 00:00:00.000000', 'ALLOWED', 1, 3),
+(2, '2024-02-05 00:00:00.000000', '2024-02-15 00:00:00.000000', 'ALLOWED', 2, 4),
+(3, '2024-03-12 00:00:00.000000', '2024-03-22 00:00:00.000000', 'ALLOWED', 3, 5),
+(4, '2024-04-08 00:00:00.000000', '2024-04-18 00:00:00.000000', 'ALLOWED', 4, 6),
+(5, '2024-05-15 00:00:00.000000', '2024-05-25 00:00:00.000000', 'ALLOWED', 5, 7),
+(6, '2024-06-01 00:00:00.000000', '2024-06-11 00:00:00.000000', 'ALLOWED', 6, 8),
+(7, '2024-07-07 00:00:00.000000', '2024-07-17 00:00:00.000000', 'ALLOWED', 7, 9),
+(8, '2024-08-14 00:00:00.000000', '2024-08-24 00:00:00.000000', 'ALLOWED', 8, 10),
+(9, '2024-09-20 00:00:00.000000', '2024-09-30 00:00:00.000000', 'REJECTED', 9, 3),
+(10, '2024-10-05 00:00:00.000000', '2024-10-15 00:00:00.000000', 'UNDECIDED', 10, 4);
 
 -- --------------------------------------------------------
 
@@ -106,7 +141,12 @@ INSERT INTO `users` (`id`, `email`, `full_name`, `password`, `role`, `username`)
 (7, 'user5@example.com', 'User Five', 'hashed_password7', 'USER', 'user5'),
 (8, 'user6@example.com', 'User Six', 'hashed_password8', 'USER', 'user6'),
 (9, 'user7@example.com', 'User Seven', 'hashed_password9', 'USER', 'user7'),
-(10, 'user8@example.com', 'User Eight', 'hashed_password10', 'USER', 'user8');
+(10, 'user8@example.com', 'User Eight', 'hashed_password10', 'USER', 'user8'),
+(11, 'bgadaokd122o@gmail.com', NULL, '$2a$10$biecZWlkI19Wkeos.oM0yu2okTQRydjdjK9b6C0E/2mtN9zamxJ1K', 'USER', 'dada122'),
+(12, 'bgadaokd1232o@gmail.com', NULL, '$2a$10$KP7chWrS56.jpPcvV1T9EuKAMV.ZkNva/I5MAArcmXHCnzGIIMFhW', 'USER', 'dada1232'),
+(16, 'redux@gmail.com', NULL, '$2a$10$Bs8kzUHD8vkFbl39Nc3.SO.o32RNvLVQaTh8GU/q7FTL7CKPT02sC', 'USER', 'redux-1'),
+(17, 'redux1@gmail.com', NULL, '$2a$10$rUMx7Yz8E8OyV9m8U58Ef.KbBuj2t4IbwLvl5gJNfY3NRvFkiXsl.', 'USER', 'redux-11'),
+(19, 'redux12@gmail.com', NULL, '$2a$10$JoNxskR8blQcAvkQbahQ1eiy.uB0Qs.1hsW8KGRQxiFljRs5oAVMG', 'USER', 'redux-121');
 
 --
 -- Index pour les tables déchargées
@@ -168,7 +208,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Contraintes pour les tables déchargées
