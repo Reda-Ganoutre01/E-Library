@@ -39,7 +39,18 @@ class UserService {
         })
         return response.data;
     }
-    
+    static async getYourProfile(token){
+      
+            const response = await axios.get(`${UserService.BASE_URL}/users/get-profile`, 
+            {
+                headers: {Authorization: `Bearer ${token}`}
+            })
+            return response.data;
+      
+    }
+
+
+   
     // Authentication check
     static logout(){
         localStorage.removeItem('token')

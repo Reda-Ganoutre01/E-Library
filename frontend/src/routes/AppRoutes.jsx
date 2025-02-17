@@ -11,6 +11,7 @@ const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
 const Profile = lazy(() => import("../pages/UserProfile.jsx"));
 const Contact = lazy(() => import("../pages/Contact.jsx"));
 const Search = lazy(() => import("../pages/Search.jsx"));
+const BrrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
 
 // Admin pages
 const Dashboard = lazy(() => import("../pages/admin/Dashboard.jsx"));
@@ -32,14 +33,19 @@ const AppRoutes = () => {
       <Routes>
         {/* Routes Utilisateurs */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        {!isAuthanticate &&  <Route path="/login" element={<Login />} />}
+        {!isAuthanticate &&   <Route path="/register" element={<Register />} />}
+
+       
         <Route path="/books" element={<Books />} />
+        
+        {isAuthanticate && <Route path="/broowRecord" element={<BrrowedRecord />} />}
+
         <Route path="/books/:search" element={<Search />} />
         <Route path="/books/:categorie" element={<Search />} />
         <Route path="/books/bookdetails/:id" element={<BookDetails />} />
         <Route path="/contact" element={<Contact />} />
-        {!isAuthanticate && <Route path="/profile" element={<Profile />} />}
+        {isAuthanticate && <Route path="/profile" element={<Profile />} />}
       </Routes>
       <Footer />
 

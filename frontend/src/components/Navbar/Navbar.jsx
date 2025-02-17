@@ -121,7 +121,7 @@ export default function Navbar() {
             </li>
           </ul>
               {/* Emprunt icon */}
-             {isAuthanticate && <Link to={"/BrrowedRecord"} onClick={() => setIsMobileMenuOpen(false)}>
+             {isAuthanticate && <Link to={"/broowRecord"} onClick={() => setIsMobileMenuOpen(false)}>
             <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
           </Link>}
             {/* Emprunt icon */}
@@ -189,7 +189,7 @@ export default function Navbar() {
           </li>
 
                   {/* Emprunt icon */}
-                  {isAuthanticate && <Link to={"/BrrowedRecord"} onClick={() => setIsMobileMenuOpen(false)}>
+                  {isAuthanticate && <Link to={"/broowRecord"} onClick={() => setIsMobileMenuOpen(false)}>
             <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
           </Link>}
             {/* Emprunt icon */}

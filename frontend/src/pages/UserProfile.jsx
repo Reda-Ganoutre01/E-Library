@@ -6,11 +6,14 @@ export default function UserProfile() {
   const navigate = useNavigate(); // useNavigate doit être utilisé ici
   const [profileData, setProfileData] = useState([]);
   const token=localStorage.getItem('token');
+  const role=localStorage.getItem('role');
   const [errors,setErrors]=useState('');
-
+  const decode=jwt.decode(token)
 
   useEffect(() => {
     fetchProfileInfo()
+    console.log(token,role)
+
   }, []);
 
   const fetchProfileInfo=async ()=>{
@@ -37,7 +40,7 @@ export default function UserProfile() {
         {/* Header */}
         <div className="flex items-center space-x-4">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800">{profileData.username}</h2>
+            <h2 className="text-2xl font-semibold text-gray-800">{profileData?.username}</h2>
           
 
           </div>
@@ -50,7 +53,7 @@ export default function UserProfile() {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold text-gray-700">Username</h3>
-              <p className="text-gray-600">{profileData.username}</p>
+              <p className="text-gray-600">{profileData?.username}</p>
             </div>
             <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300">
               Modifier
@@ -61,7 +64,7 @@ export default function UserProfile() {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold text-gray-700">Email</h3>
-              <p className="text-gray-600">{profileData.email}</p>
+              <p className="text-gray-600">{profileData?.email}</p>
             </div>
             <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300">
               Modifier
@@ -72,7 +75,7 @@ export default function UserProfile() {
          <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold text-gray-700">Full Name</h3>
-              <p className="text-gray-600">{profileData.fullname}</p>
+              <p className="text-gray-600">{profileData?.fullname}</p>
             </div>
             <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300">
               Modifier
