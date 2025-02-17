@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import UserService from "../services/UserService.js";
 
 // User pages
 const Home = lazy(() => import("../pages/Home.jsx"));
@@ -22,6 +23,9 @@ const Nav = lazy(() => import("../components/Navbar/Navbar.jsx"));
 const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
 
 const AppRoutes = () => {
+
+  const isAuthanticate=UserService.isAuthanticate()
+  const admin=UserService.adminOnly()
   return (
     <Suspense fallback={<Loader />}>
       <Nav />
@@ -35,14 +39,18 @@ const AppRoutes = () => {
         <Route path="/books/:categorie" element={<Search />} />
         <Route path="/books/bookdetails/:id" element={<BookDetails />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
-
-        {/* Routes Admin */}
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/users" element={<ManageUsers />} />
-        <Route path="/admin/books" element={<ManageBooks />} />
+        {!isAuthanticate && <Route path="/profile" element={<Profile />} />}
       </Routes>
       <Footer />
+
+      {admin &&(
+         <Routes>
+         {/* Routes Admin */}
+         <Route path="/admin/dashboard" element={<Dashboard />} />
+         <Route path="/admin/users" element={<ManageUsers />} />
+         <Route path="/admin/books" element={<ManageBooks />} />
+       </Routes>
+      )}
     </Suspense>
   );
 };

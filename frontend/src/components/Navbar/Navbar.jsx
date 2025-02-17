@@ -5,7 +5,9 @@ import { FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import CategoriesService from "../../services/CategoriesService";
-
+import BookIcon from '@mui/icons-material/Book';
+import UserService from "../../services/UserService";
+import LoginIcon from '@mui/icons-material/Login';
 const Menu = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "Books", link: "/books" },
@@ -16,6 +18,9 @@ export default function Navbar() {
   const [categoriesList, setCategoriesList] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // for is Authenticated
+  const isAuthanticate=UserService.isAuthanticate()
 
   // for Search
   const [search, setSearch] = useState("");
@@ -115,11 +120,18 @@ export default function Navbar() {
               </div>
             </li>
           </ul>
-
-          {/* Login Icon */}
-          <Link to={"/login"}>
+              {/* Emprunt icon */}
+             {isAuthanticate && <Link to={"/BrrowedRecord"} onClick={() => setIsMobileMenuOpen(false)}>
+            <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
+          </Link>}
+            {/* Emprunt icon */}
+            {isAuthanticate && <Link to={"/profile"} onClick={() => setIsMobileMenuOpen(false)}>
             <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
-          </Link>
+          </Link>}
+          {/* Login Icon */}
+          {!isAuthanticate && <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
+            <LoginIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
+          </Link>}
         </div>
 
         {/* Mobile Menu Button */}
@@ -176,10 +188,18 @@ export default function Navbar() {
             </div>
           </li>
 
-          {/* Login Icon */}
-          <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
+                  {/* Emprunt icon */}
+                  {isAuthanticate && <Link to={"/BrrowedRecord"} onClick={() => setIsMobileMenuOpen(false)}>
+            <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
+          </Link>}
+            {/* Emprunt icon */}
+            {isAuthanticate && <Link to={"/profile"} onClick={() => setIsMobileMenuOpen(false)}>
             <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
-          </Link>
+          </Link>}
+         {/* Login Icon */}
+         {!isAuthanticate && <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
+            <LoginIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
+          </Link>}
         </ul>
       </div>
     </nav>
