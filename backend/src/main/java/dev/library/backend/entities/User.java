@@ -25,19 +25,26 @@ public class User implements UserDetails , Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true)
     private String username;
+
     private String password;
+
     @Column(unique = true)
     private String email;
+
     @Column(unique = true)
     private String fullName;
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.DETACH , orphanRemoval = true)
     @JsonBackReference
     private List<BorrowRecord> borrowRecords;
+
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'USER'")
     private Role role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {

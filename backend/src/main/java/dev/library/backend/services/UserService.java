@@ -7,7 +7,12 @@ import java.util.List;
 import dev.library.backend.dto.mappers.UserMapper;
 import dev.library.backend.dto.requests.UserRequestDto;
 import dev.library.backend.dto.response.UserResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +26,7 @@ import dev.library.backend.entities.enums.Role;
 import dev.library.backend.repositories.UserRepository;
 
 @Service
+@AllArgsConstructor
 public class UserService implements UserDetailsService
 {
 
@@ -28,17 +34,12 @@ public class UserService implements UserDetailsService
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    @Autowired
-    public UserService(UserRepository userRepository , UserMapper userMapper , PasswordEncoder passwordEncoder)
+    public Page<UserResponseDto> getAllUsers(int page , int size , String sortBy , String sortOrder)
     {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository  = userRepository;
-        this.userMapper      = userMapper;
-    }
-
-    public List<UserResponseDto> getAllUsers()
-    {
-        return this.userMapper.toDataTransferObjects(this.userRepository.findAll());
+        Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<User> collection = userRepository.findAll(pageable);
+        return collection.map(this.userMapper::toDataTransferObject);
     }
 
     public UserResponseDto getUser(Long id)

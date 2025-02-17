@@ -3,6 +3,7 @@ package dev.library.backend.services;
 import dev.library.backend.dto.mappers.CategoryMapper;
 import dev.library.backend.dto.requests.CategoryRequestDto;
 import dev.library.backend.dto.response.CategoryResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +15,12 @@ import dev.library.backend.entities.Category;
 import dev.library.backend.repositories.CategoryRepository;
 
 @Service
+@AllArgsConstructor
 public class CategoryService
 {
-    @Autowired
-    private CategoryMapper categoryMapper;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+
     public Page<CategoryResponseDto> getCategories(int page , int size , String sortBy , String sortOrder)
     {
         Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();

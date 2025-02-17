@@ -7,6 +7,7 @@ import dev.library.backend.dto.response.AuthenticationResponseDto;
 import dev.library.backend.entities.User;
 import dev.library.backend.entities.enums.Role;
 import dev.library.backend.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,19 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final JwtService jwtService;
-    @Autowired
-    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtService jwtService)
-    {
-        this.authenticationManager = authenticationManager;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.jwtService = jwtService;
-    }
+
     public AuthenticationResponseDto register(RegisterRequestDto registerRequestDto)
     {
 

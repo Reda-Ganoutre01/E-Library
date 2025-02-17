@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Component
-public class FileUploader {
+public class FileUploaderResolver {
     private final StaticResourceResolver staticResourceResolver;
     @Autowired
-    public FileUploader(StaticResourceResolver staticResourceResolver) {
+    public FileUploaderResolver(StaticResourceResolver staticResourceResolver) {
         this.staticResourceResolver = staticResourceResolver;
     }
     public String uploadFile(MultipartFile file) throws IOException {

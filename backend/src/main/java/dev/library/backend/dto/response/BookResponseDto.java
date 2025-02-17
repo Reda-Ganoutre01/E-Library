@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Set;
 
 @Data
 @Builder
@@ -12,11 +11,11 @@ import java.util.Set;
 @NoArgsConstructor
 public class BookResponseDto {
     private Long id;
-    private String cover;
     private String title;
+    private String cover;
     private String author;
     private String description;
     private String isbn;
-    private int copies;
     private String category;
+    private int copies;
 }
