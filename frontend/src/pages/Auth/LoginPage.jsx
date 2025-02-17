@@ -17,6 +17,7 @@ export default function LoginPage() {
       if (userData.token) {
         localStorage.setItem('token', userData.token);
         localStorage.setItem('role', userData.role);
+        alert('User login successfully')
         navigate('/profile');
       } else {
         setErrors(userData.error);
