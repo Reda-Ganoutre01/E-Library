@@ -1,21 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useEffect, useState } from "react";
-
+import jwtDecode from "jwt-decode";  
 export default function UserProfile() {
-  const navigate = useNavigate(); // useNavigate doit être utilisé ici
+  const navigate = useNavigate(); 
   const [profileData, setProfileData] = useState([]);
   const token=localStorage.getItem('token');
   const role=localStorage.getItem('role');
   const [errors,setErrors]=useState('');
-  const decode=jwt.decode(token)
 
-  useEffect(() => {
+
+  useEffect(()=>{
     fetchProfileInfo()
-    console.log(token,role)
-
-  }, []);
-
+    console.log(jwtDecode(token))
+  },[])
   const fetchProfileInfo=async ()=>{
     try{
       const token=localStorage.getItem('token')
