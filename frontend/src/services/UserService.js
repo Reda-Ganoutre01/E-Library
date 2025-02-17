@@ -3,8 +3,8 @@ import axios from "axios";
 class UserService {
     static Base_Url = "http://localhost:8080/api/v1/";
 
-    static async login(email, password) {
-        const response=await axios.post(`${UserService.Base_Url}auth/authenticate`, { email, password });
+    static async login(username, password) {
+        const response=await axios.post(`${UserService.Base_Url}auth/authenticate`, { username, password });
         return response.data;
     }
     static async register({userData,token}){

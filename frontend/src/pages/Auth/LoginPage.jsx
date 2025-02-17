@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../services/UserService";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('bgadaokd122o@gmail.com');
+  const [username, setusername] = useState('reda1');
   const [password, setPassword] = useState('1234');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const userData = await UserService.login(email, password);
+      const userData = await UserService.login(username, password);
       if (userData.token) {
         localStorage.setItem('token', userData.token);
         localStorage.setItem('role', userData.role);
@@ -45,13 +45,13 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">Username</label>
             <div className="relative mt-1">
               <EnvelopeIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
                 required
                 className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="example@email.com"
