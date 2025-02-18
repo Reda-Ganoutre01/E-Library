@@ -13,6 +13,7 @@ import dev.library.backend.services.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +31,18 @@ public class BookController
     private final BookMapper bookMapper;
 
     @GetMapping("/")
-    public ResponseEntity<?> getBooks(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size , @RequestParam(defaultValue = "title") String sortBy, @RequestParam(defaultValue = "asc") String direction)
-    {
-        try
-        {
-            return new ResponseEntity<>(this.bookMapper.toDataTransferObjects(this.bookRepository.findAll()), HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
+    public ResponseEntity<?> getBooks(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "10") int size,
+                                      @RequestParam(defaultValue = "title") String sortBy,
+                                      @RequestParam(defaultValue = "asc") String direction) {
+        try {
+            Page<BookResponseDto> booksPage = bookService.getBooks(page, size, sortBy, direction);
+            return new ResponseEntity<>(booksPage, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getBook(@PathVariable Long id)
