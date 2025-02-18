@@ -1,6 +1,8 @@
 package dev.library.backend.controllers;
 
 import dev.library.backend.dto.requests.UserRequestDto;
+import dev.library.backend.dto.response.UserResponseDto;
+import dev.library.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,4 +83,15 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/profile/{username}")
+    public ResponseEntity<?> getProfile(@PathVariable String username) {
+        try {
+            UserResponseDto userProfile = userService.getProfile(username);
+            return new ResponseEntity<>(userProfile, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
