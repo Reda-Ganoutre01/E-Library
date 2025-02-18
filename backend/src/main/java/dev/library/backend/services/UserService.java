@@ -80,11 +80,15 @@ public class UserService implements UserDetailsService
         return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
-    public UserResponseDto getProfile(String username) {
-        // Retrieve the user by username and map it to UserResponseDto
+    public UserResponseDto getAuthenticatedUserProfile() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+        String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new RuntimeException("User not found");
+            throw new UsernameNotFoundException("User not found");
         }
         return userMapper.toDataTransferObject(user);
     }

@@ -20,6 +20,7 @@ export default function LoginPage() {
         localStorage.setItem('username',username)
         alert('User login successfully')
         navigate('/profile');
+        window.location.reload();
       } else {
         setErrors(userData.error);
       }

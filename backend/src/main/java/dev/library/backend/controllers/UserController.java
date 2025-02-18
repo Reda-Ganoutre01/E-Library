@@ -84,10 +84,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<?> getProfile(@PathVariable String username) {
+    // Profile endpoint that returns the authenticated user's profile based on the token
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile() {
         try {
-            UserResponseDto userProfile = userService.getProfile(username);
+            UserResponseDto userProfile = userService.getAuthenticatedUserProfile();
             return new ResponseEntity<>(userProfile, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

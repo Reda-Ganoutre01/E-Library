@@ -39,10 +39,14 @@ class UserService {
         })
         return response.data;
     }
-    static async getYourProfile(token){
-        const response = await axios.get(`${UserService.Base_Url}users/profile`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+    // static async getYourProfile(token){
+    //     const response = await axios.get(`${UserService.Base_Url}users/profile/dada1232`, {
+    //         headers: { Authorization: `Bearer ${token}` }
+    //     });
+    //     return response.data;
+    // }
+    static async getYourProfile(){
+        const response = await axios.get(`${UserService.Base_Url}users/profile/dada1232`);
         return response.data;
     }
     
