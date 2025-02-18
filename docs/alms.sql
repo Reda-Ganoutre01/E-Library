@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 16 fév. 2025 à 15:51
+-- Généré le : mar. 18 fév. 2025 à 18:25
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -52,7 +52,17 @@ INSERT INTO `books` (`id`, `author`, `copies`, `cover`, `description`, `isbn`, `
 (7, 'Albert Einstein', 3, 'b3.jpeg', 'Relativity theory.', '978-5566778899', 'Relativity', 7),
 (8, 'Charles Darwin', 5, 'b4.jpg', 'Evolution theory.', '978-6677889900', 'Origin of Species', 8),
 (9, 'Sigmund Freud', 6, 'b6.jpeg', 'Psychological theories.', '978-7788990011', 'The Ego and the Id', 9),
-(10, 'Leonardo da Vinci', 4, 'book01.jpg', 'Art and science.', '978-8899001122', 'Codex Leicester', 10);
+(10, 'Leonardo da Vinci', 4, 'book01.jpg', 'Art and science.', '978-8899001122', 'Codex Leicester', 10),
+(11, 'J.K. Rowling', 15, 'book11.jpg', 'Fantasy novel about a young wizard.', '978-1234567891', 'Harry Potter and the Sorcerer\'s Stone', 2),
+(12, 'George Orwell', 10, 'book12.jpeg', 'A dystopian novel on totalitarianism.', '978-2233445567', '1984', 1),
+(13, 'Haruki Murakami', 7, 'book13.jpeg', 'A surreal novel about loneliness.', '978-3344556678', 'Kafka on the Shore', 3),
+(14, 'Mark Zuckerberg', 5, 'book14.jpg', 'The story behind Facebook.', '978-4455667789', 'The Facebook Effect', 4),
+(15, 'Stephen Hawking', 9, 'book15.jpg', 'A journey through space and time.', '978-5566778890', 'A Brief History of Time', 8),
+(16, 'Malcolm Gladwell', 6, 'book16.jpg', 'Exploring the factors that make people successful.', '978-6677889901', 'Outliers', 5),
+(17, 'Dan Brown', 8, 'book17.jpg', 'A thriller about codes and symbols.', '978-7788990012', 'The Da Vinci Code', 7),
+(18, 'Agatha Christie', 12, 'book18.jpg', 'A classic mystery novel.', '978-8899001123', 'Murder on the Orient Express', 6),
+(19, 'F. Scott Fitzgerald', 5, 'book19.jpeg', 'A novel about the American Dream.', '978-1122334456', 'The Great Gatsby', 10),
+(20, 'Homer', 10, 'book20.jpeg', 'An ancient epic about the Trojan War.', '978-2233445568', 'The Iliad', 9);
 
 -- --------------------------------------------------------
 
@@ -115,6 +125,16 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -146,7 +166,11 @@ INSERT INTO `users` (`id`, `email`, `full_name`, `password`, `role`, `username`)
 (12, 'bgadaokd1232o@gmail.com', NULL, '$2a$10$KP7chWrS56.jpPcvV1T9EuKAMV.ZkNva/I5MAArcmXHCnzGIIMFhW', 'USER', 'dada1232'),
 (16, 'redux@gmail.com', NULL, '$2a$10$Bs8kzUHD8vkFbl39Nc3.SO.o32RNvLVQaTh8GU/q7FTL7CKPT02sC', 'USER', 'redux-1'),
 (17, 'redux1@gmail.com', NULL, '$2a$10$rUMx7Yz8E8OyV9m8U58Ef.KbBuj2t4IbwLvl5gJNfY3NRvFkiXsl.', 'USER', 'redux-11'),
-(19, 'redux12@gmail.com', NULL, '$2a$10$JoNxskR8blQcAvkQbahQ1eiy.uB0Qs.1hsW8KGRQxiFljRs5oAVMG', 'USER', 'redux-121');
+(19, 'redux12@gmail.com', NULL, '$2a$10$JoNxskR8blQcAvkQbahQ1eiy.uB0Qs.1hsW8KGRQxiFljRs5oAVMG', 'USER', 'redux-121'),
+(21, 'redux1212@gmail.com', NULL, '$2a$10$DGio9k96rF48IRaD/yz5I./Jeqm2wW.nSrtOp95uSm72qxXIlfOW.', 'USER', 'reda1'),
+(22, 'bganoutre52@gmail.com', NULL, '$2a$10$sv6sZl7GsUSFx9vpX3b4ee5QMmFeNnwXmrerwJQo3Hm6Xst0MYNue', 'USER', 'redux'),
+(24, 'redux121242@gmail.com', NULL, '$2a$10$lZcqY9w1vbZuJd37f6c.hu4K2Tzxm3bwP.6i3Yx1jIf1HsHVWNxmC', 'USER', 'reda131'),
+(26, 'bgan312241@gmail.com', NULL, '$2a$10$oGd/7ia2amfMo2E7R.HdvOX.gWz6FHzIP8CzM6eyUHABEDcaqcs9q', 'USER', 'abdella');
 
 --
 -- Index pour les tables déchargées
@@ -175,6 +199,12 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `UKt8o6pivur7nn124jehx7cygw5` (`name`);
 
 --
+-- Index pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
@@ -190,7 +220,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `borrow_records`
@@ -205,10 +235,16 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT pour la table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Contraintes pour les tables déchargées
