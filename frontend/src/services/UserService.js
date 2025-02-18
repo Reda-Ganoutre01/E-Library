@@ -7,11 +7,8 @@ class UserService {
         const response=await axios.post(`${UserService.Base_Url}auth/authenticate`, { username, password });
         return response.data;
     }
-    static async register({userData,token}){
-        const response=await axios.post(`${UserService.Base_Url}auth/register`,
-            userData,{
-                headers:{Authorization:`Bearer${token}`}
-        });
+    static async register(userData){
+        const response=await axios.post(`${UserService.Base_Url}auth/register`,userData);
         return response.data;
     }
     static async getAllUsers(token){
@@ -45,8 +42,8 @@ class UserService {
     //     });
     //     return response.data;
     // }
-    static async getYourProfile(){
-        const response = await axios.get(`${UserService.Base_Url}users/profile/dada1232`);
+    static async getYourProfile(username){
+        const response = await axios.get(`${UserService.Base_Url}users/profile/${username}`);
         return response.data;
     }
     
@@ -57,6 +54,7 @@ class UserService {
     static logout(){
         localStorage.removeItem('token')
         localStorage.removeItem('role')
+        localStorage.removeItem('username')
     }
 
     static isAuthanticate(){

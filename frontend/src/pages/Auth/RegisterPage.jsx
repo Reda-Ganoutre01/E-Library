@@ -1,5 +1,4 @@
-
-import { LockClosedIcon, EnvelopeIcon, UserIcon } from "@heroicons/react/24/solid"; // Added user icon
+import { LockClosedIcon, EnvelopeIcon, UserIcon } from "@heroicons/react/24/solid"; 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../services/UserService";
@@ -19,54 +18,63 @@ export default function RegisterForm() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      await UserService.register(formData, token);
-      setFormData({
-        username: "",
-        fullname: "",
-        email: "",
-        password: "",
-
-      })
-      alert('User registered successfully')
+      const userData=await UserService.register(formData);
+      if (userData.token) {
+        localStorage.setItem('token', userData.token);
+        localStorage.setItem('role', userData.role);
+        localStorage.setItem('username',formData.username)
+        setFormData({
+          username: "",
+          full_name: "",
+          email: "",
+          password: "",
+        });
+        alert('User Register successfully')
+        navigate('/profile');
+        window.location.reload();
+      } else {
+        setErrors(userData.error);
+      }
+      
+      alert('User registered successfully');
       navigate('/profile');
-
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
       setErrors({ general: error.message });
       setTimeout(() => {
         setErrors('');
       }, 5000);
     }
-  }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
       <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-center text-2xl font-bold text-gray-900">Register</h2>
 
-
-
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* User Name */}
+          {/* Username */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Username</label>
             <div className="relative mt-1">
               <UserIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                value={formData.email}
+                name="username"
+                value={formData.username}
                 onChange={handleInputChange}
                 required
                 className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="John"
               />
             </div>
-            {errors && <p className="text-sm text-red-500">{errors}</p>}
+            {errors.username && <p className="text-sm text-red-500">{errors.username}</p>}
           </div>
+
           {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -74,14 +82,15 @@ export default function RegisterForm() {
               <UserIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                value={formData.fullname}
+                name="fullname"
+                value={formData.full_name}
                 onChange={handleInputChange}
                 required
                 className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="John Doe"
               />
             </div>
-            {errors && <p className="text-sm text-red-500">{errors}</p>}
+            {errors.fullname && <p className="text-sm text-red-500">{errors.fullname}</p>}
           </div>
 
           {/* Email */}
@@ -91,14 +100,15 @@ export default function RegisterForm() {
               <EnvelopeIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               <input
                 type="email"
+                name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="example@email.com"
               />
             </div>
+            {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
           </div>
-
 
           {/* Password */}
           <div>
@@ -107,13 +117,15 @@ export default function RegisterForm() {
               <LockClosedIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
               <input
                 type="password"
-                required
+                name="password"
                 value={formData.password}
                 onChange={handleInputChange}
+                required
                 className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="••••••••"
               />
             </div>
+            {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
           </div>
 
           <button
