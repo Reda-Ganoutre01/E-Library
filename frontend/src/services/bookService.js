@@ -3,8 +3,8 @@ import axios from "axios";
 
 class BookService {
     static Books_Rest_Api_url = "http://localhost:8080/api/v1/books/";
-    getBooks() {
-        return axios.get(BookService.Books_Rest_Api_url);
+    getBooks(page,pageSize) {
+        return axios.get(`${BookService.Books_Rest_Api_url}?page=${page}&size=${pageSize}`);
     }
 
     getThreeNewBooks() {
