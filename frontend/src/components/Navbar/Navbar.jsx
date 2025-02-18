@@ -111,7 +111,7 @@ export default function Navbar() {
                       key={category.id}
                       className="p-2 hover:text-primary rounded-md"
                     >
-                    <Link to={`/books/categorie=${category.name}`}>{category.name}</Link>
+                    <Link to={`/books/category=${category.name}`}>{category.name}</Link>
                     </li>
                   ))):''
                 }
@@ -176,7 +176,7 @@ export default function Navbar() {
                     className="p-2 hover:bg-gray-200 rounded-md"
                   >
                     <Link
-                      to={`/books/categorie=${category.name}`}
+                      to={`/books/category=${category.name}`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {category.name}

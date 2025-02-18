@@ -5,6 +5,7 @@ import { BookCard } from '../components/Book/BookCard';
 
 export default function Search() {
     const { search } = useParams();
+    const { category } = useParams();
     const [booksSearch, setBooksSearch] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false); // Loading state
@@ -26,18 +27,33 @@ export default function Search() {
                 setError("Une erreur s'est produite lors de la recherche.");
                 setLoading(false);  // Stop loading after error
             });
-    }, [search]); // Trigger the effect whenever `search` changes
+    }, [search]); 
 
     useEffect(() => {
         console.log("Books found:", booksSearch);
     }, [booksSearch]);
 
+    useEffect(()=>{
+        if(!category) return;
+        setLoading(true)
+        setBooksSearch([])
+        setError(null)
+
+        bookService.getBookByCategories(category)
+        .then((response)=>{
+            setBooksSearch(response.data);
+            setLoading(false);
+        })
+        .catch((error)=>{
+             console.error("Error fetching books:", error);
+                setError("Une erreur s'est produite lors de la recherche.");
+                setLoading(false);  // Stop loading after error
+        })
+    },[category])
+
     return (
         <div className="container mx-auto px-4 py-10">
-            {/* <div data-aos="zoom-in-down" className="flex text-3xl justify-center p-4">
-                Searching for ..{search}
-            </div> */}
-
+           
             {/* Error message display */}
             {error && (
                 <div role="alert" className="alert alert-warning bg-red-500 text-white p-4 rounded-lg mb-4">

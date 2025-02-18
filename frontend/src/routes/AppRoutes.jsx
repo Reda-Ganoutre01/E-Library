@@ -42,7 +42,7 @@ const AppRoutes = () => {
         {isAuthanticate && <Route path="/broowRecord" element={<BrrowedRecord />} />}
 
         <Route path="/books/:search" element={<Search />} />
-        <Route path="/books/:categorie" element={<Search />} />
+        <Route path="/books/:category" element={<Search />} />
         <Route path="/books/bookdetails/:id" element={<BookDetails />} />
         <Route path="/contact" element={<Contact />} />
         {isAuthanticate && <Route path="/profile" element={<Profile />} />}

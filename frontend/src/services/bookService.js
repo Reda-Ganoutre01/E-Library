@@ -24,8 +24,8 @@ class BookService {
         return axios.get(`${BookService.Books_Rest_Api_url}topbooks`);
     }
 
-    getBookByCategories(categorie) {
-        return axios.get(`${BookService.Books_Rest_Api_url}categorie=${categorie}`);
+    getBookByCategories(category) {
+        return axios.get(`${BookService.Books_Rest_Api_url}category=${category}`);
     }
 }
 

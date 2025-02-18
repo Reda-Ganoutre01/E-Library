@@ -23,10 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/books")
-public class BookController {
+public class BookController
+{
     private final BookRepository bookRepository;
     private final BookService bookService;
     private final BookMapper bookMapper;
+
     @GetMapping("/")
     public ResponseEntity<?> getBooks(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size , @RequestParam(defaultValue = "title") String sortBy, @RequestParam(defaultValue = "asc") String direction)
     {
@@ -39,6 +41,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getBook(@PathVariable Long id)
     {
@@ -51,6 +54,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/search={search}")
     public ResponseEntity<?> getBookBySearch(@PathVariable String search)
     {
@@ -63,6 +67,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createBook(@ModelAttribute BookRequestDto bookRequestDto , @RequestPart("file") MultipartFile file)
     {
@@ -79,23 +84,41 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/latest")
-    public ResponseEntity<List<BookResponseDto>> getLatestBooks() {
-        List<BookResponseDto> latestBooks = bookService.getLatestBooks();
-        return new ResponseEntity<>(latestBooks, HttpStatus.OK);
+    public ResponseEntity<?> getLatestBooks() {
+        try
+        {
+            return new ResponseEntity<>(this.bookService.getLatestBooks() , HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/topbooks")
-    public ResponseEntity<List<BookResponseDto>> getTopBooks(){
-        List<BookResponseDto> topbooks=bookService.getTopBooks();
-        return new ResponseEntity<>(topbooks,HttpStatus.OK);
+    public ResponseEntity<?> getTopBooks(){
+        try
+        {
+            return new ResponseEntity<>(this.bookService.getTopBooks() , HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping("/categorie={categorie}")
-    public ResponseEntity <List<BookResponseDto>> getBooksByCategories(@PathVariable String categorie){
-        return new ResponseEntity<>(this.bookService.getBooksByCategories(categorie),HttpStatus.OK);
-
+    @GetMapping("/category={category}")
+    public ResponseEntity<?> getBooksByCategory(@PathVariable String category) {
+        try {
+            List<BookResponseDto> books = this.bookService.getBooksByCategories(category);
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 //    @PreAuthorize("hasRole('LIBRARIAN')")
 //    @PutMapping("/update/{id}")
 //    public Book updateBook( @RequestBody Book book) {

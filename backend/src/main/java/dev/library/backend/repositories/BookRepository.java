@@ -12,7 +12,6 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE LOWER(b.title) " + "LIKE LOWER(CONCAT('%', :search, '%')) " +
             "OR LOWER(b.author) LIKE LOWER(CONCAT('%', :search, '%')) " + "OR LOWER(b.category.name) LIKE LOWER(CONCAT('%', :search, '%')) AND b.copies > 0")
-
     List<Book> searchBooks(@Param("search") String search);
      @Query(value="SELECT * FROM books ORDER BY id DESC LIMIT 3", nativeQuery = true)
 
@@ -22,7 +21,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
      List<Book> getTopBooks();
      @Query(value = "SELECT b.* FROM books b " + "INNER JOIN categories cat ON cat.id = b.category_id " +
-             "WHERE LOWER(cat.name) LIKE LOWER(CONCAT('%', :categorie, '%'))", nativeQuery = true)
-
+             "WHERE LOWER(cat.name) LIKE LOWER(CONCAT('%', :category, '%'))", nativeQuery = true)
      List<Book> getBooksByCategories(@Param("category") String category);
 }
