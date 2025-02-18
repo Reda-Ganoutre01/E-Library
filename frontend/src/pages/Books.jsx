@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import bookService from "../services/bookService.js";
 
 import { BookCard } from "../components/Book/BookCard.jsx";
@@ -7,7 +7,7 @@ export default function Books() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    bookService.getBooks().then((response) => setBooks(response.data.content));
+    bookService.getBooks().then((response) => setBooks(response.data));
   }, []);
 
   return (

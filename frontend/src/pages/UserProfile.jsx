@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useEffect, useState } from "react";
-import jwtDecode from "jwt-decode";  
+// import jwtDecode from "jwt-decode";  
 export default function UserProfile() {
   const navigate = useNavigate(); 
   const [profileData, setProfileData] = useState([]);
@@ -12,7 +12,7 @@ export default function UserProfile() {
 
   useEffect(()=>{
     fetchProfileInfo()
-    console.log(jwtDecode(token))
+    // console.log(jwtDecode(token))
   },[])
   const fetchProfileInfo=async ()=>{
     try{
