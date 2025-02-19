@@ -15,10 +15,17 @@ const BorrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
 const NotFound = lazy(() => import("../pages/NotFound.jsx")); // 404 Page
 
 // Admin pages
-const AdminApp = lazy(() => import("../components/Admin/AppAdmin.jsx"));
-const Dashboard = lazy(() => import("../pages/admin/Dashboard.jsx"));
-const ManageUsers = lazy(() => import("../pages/admin/ManageUsers.jsx"));
-const ManageBooks = lazy(() => import("../pages/admin/ManageBooks.jsx"));
+const AdminProfile = lazy(() => import("../components/Admin/Profile/AdminProfile.jsx"));
+
+const Slidebar = lazy(() => import("../components/Admin/Slidebar.jsx"));
+const Main = lazy(() => import("../components/Admin/Main.jsx"));
+const Dashboardview = lazy(() => import("../components/Admin/Dahboardview.jsx"));
+const ManageUsers = lazy(() => import("../components/Admin/Users/ManageUsers.jsx"));
+const ManageBooks = lazy(() => import("../components/Admin/Books/ManageBooks.jsx"));
+const ManageBrrowRecord = lazy(() => import("../components/Admin/BrrowRecord/ManageBrrowRecord.jsx"));
+
+const ManageCategory = lazy(() => import("../components/Admin/Categoryes/ManageCategoryes.jsx"));
+const ManageMessage = lazy(() => import("../components/Admin/Messages/ManageMessage.jsx"));
 
 // Components
 const Loader = lazy(() => import("../components/Loader/Loader.jsx"));
@@ -48,12 +55,26 @@ const AppRoutes = () => {
 
         {/* Admin Routes */}
         {isAdmin && (
-          <>
-            <Route path="/admin" element={<AdminApp />} />
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/users" element={<ManageUsers />} />
-            <Route path="/admin/books" element={<ManageBooks />} />
-          </>
+          <Route path="/admin/*" element={
+            <div className="flex">
+              <div className="basis-[12%] h-[100vh] border">
+                <Slidebar />
+              </div>
+              <div className="basis-[88%] border">
+                <Dashboardview/>
+                <Routes>
+                  <Route path="" element={<Main />} />
+                  <Route path="users" element={<ManageUsers />} />
+                  <Route path="books" element={<ManageBooks />} />
+                  <Route path="brrowrecord" element={<ManageBrrowRecord />} />
+                  <Route path="categorys" element={<ManageCategory />} />
+                  <Route path="message" element={<ManageMessage />} />
+                  <Route path="profile" element={<AdminProfile />} />
+
+                </Routes>
+              </div>
+            </div>
+          } />
         )}
 
         {/* Catch-all 404 Route */}

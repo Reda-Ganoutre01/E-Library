@@ -5,22 +5,26 @@ import ClassIcon from "@mui/icons-material/Class";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CategoryIcon from "@mui/icons-material/Category";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
-import CountUp from 'react-countup';
+import { Link } from "react-router-dom";
+
 export default function Sidebar() {
   const menuItems = [
-    { icon: <GroupIcon sx={{ color: "white" }} />, label: "Users" },
-    { icon: <ClassIcon sx={{ color: "white" }} />, label: "Books" },
-    { icon: <BookmarkIcon sx={{ color: "white" }} />, label: "BorrowRecord" },
-    { icon: <CategoryIcon sx={{ color: "white" }} />, label: "Categories" },
-    { icon: <ChatRoundedIcon sx={{ color: "white" }} />, label: "Messages" },
+    { icon: <GroupIcon sx={{ color: "white" }} />, label: "Users", to: "/admin/users" },
+    { icon: <ClassIcon sx={{ color: "white" }} />, label: "Books", to: "/admin/books" },
+    { icon: <BookmarkIcon sx={{ color: "white" }} />, label: "BorrowRecord", to: "/admin/brrowrecord" },
+    { icon: <CategoryIcon sx={{ color: "white" }} />, label: "Categories", to: "/admin/categorys" },
+    { icon: <ChatRoundedIcon sx={{ color: "white" }} />, label: "Messages", to: "/admin/message" },
   ];
 
   return (
     <div className='bg-[#4E73DF] px-[25px] h-screen'>
       {/* Header */}
-      <div className="py-6 flex items-center justify-center border-b border-white/30">
+      <Link to={"/admin"}>
+       <div className="py-6 flex items-center justify-center border-b border-white/30">
         <h1 className="text-white text-lg font-extrabold cursor-pointer">Admin Panel</h1>
       </div>
+      </Link>
+     
 
       {/* Dashboard */}
       <div className="flex items-center gap-4 py-5 border-b border-white/30">
@@ -32,17 +36,17 @@ export default function Sidebar() {
       <div className="pt-4 border-b border-white/30">
         <p className="text-xs font-extrabold text-white/40">INTERFACE</p>
         {menuItems.map((item, index) => (
-          <div key={index} className="flex items-center justify-between gap-4 py-4 cursor-pointer hover:bg-white/10 px-3 rounded-md transition-all">
-            <div className="flex items-center gap-4">
-              {item.icon}
-              <p className="text-sm font-normal text-white">{item.label}</p>
+          <Link key={index} to={item.to}>
+            <div className="flex items-center justify-between gap-4 py-4 cursor-pointer hover:bg-white/10 px-3 rounded-md transition-all">
+              <div className="flex items-center gap-4">
+                {item.icon}
+                <p className="text-sm font-normal text-white">{item.label}</p>
+              </div>
+              <FaChevronRight color="white" />
             </div>
-            <FaChevronRight color="white" />
-            
-          </div>
+          </Link>
         ))}
       </div>
-
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import UserService from "../../services/UserService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DashboardView = () => {
   const [open, setOpen] = useState(false);
@@ -36,7 +36,10 @@ const DashboardView = () => {
             {open && (
               <div className="bg-white shadow-md border rounded-md h-[120px] w-[150px] absolute top-[65px] right-0 p-[15px] space-y-[10px] z-50">
                 
+                <Link to={"/admin/profile"}>
                 <p className="cursor-pointer hover:text-blue-600 font-semibold transition duration-200">Profile</p>
+
+                </Link>
                 <button  className="cursor-pointer hover:text-blue-600 font-semibold transition duration-200"
                  onClick={logout}>Log out</button>
               </div>

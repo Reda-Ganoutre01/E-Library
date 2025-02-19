@@ -2,6 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import { FaBook, FaLayerGroup, FaUsers } from "react-icons/fa";
 import { MdOutlineLibraryBooks } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Main = () => {
 
@@ -15,7 +16,9 @@ const Main = () => {
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 pb-4">
         {/* Users */}
-        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+
+        <Link to={"/admin/users"}>
+         <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Users</h2>
             <h1 className="text-xl font-bold text-[#5a5c69] mt-1">
@@ -25,9 +28,12 @@ const Main = () => {
           </div>
           <FaUsers className="text-[#4E73DF] text-3xl" />
         </div>
+        </Link>
+       
 
         {/* Books Monthly */}
-        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4eaadf] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+        <Link to={"/admin/books"}>
+         <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4eaadf] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Books</h2>
             <h1 className="text-xl font-bold text-[#5a5c69] mt-1">
@@ -37,8 +43,12 @@ const Main = () => {
           </div>
           <MdOutlineLibraryBooks className="text-[#4E73DF] text-3xl" />
         </div>
+        </Link>
+       
 
         {/* Borrowed Records */}
+        <Link to={"/admin/brrowrecord"}>
+
         <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4edfcc] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#B589DF] text-xs font-bold uppercase">Borrowed Records</h2>
@@ -48,8 +58,11 @@ const Main = () => {
           </div>
           <FaBook className="text-[#4E73DF] text-3xl" />
         </div>
+        </Link>
 
         {/* Categories */}
+        <Link to={"/admin/categorys"}>
+
         <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4edf55] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#B589DF] text-xs font-bold uppercase">Categories</h2>
@@ -60,6 +73,7 @@ const Main = () => {
           </div>
           <FaLayerGroup className="text-[#4E73DF] text-3xl" />
         </div>
+        </Link>
       </div>
     </div>
   );

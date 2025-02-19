@@ -5,7 +5,7 @@ import UserService from "../../services/UserService";
 import { jwtDecode } from "jwt-decode"; // Use named import
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("reda1");
+  const [username, setUsername] = useState("admin");
   const [password, setPassword] = useState("1234");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
