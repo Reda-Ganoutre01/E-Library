@@ -4,7 +4,7 @@ import UserService from "../services/UserService.js";
 
 // User pages
 const Home = lazy(() => import("../pages/Home.jsx"));
-const Login = lazy(() => import("../pages/Auth/LoginPage.jsx"))
+const Login = lazy(() => import("../pages/Auth/LoginPage.jsx"));
 const Register = lazy(() => import("../pages/Auth/RegisterPage.jsx"));
 const Books = lazy(() => import("../pages/Books.jsx"));
 const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
@@ -12,13 +12,10 @@ const Profile = lazy(() => import("../pages/UserProfile.jsx"));
 const Contact = lazy(() => import("../pages/Contact.jsx"));
 const Search = lazy(() => import("../pages/Search.jsx"));
 const BorrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
-
-
-const NotFound = lazy(() => import("../pages/NotFound.jsx"));
+const NotFound = lazy(() => import("../pages/NotFound.jsx")); // 404 Page
 
 // Admin pages
 const AdminApp = lazy(() => import("../components/Admin/AppAdmin.jsx"));
-
 const Dashboard = lazy(() => import("../pages/admin/Dashboard.jsx"));
 const ManageUsers = lazy(() => import("../pages/admin/ManageUsers.jsx"));
 const ManageBooks = lazy(() => import("../pages/admin/ManageBooks.jsx"));
@@ -29,14 +26,13 @@ const Nav = lazy(() => import("../components/Navbar/Navbar.jsx"));
 const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
 
 const AppRoutes = () => {
+  const isAuthenticated = UserService.isAuthanticate();
+  const isAdmin = UserService.adminOnly();
 
-  const isAuthenticated=UserService.isAuthanticate()
-  const isAdmin=UserService.adminOnly()
   return (
     <Suspense fallback={<Loader />}>
-      
-       {/* Show Navbar only for users */}
-       {!isAdmin && <Nav />}
+      {/* Show Navbar only for users */}
+      {!isAdmin && <Nav />}
       <Routes>
         {/* User Routes */}
         <Route path="/" element={<Home />} />
@@ -50,25 +46,21 @@ const AppRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
 
-        <Route path="*" element={<NotFound />} />
+        {/* Admin Routes */}
+        {isAdmin && (
+          <>
+            <Route path="/admin" element={<AdminApp />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/users" element={<ManageUsers />} />
+            <Route path="/admin/books" element={<ManageBooks />} />
+          </>
+        )}
 
+        {/* Catch-all 404 Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {!isAdmin && 
-      <Footer />} 
-
-        {isAdmin &&
-         <Routes>
-          <Route path="/admin" element={<AdminApp />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/users" element={<ManageUsers />} />
-          <Route path="/admin/books" element={<ManageBooks />} />
-          <Route path="*" element={<NotFound />} />
-
-        </Routes>
-        }
-       
-      
+      {!isAdmin && <Footer />}
     </Suspense>
   );
 };
