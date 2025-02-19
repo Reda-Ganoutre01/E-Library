@@ -4,6 +4,7 @@ import { FaBook, FaLayerGroup, FaUsers } from "react-icons/fa";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 
 const Main = () => {
+
   return (
     <div className="pt-6 px-6 bg-[#F8F9FC] min-h-screen">
       {/* Header */}
@@ -26,9 +27,9 @@ const Main = () => {
         </div>
 
         {/* Books Monthly */}
-        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4eaadf] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
-            <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Books (Monthly)</h2>
+            <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Books</h2>
             <h1 className="text-xl font-bold text-[#5a5c69] mt-1">
             <CountUp start={0} end={50} delay={0}/>
 
@@ -38,7 +39,7 @@ const Main = () => {
         </div>
 
         {/* Borrowed Records */}
-        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4edfcc] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#B589DF] text-xs font-bold uppercase">Borrowed Records</h2>
             <h1 className="text-xl font-bold text-[#5a5c69] mt-1">
@@ -49,7 +50,7 @@ const Main = () => {
         </div>
 
         {/* Categories */}
-        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4edf55] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
           <div>
             <h2 className="text-[#B589DF] text-xs font-bold uppercase">Categories</h2>
             <h1 className="text-xl font-bold text-[#5a5c69] mt-1">

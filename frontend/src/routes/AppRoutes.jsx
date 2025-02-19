@@ -13,6 +13,9 @@ const Contact = lazy(() => import("../pages/Contact.jsx"));
 const Search = lazy(() => import("../pages/Search.jsx"));
 const BorrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
 
+
+const NotFound = lazy(() => import("../pages/NotFound.jsx"));
+
 // Admin pages
 const AdminApp = lazy(() => import("../components/Admin/AppAdmin.jsx"));
 
@@ -46,19 +49,24 @@ const AppRoutes = () => {
         <Route path="/books/bookdetails/:id" element={<BookDetails />} />
         <Route path="/contact" element={<Contact />} />
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
 
       {!isAdmin && 
       <Footer />} 
 
-        {/* {isAdmin &&
+        {isAdmin &&
          <Routes>
           <Route path="/admin" element={<AdminApp />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/books" element={<ManageBooks />} />
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
-        } */}
+        }
        
       
     </Suspense>

@@ -36,12 +36,7 @@ class UserService {
         })
         return response.data;
     }
-    // static async getYourProfile(token){
-    //     const response = await axios.get(`${UserService.Base_Url}users/profile/dada1232`, {
-    //         headers: { Authorization: `Bearer ${token}` }
-    //     });
-    //     return response.data;
-    // }
+  
     static async getYourProfile(username){
         const response = await axios.get(`${UserService.Base_Url}users/profile/${username}`);
         return response.data;
@@ -64,7 +59,7 @@ class UserService {
 
     static isAdmin(){
         const role=localStorage.getItem('role')
-        return role=='ADMIN'
+        return role=='LIBRARIAN'
     }
     static isUser(){
         const role=localStorage.getItem('role')
