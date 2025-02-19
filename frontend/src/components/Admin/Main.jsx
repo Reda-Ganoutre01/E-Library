@@ -1,68 +1,55 @@
-import React from 'react'
-import { FaRegCalendarMinus } from 'react-icons/fa'
+import React from "react";
+import { FaBook, FaLayerGroup, FaUsers } from "react-icons/fa";
+import { MdOutlineLibraryBooks } from "react-icons/md";
 
 const Main = () => {
   return (
-    <div className='pt-[25px] px-[25px] bg-[#F8F9FC]'>
+    <div className="pt-6 px-6 bg-[#F8F9FC] min-h-screen">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className='text-[#5a5c69] text-[28px] leading-[34px] font-normal cursor-pointer'>Dashboard</h1>
-        <button className='bg-[#2E59D9] h-[32px] rounded-[3px] text-white
-        flex items-center justify-center px-[30px] cursor-pointer
-        '>Generate Report</button>
+        <h1 className="text-[#5a5c69] text-2xl font-semibold cursor-pointer">Dashboard</h1>
       </div>
-      <div className='grid grid-cols-4 gap-[30px] mt-[25px] pb-[15px]'>
 
-{/* USERS */}
-<div className='h-[100px] rounded-[8px] bg-white border-l-[4px] border-[#4E73DF]
-    flex items-center justify-center px-[30px] cursor-pointer hover:lg transform hover:scale-[103%]
-    transition duration-300 ea
-    '>
-        <div>
-            <h2 className='text-[#1cc88a] text-[11px] leading-[17px] font-bold'>EARNINGS (MONTHLY)</h2>
-            <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>$40,000</h1>
+      {/* Statistics Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 pb-4">
+        {/* Users */}
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+          <div>
+            <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Users</h2>
+            <h1 className="text-xl font-bold text-[#5a5c69] mt-1">10</h1>
+          </div>
+          <FaUsers className="text-[#4E73DF] text-3xl" />
         </div>
-        <FaRegCalendarMinus fontSize={28} color=''/>
-    </div>
-    {/* Emprunt */}
-    <div className='h-[100px] rounded-[8px] bg-white border-l-[4px] border-[#4E73DF]
-    flex items-center justify-center px-[30px] cursor-pointer hover:lg transform hover:scale-[103%]
-    transition duration-300 ea
-    '>
-        <div>
-            <h2 className='text-[#1cc88a] text-[11px] leading-[17px] font-bold'>EARNINGS (MONTHLY)</h2>
-            <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>$40,000</h1>
-        </div>
-        <FaRegCalendarMinus fontSize={28} color=''/>
-    </div>
 
-    
-    {/* Books */}
-    <div className='h-[100px] rounded-[8px] bg-white border-l-[4px] border-[#4E73DF]
-    flex items-center justify-center px-[30px] cursor-pointer hover:lg transform hover:scale-[103%]
-    transition duration-300 ea
-    '>
-        <div>
-            <h2 className='text-[#B589DF] text-[11px] leading-[17px] font-bold'>EARNINGS (MONTHLY)</h2>
-            <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>$40,000</h1>
+        {/* Books Monthly */}
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+          <div>
+            <h2 className="text-[#1cc88a] text-xs font-bold uppercase">Books (Monthly)</h2>
+            <h1 className="text-xl font-bold text-[#5a5c69] mt-1">20</h1>
+          </div>
+          <MdOutlineLibraryBooks className="text-[#4E73DF] text-3xl" />
         </div>
-        <FaRegCalendarMinus fontSize={28} color=''/>
-    </div>
-{/* Categories */}
-<div className='h-[100px] rounded-[8px] bg-white border-l-[4px] border-[#4E73DF]
-    flex items-center justify-center px-[30px] cursor-pointer hover:lg transform hover:scale-[103%]
-    transition duration-300 ea
-    '>
-        <div>
-            <h2 className='text-[#B589DF] text-[11px] leading-[17px] font-bold'>EARNINGS (MONTHLY)</h2>
-            <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>$40,000</h1>
+
+        {/* Borrowed Records */}
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+          <div>
+            <h2 className="text-[#B589DF] text-xs font-bold uppercase">Borrowed Records</h2>
+            <h1 className="text-xl font-bold text-[#5a5c69] mt-1">10</h1>
+          </div>
+          <FaBook className="text-[#4E73DF] text-3xl" />
         </div>
-        <FaRegCalendarMinus fontSize={28} color=''/>
-    </div>
 
-
+        {/* Categories */}
+        <div className="h-[100px] flex items-center justify-between px-6 bg-white border-l-4 border-[#4E73DF] shadow-md rounded-lg cursor-pointer transform hover:scale-105 transition duration-300">
+          <div>
+            <h2 className="text-[#B589DF] text-xs font-bold uppercase">Categories</h2>
+            <h1 className="text-xl font-bold text-[#5a5c69] mt-1">10</h1>
+          </div>
+          <FaLayerGroup className="text-[#4E73DF] text-3xl" />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

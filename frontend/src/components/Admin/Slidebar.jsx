@@ -5,7 +5,7 @@ import ClassIcon from "@mui/icons-material/Class";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CategoryIcon from "@mui/icons-material/Category";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
-
+import <CountUp></CountUp> from 'react-countup';
 export default function Sidebar() {
   const menuItems = [
     { icon: <GroupIcon sx={{ color: "white" }} />, label: "Users" },
@@ -16,7 +16,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="bg-primary h-screen px-6">
+    <div className='bg-[#4E73DF] px-[25px] h-screen'>
       {/* Header */}
       <div className="py-6 flex items-center justify-center border-b border-white/30">
         <h1 className="text-white text-lg font-extrabold cursor-pointer">Admin Panel</h1>
