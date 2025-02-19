@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 18 fév. 2025 à 18:25
+-- Généré le : jeu. 20 fév. 2025 à 00:35
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -152,8 +152,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `full_name`, `password`, `role`, `username`) VALUES
-(1, 'admin1@example.com', 'Admin One', 'hashed_password1', 'LIBRARIAN', 'admin1'),
-(2, 'admin2@example.com', 'Admin Two', 'hashed_password2', 'LIBRARIAN', 'admin2'),
+(1, 'admin1@example.com', 'Admin One', '$2a$10$biecZWlkI19Wkeos.oM0yu2okTQRydjdjK9b6C0E/2mtN9zamxJ1K', 'LIBRARIAN', 'admin'),
+(2, 'admin2@example.com', 'Admin Two', '$2a$10$biecZWlkI19Wkeos.oM0yu2okTQRydjdjK9b6C0E/2mtN9zamxJ1K', 'LIBRARIAN', 'admin2'),
 (3, 'user1@example.com', 'User One', 'hashed_password3', 'USER', 'user1'),
 (4, 'user2@example.com', 'User Two', 'hashed_password4', 'USER', 'user2'),
 (5, 'user3@example.com', 'User Three', 'hashed_password5', 'USER', 'user3'),
