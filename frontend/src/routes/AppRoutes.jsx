@@ -51,14 +51,14 @@ const AppRoutes = () => {
       {!isAdmin && 
       <Footer />} 
 
-        {isAdmin &&
+        {/* {isAdmin &&
          <Routes>
           <Route path="/admin" element={<AdminApp />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/books" element={<ManageBooks />} />
         </Routes>
-        }
+        } */}
        
       
     </Suspense>

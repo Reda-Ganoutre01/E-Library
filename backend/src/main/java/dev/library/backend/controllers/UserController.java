@@ -84,15 +84,18 @@ public class UserController {
         }
     }
 
-    // Profile endpoint that returns the authenticated user's profile based on the token
-    @GetMapping("/profile")
-    public ResponseEntity<?> getProfile() {
+    @GetMapping("/profile/{name}")
+    public ResponseEntity<?> getProfile(@PathVariable String name) {
         try {
-            UserResponseDto userProfile = userService.getAuthenticatedUserProfile();
+            UserResponseDto userProfile = userService.getUserProfileByName(name);
+            if (userProfile == null) {
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(userProfile, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 }
