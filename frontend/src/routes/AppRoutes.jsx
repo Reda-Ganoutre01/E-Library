@@ -32,8 +32,8 @@ const AppRoutes = () => {
   return (
     <Suspense fallback={<Loader />}>
       
-       {/* Show Navbar only for users
-       {!isAdmin && <Nav />} */}
+       {/* Show Navbar only for users */}
+       {!isAdmin && <Nav />}
       <Routes>
         {/* User Routes */}
         <Route path="/" element={<Home />} />
@@ -48,17 +48,18 @@ const AppRoutes = () => {
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
       </Routes>
 
-      {/* {!isAdmin && 
-      <Footer />}  */}
+      {!isAdmin && 
+      <Footer />} 
 
-      {/* Admin Routes - No Navbar or Footer */}
-    
-        <Routes>
+        {isAdmin &&
+         <Routes>
           <Route path="/admin" element={<AdminApp />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/books" element={<ManageBooks />} />
         </Routes>
+        }
+       
       
     </Suspense>
   );
