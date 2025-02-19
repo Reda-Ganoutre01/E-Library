@@ -11,12 +11,20 @@ class UserService {
         const response=await axios.post(`${UserService.Base_Url}auth/register`,userData);
         return response.data;
     }
-    static async getAllUsers(token){
-        const response=await axios.get(`${UserService.Base_Url}users/`,{
-            headers:{Authorization:`Bearer ${token}`}
-        })
-        return response.data;
-    }
+   // In UserService.js
+static async getAllUsers(token, page = 0) {
+    const response = await axios.get(`${UserService.Base_Url}users/`, {
+      params: { page: page, size: 6 },
+    });
+    return response.data;
+  }
+  
+    // static async getAllUsers(token){
+    //     const response=await axios.get(`${UserService.Base_Url}users/`,{
+    //         headers:{Authorization:`Bearer ${token}`}
+    //     })
+    //     return response.data;
+    // }
     static async getUserById(userId,token){
         const response=await axios.get(`${UserService.Base_Url}users/${userId}`,{
             headers:{Authorization:`Bearer ${token}`}

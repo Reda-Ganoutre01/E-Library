@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import dev.library.backend.services.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") // Allow requests from React app
+@CrossOrigin(origins = "http://localhost:5173") // Allow the frontend to access the API
 @RequestMapping("/api/v1/users")
 public class UserController {
     public final UserService userService;
