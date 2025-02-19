@@ -11,9 +11,11 @@ const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
 const Profile = lazy(() => import("../pages/UserProfile.jsx"));
 const Contact = lazy(() => import("../pages/Contact.jsx"));
 const Search = lazy(() => import("../pages/Search.jsx"));
-const BrrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
+const BorrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
 
 // Admin pages
+const AdminApp = lazy(() => import("../components/Admin/AppAdmin.jsx"));
+
 const Dashboard = lazy(() => import("../pages/admin/Dashboard.jsx"));
 const ManageUsers = lazy(() => import("../pages/admin/ManageUsers.jsx"));
 const ManageBooks = lazy(() => import("../pages/admin/ManageBooks.jsx"));
@@ -25,38 +27,39 @@ const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
 
 const AppRoutes = () => {
 
-  const isAuthanticate=UserService.isAuthanticate()
-  const admin=UserService.adminOnly()
+  const isAuthenticated=UserService.isAuthanticate()
+  const isAdmin=UserService.adminOnly()
   return (
     <Suspense fallback={<Loader />}>
-      <Nav />
+      
+       {/* Show Navbar only for users
+       {!isAdmin && <Nav />} */}
       <Routes>
-        {/* Routes Utilisateurs */}
+        {/* User Routes */}
         <Route path="/" element={<Home />} />
-        {!isAuthanticate &&  <Route path="/login" element={<Login />} />}
-        {!isAuthanticate &&   <Route path="/register" element={<Register />} />}
-
-       
+        {!isAuthenticated && <Route path="/login" element={<Login />} />}
+        {!isAuthenticated && <Route path="/register" element={<Register />} />}
         <Route path="/books" element={<Books />} />
-        
-        {isAuthanticate && <Route path="/broowRecord" element={<BrrowedRecord />} />}
-
+        {isAuthenticated && <Route path="/borrowRecord" element={<BorrowedRecord />} />}
         <Route path="/books/:search" element={<Search />} />
         <Route path="/books/:category" element={<Search />} />
         <Route path="/books/bookdetails/:id" element={<BookDetails />} />
         <Route path="/contact" element={<Contact />} />
-        {isAuthanticate && <Route path="/profile" element={<Profile />} />}
+        {isAuthenticated && <Route path="/profile" element={<Profile />} />}
       </Routes>
-      <Footer />
 
-      {admin &&(
-         <Routes>
-         {/* Routes Admin */}
-         <Route path="/admin/dashboard" element={<Dashboard />} />
-         <Route path="/admin/users" element={<ManageUsers />} />
-         <Route path="/admin/books" element={<ManageBooks />} />
-       </Routes>
-      )}
+      {/* {!isAdmin && 
+      <Footer />}  */}
+
+      {/* Admin Routes - No Navbar or Footer */}
+    
+        <Routes>
+          <Route path="/admin" element={<AdminApp />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/books" element={<ManageBooks />} />
+        </Routes>
+      
     </Suspense>
   );
 };

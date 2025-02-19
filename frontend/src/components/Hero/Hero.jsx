@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Book1 from "../../assets/images/books/book1.jpg"
 import Vector from "../../assets/images/website/blue-pattern.png";
 
 import { getImgUrl } from '../../utils/getImgUrl';
@@ -10,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 export default function Hero (){
     const [bookslist, setBookslist] = useState([]);
-    const [imageid, setImageId] = useState(Book1);
+    const [imageid, setImageId] = useState('');
     const [author, setAuthor] = useState("Anonymous");
     const [title, setTitle] = useState("Effective Java");
     const [idBook, setBookID] = useState();

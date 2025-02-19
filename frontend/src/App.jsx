@@ -7,7 +7,6 @@ function App() {
     <BrowserRouter>
      
       <AppRoutes/>
-      {/* <Home/> */}
     </BrowserRouter>
   );
 }
