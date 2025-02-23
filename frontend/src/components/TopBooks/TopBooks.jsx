@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useEffect, useState } from 'react';
-
 import bookService from '../../services/bookService';
 
 export default function TopBooks (){
@@ -43,7 +42,7 @@ export default function TopBooks (){
             1024: { slidesPerView: 3, spaceBetween: 40 },
             1280: { slidesPerView: 5, spaceBetween: 5 },
           }}
-          modules={[Navigation, Pagination, Autoplay]}  // Include Autoplay module
+          modules={[Navigation, Pagination, Autoplay]}  
           className="mySwiper"
         >
           {topBookslist.length > 0 ? ( topBookslist.map((book, index) => (

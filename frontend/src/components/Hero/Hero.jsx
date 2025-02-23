@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Vector from "../../assets/images/website/blue-pattern.png";
+import Vector from "../../assets/images/blue-pattern.png";
 
 import { getImgUrl } from '../../utils/getImgUrl';
 import bookService from '../../services/bookService';
@@ -95,7 +95,7 @@ export default function Hero (){
                             </p>
                             <div>
                                 <Link
-                                    to={`/books/${idBook}`}
+                                    to={`/books/bookdetails/${idBook}`}
                                     className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
                                 >
                                     Show Details

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo/logo_ALMS.png";
+import logo from "../../assets/images/logo_ALMS.png";
 import { useEffect, useState } from "react";
 import CategoriesService from "../../services/CategoriesService";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'; // Import icons

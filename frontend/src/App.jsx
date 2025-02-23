@@ -1,17 +1,11 @@
+// App.js
 import { BrowserRouter } from "react-router-dom";
-import { lazy } from "react";
-const AppRoutes=lazy(()=>import("./routes/AppRoutes.jsx"))
-
-
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-
-
-
   return (
     <BrowserRouter>
-     
-      <AppRoutes/>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

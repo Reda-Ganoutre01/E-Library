@@ -2,9 +2,9 @@ import { useState } from "react";
 import { LockClosedIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../services/UserService";
-import { jwtDecode } from "jwt-decode"; // Use named import
+import { jwtDecode } from "jwt-decode"; 
 
-export default function LoginPage() {
+export default function LoginForm() {
   const [username, setUsername] = useState("admin");
   const [password, setPassword] = useState("1234");
   const [errors, setErrors] = useState({});

@@ -1,8 +1,7 @@
 
-import { lazy } from "react"
 
-const Hero=lazy(()=>import('../components/Hero/Hero.jsx'));
-const TopBooks=lazy(()=>import('../components/TopBooks/TopBooks.jsx'));
+import Hero from "../components/Hero/Hero"
+import TopBooks from "../components/TopBooks/TopBooks"
 
 export default function Home(){
 
