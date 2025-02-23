@@ -2,7 +2,10 @@ import { useState } from "react";
 import { LockClosedIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../services/UserService";
-import { jwtDecode } from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
+import FormInput from "../Form/FormInput"; // Make sure the correct path is used
+import Btn from "../Form/Btn";
+import ErrorMessage from "../Form/ErrorMessage";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("admin");
@@ -51,57 +54,42 @@ export default function LoginForm() {
       <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-center text-2xl font-bold text-gray-900">Login</h2>
 
-        {/* Display form errors */}
         {errors.general && (
-          <p className="text-sm text-red-500 bg-red-100 p-2 rounded-md">
-            {errors.general}
-          </p>
+          <ErrorMessage message={errors.general}/>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Username Field */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <div className="relative mt-1">
-              <EnvelopeIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your username"
-              />
-            </div>
-          </div>
+          <FormInput
+            label="Username"
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            icon={EnvelopeIcon}
+            placeholder="Enter your username"
+            required
+            error={errors.username}
+          />
 
           {/* Password Field */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <div className="relative mt-1">
-              <LockClosedIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full rounded-md border border-gray-300 px-10 py-2 focus:ring-2 focus:ring-blue-500"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
+          <FormInput
+            label="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            icon={LockClosedIcon}
+            placeholder="••••••••"
+            required
+            error={errors.password}
+          />
 
           {/* Submit Button */}
-          <button
+          <Btn
             type="submit"
-            className="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 transition disabled:bg-gray-400"
-          >
-            Login
-          </button>
+            classname="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 transition disabled:bg-gray-400"
+            text="Login"
+          />
         </form>
 
         {/* Link to Register */}
