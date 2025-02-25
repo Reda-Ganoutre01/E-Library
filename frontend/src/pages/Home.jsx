@@ -1,7 +1,7 @@
 
 
 import Hero from "../components/Hero/Hero"
-import TopBooks from "../components/TopBooks/TopBooks"
+import TopBooks from "../components/Book/TopBooks"
 
 export default function Home(){
 

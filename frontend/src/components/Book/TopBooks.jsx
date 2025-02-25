@@ -1,4 +1,4 @@
-import { BookCard } from "../Book/BookCard";
+import { BookCard } from "./BookCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -11,7 +11,7 @@ export default function TopBooks (){
   const [topBookslist,setTopBookslist]=useState([])
 
   useEffect(()=>{
-    bookService.getTopBrrowRecordsBooks()
+    bookService.getTopBooks()
     .then((response)=>
        setTopBookslist(response.data)
       )
@@ -30,11 +30,10 @@ export default function TopBooks (){
           slidesPerView={1}
           spaceBetween={20}
           navigation={true}
-          // pagination={{ clickable: true }}
-          loop={true}  // Ensures looping of slides
+          loop={true} 
           autoplay={{
-            delay: 2000,  // Slide transition after 3 seconds
-            disableOnInteraction: false,  // Ensures autoplay continues even after user interaction
+            delay: 2000,  
+            disableOnInteraction: false,  
           }}
           breakpoints={{
             640: { slidesPerView: 2  ,spaceBetween: 5},

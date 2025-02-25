@@ -14,8 +14,10 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    CategoriesService.getCategories()
-    .then((response) => setCategoriesList(response.data.content));
+    CategoriesService.getAllCategories()
+    .then((response) => setCategoriesList(response.data.content))
+    .catch((error) => console.error("Error fetching categories:", error));
+  
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
     };

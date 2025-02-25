@@ -1,32 +1,32 @@
-    import axios from "axios";
+import axios from "axios";
 
+class BookService
+{
+    constructor()
+    {
+        this.http = axios.create({baseURL : "http://localhost:8080/api/v1/books"});
 
-    class BookService {
-        static Books_Rest_Api_url = "http://localhost:8080/api/v1/books/";
-        getBooks(page,pageSize) {
-            return axios.get(`${BookService.Books_Rest_Api_url}?page=${page}&size=${pageSize}`);
-        }
-
-        getThreeNewBooks() {
-            return axios.get(`${BookService.Books_Rest_Api_url}latest`);
-        }
-
-        getBookById(id) {
-            return axios.get(`${BookService.Books_Rest_Api_url}${id}`);
-        }
-
-        // Updated to match backend route `/search={search}`
-        searchBooks(search) {
-            return axios.get(`${BookService.Books_Rest_Api_url}${search}`); // Corrected path parameter
-        }
-
-        getTopBrrowRecordsBooks() {
-            return axios.get(`${BookService.Books_Rest_Api_url}topbooks`);
-        }
-
-        getBookByCategories(category) {
-            return axios.get(`${BookService.Books_Rest_Api_url}category=${category}`);
-        }
     }
+    async getAllBooks(page , size , sortBy)
+    {
+        return this.http.get(`/?page=${page}&size=${size}&sortBy=${sortBy}`);
+    }
+    async getTopBooks()
+    {
+        return this.http.get("/topbooks")
+    }
+    async getLatestBooks()
+    {
+        return this.http.get("/latest")
+    }
+    async getBooksByCategory(category)
+    {
+        return this.http.get(`/category=${category}`)
+    }
+    async getBook(id)
+    {
+        return this.http.get(`/${id}`)
+    }
+}
 
-    export default new BookService();
+export default new BookService();

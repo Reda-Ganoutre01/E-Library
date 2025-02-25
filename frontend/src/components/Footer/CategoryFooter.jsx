@@ -6,7 +6,7 @@ export const CategoryFooter = () => {
   const [categoriesList, setCategoriesList] = useState([]);
 
   useEffect(() => {
-    CategoriesService.getCategories().then((res) =>
+    CategoriesService.getAllCategories().then((res) =>
       setCategoriesList(res.data.content)
     );
   }, []);

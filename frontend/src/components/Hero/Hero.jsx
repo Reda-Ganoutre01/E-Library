@@ -19,7 +19,7 @@ export default function Hero() {
 
 
     useEffect(() => {
-        bookService.getThreeNewBooks()
+        bookService.getLatestBooks()
             .then((response) =>
                 setBookslist(response.data)
             )}, [])
