@@ -2,15 +2,15 @@
   import { lazy } from "react";
 
   // User pages
-  const Home = lazy(() => import("../pages/Home.jsx"));
-  const Login = lazy(() => import("../components/Auth/LoginForm.jsx"));
-  const Register = lazy(() => import("../components/Auth/RegisterForm.jsx"));
-  const Books = lazy(() => import("../pages/Books.jsx"));
-  const BookDetails = lazy(() => import("../pages/BookDetails.jsx"));
-  const Profile = lazy(() => import("../pages/UserProfile.jsx"));
-  const Contact = lazy(() => import("../pages/Contact.jsx"));
-  const Search = lazy(() => import("../pages/Search.jsx"));
-  const BorrowedRecord = lazy(() => import("../pages/BorrowRecord.jsx"));
+  const Home = lazy(() => import("../pages/HomePage.jsx"));
+  const Login = lazy(() => import("../pages/LoginPage.jsx"));
+  const Register = lazy(() => import("../pages/RegisterPage.jsx"));
+  const Books = lazy(() => import("../pages/BooksPage.jsx"));
+  const BookDetails = lazy(() => import("../pages/BookPage.jsx"));
+  const Profile = lazy(() => import("../pages/UserProfilePage.jsx"));
+  const Contact = lazy(() => import("../pages/ContactPage.jsx"));
+  const Search = lazy(() => import("../pages/SearchPage.jsx"));
+  const BorrowedRecord = lazy(() => import("../pages/BorrowRecordPage.jsx"));
 
 
   const UserRoutes = ({ isAuthenticated }) => (

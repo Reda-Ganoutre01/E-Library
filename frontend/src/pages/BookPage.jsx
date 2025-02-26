@@ -3,7 +3,7 @@ import bookService from "../services/bookService";
 import { useParams } from "react-router-dom";
 import BookDetailsComp from "../components/Book/BookDetailsComp";
 
-export default function BookDetails() {
+export default function BookPage() {
   const { id } = useParams();
   const [book, setBook] = useState(null);
 

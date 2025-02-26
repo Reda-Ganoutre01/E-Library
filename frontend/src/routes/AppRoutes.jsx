@@ -7,7 +7,7 @@ const AdminRoutes = lazy(() => import("./AdminRoutes.jsx"));
 const Loader = lazy(() => import("../components/Loader/Loader.jsx"));
 const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
 const Navbar = lazy(() => import("../components/Navbar/Navbar.jsx"));
-const NotFound = lazy(() => import("../pages/NotFound.jsx"));
+const NotFound = lazy(() => import("../pages/NotFoundPage.jsx"));
 
 const AppRoutes = () => {
   const isAuthenticated = UserService.isAuthenticated();

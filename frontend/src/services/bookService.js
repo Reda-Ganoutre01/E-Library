@@ -10,7 +10,6 @@ class BookService
     async getAllBooks(page , pageSize )
     {
         return this.http.get(`/?page=${page}&size=${pageSize}`);
-            //         return axios.get(`${BookService.Books_Rest_Api_url}?page=${page}&size=${pageSize}`);
 
     }
     async getTopBooks()

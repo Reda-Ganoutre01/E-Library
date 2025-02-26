@@ -1,7 +1,13 @@
 import { getImgUrl } from '../../utils/getImgUrl';
 import { Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-export const BookCard = ({ book }) => {
+
+
+
+
+
+export default function BookCard({ book }) {
+ 
   return (
     <div data-aos="zoom-in-up"
       className='rounded-lg shadow-lg p-4
@@ -46,4 +52,4 @@ export const BookCard = ({ book }) => {
       </div>
     </div>
   );
-};
+}
