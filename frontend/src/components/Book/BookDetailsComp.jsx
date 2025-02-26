@@ -1,6 +1,6 @@
 import { getImgUrl } from "../../utils/getImgUrl";
 
-export default function BookDetailsComp({id,Book}) {
+export default function BookDetailsComp({id,book}) {
  
 
   const handleBorrow = () => {
