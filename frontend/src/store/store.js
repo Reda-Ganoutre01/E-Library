@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import BookReducer from "../features/book/BookSlice";
+import CategoryReducer from "../features/category/CategoryReducer";
+import BookReducer from "../features/book/BookReducer";
+import AuthReducer from "../features/auth/AuthReducer";
+
 
 const store = configureStore({
-    reducer: {
-        books: BookReducer,  
-    },
+    reducer : {
+        categories : CategoryReducer,
+        books : BookReducer,
+        auth  : AuthReducer
+    }
 });
 
 export default store;

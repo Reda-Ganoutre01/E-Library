@@ -1,0 +1,1 @@
+export const CategorysSelector=((state) => state.books)

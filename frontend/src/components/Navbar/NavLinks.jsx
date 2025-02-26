@@ -1,11 +1,11 @@
 import {Menu} from "./Menu"
 import PersonIcon from "@mui/icons-material/Person";
-import CategoriesService from "../../services/CategoriesService";
 import BookIcon from '@mui/icons-material/Book';
 import UserService from "../../services/UserService";
 import { FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CategoryService from "../../services/CategoryService";
 
 export default function NavLinks(){
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,7 +14,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    CategoriesService.getAllCategories()
+    CategoryService.getAllCategories()
     .then((response) => setCategoriesList(response.data.content))
     .catch((error) => console.error("Error fetching categories:", error));
   

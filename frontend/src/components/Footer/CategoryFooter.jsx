@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import CategoriesService from "../../services/CategoriesService";
 import { Link } from "react-router-dom";
+import CategoryService from "../../services/CategoryService";
 
 export const CategoryFooter = () => {
   const [categoriesList, setCategoriesList] = useState([]);
 
   useEffect(() => {
-    CategoriesService.getAllCategories().then((res) =>
+    CategoryService.getAllCategories().then((res) =>
       setCategoriesList(res.data.content)
     );
   }, []);

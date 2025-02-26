@@ -1,1 +1,1 @@
-export const booksSelector=({books})=>books
+export const booksSelector=((state) => state.books)

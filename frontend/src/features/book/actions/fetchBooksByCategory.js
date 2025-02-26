@@ -2,10 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import BookService from "../../../services/BookService";
 
 
-const fetchBooks = createAsyncThunk('book/fetchBooks', async (payload , {rejectWithValue}) => {
+const fetchBooksByCategory = createAsyncThunk('book/fetchBooks', async (payload , {rejectWithValue}) => {
     try
     {
-        const response = await BookService.getAllBooks(payload.page , payload.size , payload.sortBy);
+        const response = await BookService.getBooksByCategory(payload.category);
         return response.data;
     }
     catch (error)
@@ -14,4 +14,4 @@ const fetchBooks = createAsyncThunk('book/fetchBooks', async (payload , {rejectW
     }
 })
 
-export default fetchBooks;
+export default fetchBooksByCategory;
