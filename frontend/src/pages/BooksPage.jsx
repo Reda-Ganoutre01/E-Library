@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import BookCard from "../components/Book/BookCard";
 import Pagination from "../components/pagination/Pagination";
 import fetchBooks from "../features/book/actions/fetchBooks";
-import { booksSelector } from "../Selectors/BookSelectors";
 
 
 export default function BooksPage() {
@@ -13,7 +12,7 @@ export default function BooksPage() {
         const [totalPages, setTotalPages] = useState(1)
         const navigate = useNavigate()
     
-        const { books, loading, error } = useSelector(booksSelector)
+        const { books, loading, error } = useSelector((state)=>state.books)
     
         const handlePageChange = (page) => {
             setCurrentPage(page - 1)

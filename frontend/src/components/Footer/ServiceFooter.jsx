@@ -10,6 +10,7 @@ export const ServiceFooter = () => {
   return (
     <>
       <nav>
+
         <h6 className="text-lg font-semibold text-white mb-4">Services</h6>
         <ul className="space-y-3">
           {Menu.map((e) => (
