@@ -1,1 +1,1 @@
-export const CategorysSelector=((state) => state.books)
+export const CategoriesSelector = (state) => state.category?.categories ?? [];

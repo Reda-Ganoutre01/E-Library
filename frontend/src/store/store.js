@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import CategoryReducer from "../features/category/CategoryReducer";
+import CategoryReducer from "../features/category/CategorySlice";
 import BookReducer from "../features/book/BookReducer";
 import AuthReducer from "../features/auth/AuthReducer";
 
