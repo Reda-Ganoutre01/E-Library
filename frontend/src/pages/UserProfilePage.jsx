@@ -6,7 +6,7 @@ export default function UserProfile() {
   const navigate = useNavigate(); 
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true); 
-  const [errors, setErrors] = useState(null); // Use an object for errors
+  const [errors, setErrors] = useState(null); 
 
   const username = localStorage.getItem('username');
 
@@ -51,15 +51,12 @@ export default function UserProfile() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
-      {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-semibold text-gray-800">Welcome, {username}</h2>
         <p className="text-gray-600 mt-2">Your Profile Information</p>
       </div>
 
-      {/* Profile Information */}
       <div className="space-y-6">
-        {/* Username */}
         <div className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm">
           <div>
             <h3 className="text-lg font-semibold text-gray-700">Username</h3>
@@ -70,7 +67,6 @@ export default function UserProfile() {
           </button>
         </div>
 
-        {/* Email */}
         <div className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm">
           <div>
             <h3 className="text-lg font-semibold text-gray-700">Email</h3>
@@ -81,7 +77,6 @@ export default function UserProfile() {
           </button>
         </div>
 
-        {/* Full Name */}
         <div className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm">
           <div>
             <h3 className="text-lg font-semibold text-gray-700">Full Name</h3>
@@ -93,7 +88,6 @@ export default function UserProfile() {
         </div>
       </div>
 
-      {/* Logout Button */}
       <div className="mt-8 flex justify-end">
         <button
           onClick={logout}
@@ -103,5 +97,6 @@ export default function UserProfile() {
         </button>
       </div>
     </div>
+    
   );
 }
