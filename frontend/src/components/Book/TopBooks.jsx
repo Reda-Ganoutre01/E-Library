@@ -3,20 +3,19 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useEffect, useState } from 'react';
-import bookService from '../../services/bookService';
+import { useEffect } from 'react';
 import BookCard from './BookCard';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchTopBooks from '../../features/book/actions/fetchTopBooks';
 
 export default function TopBooks (){
-  const [topBookslist,setTopBookslist]=useState([])
+  const dispatch = useDispatch();
+  const { topBooks } = useSelector((state) => state.books);
 
-  useEffect(()=>{
-    bookService.getTopBooks()
-    .then((response)=>
-       setTopBookslist(response.data)
-      )
-    
-  },[])
+  useEffect(() => {
+    dispatch(fetchTopBooks());
+  }, [dispatch]);
+
   return (
     <div className="container mx-auto px-4">
       <div className="py-10">
@@ -44,7 +43,7 @@ export default function TopBooks (){
           modules={[Navigation, Pagination, Autoplay]}  
           className="mySwiper"
         >
-          {topBookslist.length > 0 ? ( topBookslist.map((book, index) => (
+          {topBooks.length > 0 ? ( topBooks.map((book, index) => (
               <SwiperSlide key={index} className='flex justify-center'>
                 <BookCard book={book}  />
               </SwiperSlide>

@@ -13,6 +13,9 @@ export default function BooksPage() {
         const navigate = useNavigate()
     
         const { books, loading, error } = useSelector((state)=>state.books)
+        useEffect(() => {
+            fetchData(currentPage)
+        }, [currentPage, fetchData])
     
         const handlePageChange = (page) => {
             setCurrentPage(page - 1)
@@ -21,10 +24,7 @@ export default function BooksPage() {
     
         const fetchData = useCallback((page) => { dispatch(fetchBooks({ page, size: 5, sortBy: "title", })) }, [dispatch])
     
-        useEffect(() => {
-            fetchData(currentPage)
-        }, [currentPage, fetchData])
-    
+      
         useEffect(() => {
             if (books?.page?.totalPages) {
                 setTotalPages(books.page.totalPages)

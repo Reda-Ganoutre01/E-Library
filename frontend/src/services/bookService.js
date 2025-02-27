@@ -14,7 +14,7 @@ class BookService
     }
     async getTopBooks()
     {
-        return this.http.get("/topbooks")
+        return this.http.get("/topbooks");
     }
     async getLatestBooks()
     {

@@ -10,12 +10,13 @@ import fetchCategories from "../../features/category/actions/fetchCategories";
 
 export default function NavLinks() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isAuthanticate = UserService.isAuthenticated()
+  const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector(
     (state) => state.categories
   );
-  const isAuthanticate = UserService.isAuthenticated()
-  const [isSticky, setIsSticky] = useState(false);
+ 
 
   useEffect(() => {
     dispatch(fetchCategories());
