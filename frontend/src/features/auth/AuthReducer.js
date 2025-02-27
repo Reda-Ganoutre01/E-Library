@@ -3,6 +3,7 @@ import authenticateUser from "./actions/authenticateUser.js";
 import {jwtDecode} from "jwt-decode";
 
 const TOKEN = localStorage.getItem("token");
+const ROLE  = localStorage.getItem("role");
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -10,6 +11,10 @@ const AuthSlice = createSlice({
     user: TOKEN ? jwtDecode(TOKEN) : null,
     token: TOKEN || null,
     isAuthenticated: !!TOKEN,
+    isAdmin: ROLE === "LIBRARIAN",
+    isUser: ROLE === "USER",
+    adminOnly: !!TOKEN && ROLE === "LIBRARIAN",
+
     loading: false,
     error: null,
   },

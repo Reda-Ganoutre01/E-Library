@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import UserService from "../services/UserService.js";
+import { useSelector } from "react-redux";
 
 const UserRoutes = lazy(() => import("./UserRoutes.jsx"));
 const AdminRoutes = lazy(() => import("./AdminRoutes.jsx"));
@@ -10,8 +10,10 @@ const Navbar = lazy(() => import("../components/Navbar/Navbar.jsx"));
 const NotFound = lazy(() => import("../pages/NotFoundPage.jsx"));
 
 const AppRoutes = () => {
-  const isAuthenticated = UserService.isAuthenticated();
-  const isAdmin = UserService.adminOnly();
+  // const isAuthenticated = UserService.isAuthenticated();
+  // const isAdmin = UserService.adminOnly();
+
+  const {isAuthenticated}=useSelector((state)=>state.auth)
 
   return (
     <Suspense fallback={<Loader />}>
