@@ -10,7 +10,7 @@ export default function Navbar() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/books/search=${search}`);
+      navigate(`/books/${search}`);
       setSearch("");
     }
   };

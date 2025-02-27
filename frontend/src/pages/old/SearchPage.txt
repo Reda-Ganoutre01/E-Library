@@ -13,8 +13,8 @@ export default function Search() {
     const { searchBooks, loadingSearchBooks, errorSearchBooks } =  useSelector((state)=>state.books)
 
     useEffect(() => {
-        if (category) dispatch(fetchBooksByCategory({category}));
-        if (search) dispatch(fetchSearchBooks({search}));
+        if (category) dispatch(fetchBooksByCategory(category));
+        if (search) dispatch(fetchSearchBooks(search));
     }, [dispatch, category, search]);
 
     const loading = loadingSearchBooks || loadingBooksByCategory;

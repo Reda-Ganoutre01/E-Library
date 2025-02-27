@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import bookService from "../services/bookService";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import BookDetailsComp from "../components/Book/BookDetailsComp";
+import { useDispatch, useSelector } from "react-redux";
+import fetchBook from "../features/book/actions/fetchBook";
+import BookDetails from "../components/Book/BookDetails";
 
 export default function BookPage() {
-  const { id } = useParams();
-  const [book, setBook] = useState(null);
-
+ 
+  const dispatch = useDispatch();
+  const { book } = useSelector((state) => state.books);
+  const {id}     = useParams();
   useEffect(() => {
-    bookService.getBook(id)
-      .then((response) => setBook(response.data))
-      .catch((error) => console.error('Error fetching book data:', error));
-  }, [id]);
-
+      dispatch(fetchBook({id : id}));
+  } , [dispatch]);
 
   return (
   <>
-  <BookDetailsComp id={id} book={book}/>
+  <BookDetails id={id} book={book}/>
   </>
   );
 }

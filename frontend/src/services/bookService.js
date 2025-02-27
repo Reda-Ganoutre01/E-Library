@@ -20,9 +20,20 @@ class BookService
     {
         return this.http.get("/latest")
     }
-    async getBooksByCategory(category)
-    {
-        return this.http.get(`/category=${category}`)
+    // async getBooksByCategory(category)
+    // {
+    //     return this.http.get(`/category=${category}`)
+    // }
+    // async searchBooks(search)
+    // {
+    //     return this.http.get(`/search=${search}`)
+    // }
+    async getBooksByCategory(category) {
+        return this.http.get(`/category/${category}`);
+    }
+
+    async searchBooks(search) {
+        return this.http.get(`/search/${search}`);
     }
     async getBook(id)
     {

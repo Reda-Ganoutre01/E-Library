@@ -59,7 +59,7 @@ export default function NavLinks() {
                       key={category.id}
                       className="p-2 hover:text-primary rounded-md"
                     >
-                      <Link to={`/books/category=${category.name}`}>{category.name}</Link>
+                      <Link to={`/books/${category.name}`}>{category.name}</Link>
                     </li>
                   ))
                 }

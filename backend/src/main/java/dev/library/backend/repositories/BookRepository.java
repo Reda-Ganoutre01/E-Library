@@ -23,6 +23,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
              "GROUP BY b.id " + "ORDER BY COUNT(bor.book_id) DESC", nativeQuery = true)
 
      List<Book> getTopBooks();
+     
      @Query(value = "SELECT b.* FROM books b " + "INNER JOIN categories cat ON cat.id = b.category_id " +
              "WHERE LOWER(cat.name) LIKE LOWER(CONCAT('%', :category, '%'))", nativeQuery = true)
      List<Book> getBooksByCategories(@Param("category") String category);

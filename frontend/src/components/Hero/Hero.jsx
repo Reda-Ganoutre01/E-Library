@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 import Vector from "../../assets/images/blue-pattern.png";
 
-import bookService from '../../services/bookService';
 import BookThumbnailList from './BookThumbnailList';
 import HeroImage from './HeroImage';
 import HeroText from './HeroText';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchLatestBooks from '../../features/book/actions/fetchLatestBooks';
 
 
 
 export default function Hero() {
-    const [bookslist, setBookslist] = useState([]);
+
+    const {latestBooks}=useSelector((state)=>state.books)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchLatestBooks());
+      }, [dispatch]);
+    
     const [imageid, setImageId] = useState('');
     const [author, setAuthor] = useState("Anonymous");
     const [title, setTitle] = useState("Effective Java");
@@ -19,29 +26,24 @@ export default function Hero() {
 
 
     useEffect(() => {
-        bookService.getLatestBooks()
-            .then((response) =>
-                setBookslist(response.data)
-            )}, [])
-    useEffect(() => {
-        if (bookslist.length > 0) {
-            setImageId(bookslist[0].cover);
-            setTitle(bookslist[0].title);
-            setDescription(bookslist[0].description);
-            setBookID(bookslist[0].id)
+        if (latestBooks.length > 0) {
+            setImageId(latestBooks[0].cover);
+            setTitle(latestBooks[0].title);
+            setDescription(latestBooks[0].description);
+            setBookID(latestBooks[0].id)
         }
 
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => {
-                const nextIndex = (prevIndex + 1) % bookslist.length;
-                setImageId(bookslist[nextIndex].cover);
-                setTitle(bookslist[nextIndex].title);
-                setDescription(bookslist[nextIndex].description);
+                const nextIndex = (prevIndex + 1) % latestBooks.length;
+                setImageId(latestBooks[nextIndex].cover);
+                setTitle(latestBooks[nextIndex].title);
+                setDescription(latestBooks[nextIndex].description);
                 return nextIndex;
             });
         }, 2500);
         return () => clearInterval(interval);
-    }, [bookslist]);
+    }, [latestBooks]);
 
     const bgImage = {
         backgroundImage: `url(${Vector})`,
@@ -68,7 +70,7 @@ export default function Hero() {
                             <HeroImage imageid={imageid} title={title} idBook={idBook} />
                             {/* BookThumbnail */}
 
-                            <BookThumbnailList bookslist={bookslist} setImageId={setImageId}
+                            <BookThumbnailList bookslist={latestBooks} setImageId={setImageId}
                                 setTitle={setTitle} setDescription={setDescription} setBookID={setBookID}
                             />
                             {/*  */}

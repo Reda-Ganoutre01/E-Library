@@ -15,7 +15,7 @@ export default function BooksPage() {
         const { books, loading, error } = useSelector((state)=>state.books)
         useEffect(() => {
             fetchData(currentPage)
-        }, [currentPage, fetchData])
+        }, [currentPage])
     
         const handlePageChange = (page) => {
             setCurrentPage(page - 1)
