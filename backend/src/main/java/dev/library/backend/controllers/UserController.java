@@ -2,7 +2,6 @@ package dev.library.backend.controllers;
 
 import dev.library.backend.dto.requests.UserRequestDto;
 import dev.library.backend.dto.response.UserResponseDto;
-import dev.library.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import dev.library.backend.services.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") // Allow the frontend to access the API
 @RequestMapping("/api/v1/users")
 public class UserController {
     public final UserService userService;
@@ -84,7 +82,6 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @GetMapping("/profile/{name}")
     public ResponseEntity<?> getProfile(@PathVariable String name) {
         try {
@@ -97,6 +94,4 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

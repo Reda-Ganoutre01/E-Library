@@ -1,6 +1,6 @@
 package dev.library.backend.services;
 
-import dev.library.backend.dto.mappers.BookMapperService;
+import dev.library.backend.dto.mappers.BookMapper;
 import dev.library.backend.dto.requests.BookRequestDto;
 import dev.library.backend.dto.response.BookResponseDto;
 import dev.library.backend.entities.Book;
@@ -25,10 +25,10 @@ import java.util.List;
 @AllArgsConstructor
 public class BookService
 {
-    private final BookMapperService bookResponseMapperService;
+    private final BookMapper    bookResponseMapperService;
     private final FileUploaderResolver fileUploaderResolver;
-    private final CategoryRepository categoryRepository;
-    private final BookRepository bookRepository;
+    private final CategoryRepository   categoryRepository;
+    private final BookRepository       bookRepository;
 
     public Page<BookResponseDto> getBooks(int page , int size , String sortBy , String direction)
     {
@@ -47,15 +47,21 @@ public class BookService
     public BookResponseDto createBook(BookRequestDto bookRequestDto , MultipartFile file) throws IOException
     {
         Book book = new Book();
-        Category category = this.categoryRepository.findById(bookRequestDto.getCategoryId()).orElseThrow(EntityNotFoundException::new);
-        String cover = this.fileUploaderResolver.uploadFile(file);
-
-        book.setAuthor(bookRequestDto.getAuthor());
-        book.setTitle(bookRequestDto.getTitle());
-        book.setIsbn(bookRequestDto.getIsbn());
-        book.setCopies(bookRequestDto.getCopies());
-        book.setCover(cover);
-        book.setCategory(category);
+        try
+        {
+            Category category = this.categoryRepository.findById(bookRequestDto.getCategoryId()).orElseThrow();
+            String cover = this.fileUploaderResolver.uploadFile(file);
+            book.setAuthor(bookRequestDto.getAuthor());
+            book.setTitle(bookRequestDto.getTitle());
+            book.setIsbn(bookRequestDto.getIsbn());
+            book.setCopies(bookRequestDto.getCopies());
+            book.setCover(cover);
+            book.setCategory(category);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
 
         return this.bookResponseMapperService.toDataTransferObject(this.bookRepository.save(book));
     }
@@ -72,6 +78,7 @@ public class BookService
         return this.bookResponseMapperService.toDataTransferObjects(latestBooks);
     }
 
+
     public List<BookResponseDto> getTopBooks()
     {
         List<Book> topBooks=this.bookRepository.getTopBooks();
@@ -82,5 +89,11 @@ public class BookService
     {
         return this.bookResponseMapperService.toDataTransferObjects(this.bookRepository.getBooksByCategories(categories));
 
+    }
+
+    public Void deleteBook(Long id)
+    {
+        this.bookRepository.deleteById(id);
+        return null;
     }
 }

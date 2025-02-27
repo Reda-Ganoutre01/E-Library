@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookRequestDto {
-    private String cover;
     private String title;
     private String author;
+    private Long categoryId;
     private String description;
     private String isbn;
     private int copies;
-    private Long categoryId;
 }
