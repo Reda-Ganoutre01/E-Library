@@ -27,7 +27,7 @@ export const CategoryFooter = () => {
         <li key={e.id}>
           <Link
             className="link link-hover cursor-pointer text-gray-400 hover:text-white transition duration-200"
-            to={`/books/category=${e.name}`}
+            to={`/books/${e.name}`}
           >
             {e.name}
           </Link>

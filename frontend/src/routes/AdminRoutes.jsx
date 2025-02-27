@@ -1,15 +1,17 @@
 // AdminRoutes.jsx
 import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
-const AdminProfile = lazy(() => import("../components/Admin/Profile/AdminProfile.jsx"));
-const Slidebar = lazy(() => import("../components/Admin/Slidebar.jsx"));
-const Main = lazy(() => import("../components/Admin/Main.jsx"));
-const Dashboardview = lazy(() => import("../components/Admin/Dahboardview.jsx"));
-const ManageUsers = lazy(() => import("../components/Admin/Users/ManageUsers.jsx"));
-const ManageBooks = lazy(() => import("../components/Admin/Books/ManageBooks.jsx"));
-const ManageBrrowRecord = lazy(() => import("../components/Admin/BrrowRecord/ManageBrrowRecord.jsx"));
-const ManageCategory = lazy(() => import("../components/Admin/Categoryes/ManageCategoryes.jsx"));
-const ManageMessage = lazy(() => import("../components/Admin/Messages/ManageMessage.jsx"));
+
+const AdminProfile = lazy(() => import("../pages/Admin/Profile/AdminProfile.jsx"));
+
+const Slidebar = lazy(() => import("../pages/Admin/Slidebar.jsx"));
+const Main = lazy(() => import("../pages/Admin/Main.jsx"));
+const Dashboardview = lazy(() => import("../pages/Admin/Dahboardview.jsx"));
+const ManageUsers = lazy(() => import("../pages/Admin/Users/ManageUsers.jsx"));
+const ManageBooks = lazy(() => import("../pages/Admin/Books/ManageBooks.jsx"));
+const ManageBrrowRecord = lazy(() => import("../pages/Admin/BrrowRecord/ManageBrrowRecord.jsx"));
+const ManageCategory = lazy(() => import("../pages/Admin/Categoryes/ManageCategoryes.jsx"));
+const ManageMessage = lazy(() => import("../pages/Admin/Messages/ManageMessage.jsx"));
 
 const AdminRoutes = () => {
   return (

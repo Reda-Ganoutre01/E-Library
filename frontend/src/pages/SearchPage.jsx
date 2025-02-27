@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "../components/Book/BookCard";
@@ -6,6 +6,7 @@ import fetchBooksByCategory from "../features/book/actions/fetchBooksByCategory"
 import fetchSearchBooks from "../features/book/actions/fetchSearchBooks";
 
 export default function Search() {
+
     const { search, category } = useParams();
     const dispatch = useDispatch();
 
@@ -45,6 +46,7 @@ export default function Search() {
                 {booksByCategory.length > 0 &&
                     booksByCategory.map((book) => <BookCard key={book.id} book={book} />)}
             </div>
+              
         </div>
     );
 }
