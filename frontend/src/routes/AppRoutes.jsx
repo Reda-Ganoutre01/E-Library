@@ -10,10 +10,9 @@ const Navbar = lazy(() => import("../components/Navbar/Navbar.jsx"));
 const NotFound = lazy(() => import("../pages/NotFoundPage.jsx"));
 
 const AppRoutes = () => {
-  // const isAuthenticated = UserService.isAuthenticated();
-  // const isAdmin = UserService.adminOnly();
 
-  const {isAuthenticated}=useSelector((state)=>state.auth)
+  const {isAdmin,isAuthenticated}=useSelector((state)=>state.auth)
+
 
   return (
     <Suspense fallback={<Loader />}>

@@ -1,41 +1,43 @@
-  import { useState } from "react";
+  import {useEffect, useState } from "react";
   import { LockClosedIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
   import { Link, useNavigate } from "react-router-dom";
   import FormInput from "../Form/FormInput"; 
   import Btn from "../Form/Btn";
   import { useDispatch, useSelector } from "react-redux";
 import authenticateUser from "../../features/auth/actions/authenticateUser";
+import ErrorMessage from "../Form/ErrorMessage";
 
   export default function LoginForm() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { loading, error, user, token } = useSelector((state) => state.auth);
-  
+    const navigate=useNavigate()
+    const dispatch = useDispatch();  
     const [credentials, setCredentials] = useState({ username: "reda", password: "1234" });
   
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      await dispatch(authenticateUser(credentials));
-  
-      if (token) {
-        if (user?.role === "USER") {
-          alert("User login successfully");
-          navigate("/profile");
-        } else if (user?.role === "LIBRARIAN") {
-          alert("Librarian login successfully");
-          navigate("/admin");
-        }
-        window.location.reload();
+  const { isAuthenticated, isAdmin, isUser, error } = useSelector((state) => state.auth);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+   
+    await dispatch(authenticateUser(credentials));
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (isAdmin) {
+        navigate("/admin");
+      } else if (isUser) {
+        navigate("/profile");
       }
-    };
+    }
+  }, [isAuthenticated, isAdmin, isUser, navigate]);
 
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
         <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-lg">
           <h2 className="text-center text-2xl font-bold text-gray-900">Login</h2>
-          {error && (
-    <p className="text-center text-red-500 text-sm">{error}</p>
-  )}
+
+          {error && <ErrorMessage message={error}/>}
+        
+
 
           
 
