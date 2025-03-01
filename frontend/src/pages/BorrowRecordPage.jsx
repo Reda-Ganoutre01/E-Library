@@ -1,7 +1,9 @@
-import React from 'react'
 
 export default function BorrowRecordPage() {
+  console.log('hello')
   return (
-    <div>BorrowRecordPage</div>
+    <>
+      
+    </>
   )
 }

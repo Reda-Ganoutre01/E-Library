@@ -1,7 +1,6 @@
 import { Menu } from "./Menu"
 import PersonIcon from "@mui/icons-material/Person";
 import BookIcon from '@mui/icons-material/Book';
-import UserService from "../../services/UserService";
 import { FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import fetchCategories from "../../features/category/actions/fetchCategories";
 
 export default function NavLinks() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isAuthanticate = UserService.isAuthenticated()
+  const {isAuthenticated}=useSelector((state)=>state.auth)
   const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector(
@@ -67,13 +66,13 @@ export default function NavLinks() {
             </div>
           </li>
         </ul>
-        {isAuthanticate && <Link to={"/broowRecord"} onClick={() => setIsMobileMenuOpen(false)}>
+        {isAuthenticated && <Link to={"/borrowRecord"} onClick={() => setIsMobileMenuOpen(false)}>
           <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
         </Link>}
-        {isAuthanticate && <Link to={"/profile"} onClick={() => setIsMobileMenuOpen(false)}>
+        {isAuthenticated && <Link to={"/profile"} onClick={() => setIsMobileMenuOpen(false)}>
           <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
         </Link>}
-        {!isAuthanticate && <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
+        {!isAuthenticated  && <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
           <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
         </Link>}
       </div>

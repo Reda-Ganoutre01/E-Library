@@ -15,6 +15,7 @@ const BookSlice = createSlice({
         topBooks: [],
         booksByCategory: [],
         searchBooks: [],
+        borrowRecordBook:[],
 
         loadingBooks: false,
         loadingLatestBooks: false,
@@ -22,6 +23,7 @@ const BookSlice = createSlice({
         loadingBook: false,
         loadingBooksByCategory: false,
         loadingSearchBooks: false,
+        loadingborrowRecordBook:false,
 
         errorBooks: null,
         errorLatestBooks: null,
@@ -29,6 +31,7 @@ const BookSlice = createSlice({
         errorBook: null,
         errorBooksByCategory: null,
         errorSearchBooks: null,
+        errorborrowRecordBook:null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -116,6 +119,8 @@ const BookSlice = createSlice({
                 state.loadingSearchBooks = false;
                 state.errorSearchBooks = action.payload;
             });
+            // Fetch Books By Category
+
     },
 });
 
