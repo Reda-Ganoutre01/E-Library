@@ -86,4 +86,15 @@ public class BorrowRecordController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/user/{id}/borrow-records")
+    public ResponseEntity<?> getUserBorrowRecords(@PathVariable Long id){
+        try {
+            this.borrowRecordService.deleteBorrowRecord(id);
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

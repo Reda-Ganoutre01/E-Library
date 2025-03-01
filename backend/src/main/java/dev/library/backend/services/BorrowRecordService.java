@@ -89,4 +89,12 @@ public class BorrowRecordService
 
         return this.borrowRecordMapper.toDataTransferObject(this.borrowRecordRepository.save(borrowRecord));
     }
+
+    public  List<BorrowRecordResponseDto> getUserBorrowRecords(Long userid){
+        List<BorrowRecord> borrowRecords=this.borrowRecordRepository.getUserBrrowRecord(userid);
+        return borrowRecords.stream()
+                .map(this.borrowRecordMapper::toDataTransferObject)
+                .toList();
+
+    }
 }
