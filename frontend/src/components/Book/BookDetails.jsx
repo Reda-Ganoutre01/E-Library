@@ -21,17 +21,26 @@ export default function BookDetails({id,book}) {
             className="w-48 h-64 object-cover rounded-lg shadow-md"
           />
         </div>
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">{book.title}</h1>
-        <p className="text-sm text-gray-600 mb-2"><strong>Author:</strong> {book.author}</p>
-        <p className="text-sm text-gray-600 mb-4"><strong>Description:</strong> {book.description}</p>
-        <p className="text-sm text-gray-600 mb-2"><strong>ISBN:</strong> {book.isbn || 'N/A'}</p>
-        <p className="text-sm text-gray-600 mb-2"><strong>Copies Available:</strong> {book.copies}</p>
-        <p className="text-sm text-gray-600 mb-6"><strong>Category:</strong> {book.category}</p>
+        <h1 className="text-3xl font-semibold text-center text-gray-900 mb-4">{book.title}</h1>
+        <p className="text-lg text-gray-700 mb-2"><strong>Author:</strong> {book.author}</p>
+        <p className="text-base text-gray-600 mb-4"><strong>Description:</strong> {book.description}</p>
+        <p className="text-lg text-gray-700 mb-2"><strong>ISBN:</strong> {book.isbn || 'N/A'}</p>
+        
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-lg text-gray-700"><strong>Copies Available:</strong> {book.copies}</p>
+          <span className={book.copies > 0 ? 'text-green-500 font-semibold' : 'text-red-500 font-semibold'}>
+            {book.copies > 0 ? 'Available' : 'Not Available'}
+          </span>
+        </div>
+
+        <p className="text-base text-gray-700 mb-6"><strong>Category:</strong> {book.category}</p>
+
         <button
           onClick={handleBorrow}
-          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transform transition-all hover:scale-105"
+          disabled={book.copies <= 0}
+          className={`w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transform transition-all hover:scale-105 ${book.copies <= 0 ? 'bg-gray-400 cursor-not-allowed' : ''}`}
         >
-          Emprunt
+          {book.copies > 0 ? 'Borrow Book' : 'Out of Stock'}
         </button>
       </div>
     </div>
