@@ -1,18 +1,20 @@
 import { LockClosedIcon, EnvelopeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserService from "../../services/UserService";
 import Btn from "../Form/Btn";
-import FormInput from "../Form/FormInput";  // Import the FormInput component
+import FormInput from "../Form/FormInput";
+import { useDispatch, useSelector } from "react-redux";
+import registerUser from "../../features/auth/actions/registerUser";
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: "",
     fullname: "",
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -23,31 +25,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const userData = await UserService.register(formData);
-      if (userData.token) {
-        localStorage.setItem('token', userData.token);
-        localStorage.setItem('role', userData.role);
-        localStorage.setItem('username', formData.username);
-        setFormData({
-          username: "",
-          fullname: "",
-          email: "",
-          password: "",
-        });
-        alert('User Register successfully');
-        navigate('/profile');
-        window.location.reload();
-      } else {
-        setErrors(userData.error);
-      }
-    } catch (error) {
-      console.log(error);
-      setErrors({ general: error.message });
-      setTimeout(() => {
-        setErrors('');
-      }, 5000);
-    }
+    dispatch(registerUser(formData));
   };
 
   return (
@@ -55,7 +33,7 @@ export default function RegisterForm() {
       <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-center text-2xl font-bold text-gray-900">Register</h2>
 
-        {errors.general && <p className="text-sm text-red-500">{errors.general}</p>}
+        {error && <p className="text-sm text-red-500">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Username Field */}
@@ -113,7 +91,8 @@ export default function RegisterForm() {
           <Btn
             type="submit"
             classname={"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 transition disabled:bg-gray-400"}
-            text={"Register"}
+            text={loading ? "Registering..." : "Register"}
+            disabled={loading}
           />
         </form>
 

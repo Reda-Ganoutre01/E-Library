@@ -3,14 +3,7 @@ import axios from "axios";
 class UserService {
     static Base_Url = "http://localhost:8080/api/v1/";
 
-    static async login(username, password) {
-        const response=await axios.post(`${UserService.Base_Url}auth/authenticate`, { username, password });
-        return response.data;
-    }
-    static async register(userData){
-        const response=await axios.post(`${UserService.Base_Url}auth/register`,userData);
-        return response.data;
-    }
+  
 static async getAllUsers(token, page = 0) {
     const response = await axios.get(`${UserService.Base_Url}users/`, {
       params: { page: page, size: 6 },

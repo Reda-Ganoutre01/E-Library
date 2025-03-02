@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import authenticateUser from "./actions/authenticateUser.js";
+import registerUser from "./actions/registerUser.js";
+
 import { jwtDecode } from "jwt-decode";
 
 const TOKEN = localStorage.getItem("token");
@@ -53,9 +55,36 @@ const AuthSlice = createSlice({
 
         localStorage.setItem("token", action.payload.token);
         localStorage.setItem("role", decodedToken.role);
-
       })
       .addCase(authenticateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Register user
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload.token;
+        const decodedToken = jwtDecode(action.payload.token);
+
+        state.user = {
+          role: decodedToken.role,
+          id: decodedToken.id,
+          sub: decodedToken.sub,
+        };
+
+        state.isAuthenticated = true;
+        state.isAdmin = decodedToken.role === "LIBRARIAN";
+        state.isUser = decodedToken.role === "USER";
+        state.adminOnly = state.isAuthenticated && state.isAdmin;
+
+        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("role", decodedToken.role);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

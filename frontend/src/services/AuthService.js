@@ -10,6 +10,9 @@ class AuthService
     {
         return await this.http.post("/authenticate", credintials);
     }
+    async register(userData){
+        return  await this.http.post("/register",userData);
+    }
     
 }
 
