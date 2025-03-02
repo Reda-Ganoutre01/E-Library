@@ -2,7 +2,7 @@ import {AuthContext} from "./AuthContext.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useContext} from "react";
 import authenticateUser from "../features/auth/actions/authenticateUser.js";
-import {logout} from "../features/auth/AuthReducer.js";
+import {logout} from "../features/auth/AuthSlice.js";
 
 
 export default function AuthProvider({children}) {

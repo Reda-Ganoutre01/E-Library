@@ -16,6 +16,7 @@ const BookSlice = createSlice({
         booksByCategory: [],
         searchBooks: [],
         borrowRecordBook:[],
+        totalbooks:0,
 
         loadingBooks: false,
         loadingLatestBooks: false,
@@ -44,6 +45,7 @@ const BookSlice = createSlice({
             .addCase(fetchBooks.fulfilled, (state, action) => {
                 state.loadingBooks = false;
                 state.books = action.payload;
+                state.totalbooks=action.payload.page.totalElements; 
             })
             .addCase(fetchBooks.rejected, (state, action) => {
                 state.loadingBooks = false;

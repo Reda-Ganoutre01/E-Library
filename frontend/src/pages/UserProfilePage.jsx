@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { logout } from "../features/auth/AuthReducer";
+import { logout } from "../features/auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {

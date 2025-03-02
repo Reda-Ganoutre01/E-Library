@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import UserService from "../../services/UserService";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, } from "react-redux";
+import { logout } from "../../features/auth/AuthSlice";
+
 
 const DashboardView = () => {
   const [open, setOpen] = useState(false);
   const Admin_username=localStorage.getItem("username")
   const navigate=useNavigate()
-
+  const dispatch=useDispatch()
   const showProfile = () => setOpen(!open);
  
-  const logout=()=>{
-    const confirmLogout=window.confirm("Are you sure you want to log out?");
-    if (confirmLogout) {
-      UserService.logout();
-      navigate("/");
-      window.location.reload();
-    }
-  }
+  
+    const handleLogout = () => {
+      const confirmLogout=window.confirm("Are you sure you want to logout?");
+      if(confirmLogout){
+      dispatch(logout())
+     navigate("/")
+     window.location.reload();
+      }
+     
+    };
 
   return (
     <div className="bg-white shadow-lg">
@@ -41,7 +45,7 @@ const DashboardView = () => {
 
                 </Link>
                 <button  className="cursor-pointer hover:text-blue-600 font-semibold transition duration-200"
-                 onClick={logout}>Log out</button>
+                 onClick={handleLogout}>Log out</button>
               </div>
             )}
           </div>

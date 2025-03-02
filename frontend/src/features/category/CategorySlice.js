@@ -6,7 +6,9 @@ const CategorySlice = createSlice({
     initialState: {
         categories: [],
         loading: false,
-        error: null
+        error: null,
+        totalCategories: 0,  
+
     },
     reducers:{},
     extraReducers : (builder) => {
@@ -17,6 +19,8 @@ const CategorySlice = createSlice({
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.loading = false;
             state.categories = action.payload;
+            state.totalCategories = action.payload.page.totalElements;  
+
         });
         builder.addCase(fetchCategories.rejected, (state, action) => {
             state.loading = false;

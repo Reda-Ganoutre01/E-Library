@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import UserService from "../../services/UserService"; 
+import { useSelector } from "react-redux";
 
 export const ServiceFooter = () => {
-  const isAuthenticated = UserService.isAuthenticated(); 
-
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const Menu = [
     { id: 1, name: "Home", link: "/" },
     { id: 2, name: "Books", link: "/Books" },
