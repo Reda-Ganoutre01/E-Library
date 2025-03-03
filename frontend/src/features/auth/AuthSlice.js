@@ -33,33 +33,37 @@ const AuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(authenticateUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(authenticateUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.token = action.payload.token;
-        const decodedToken = jwtDecode(action.payload.token);
+    .addCase(authenticateUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(authenticateUser.fulfilled, (state, action) => {
+      const token = action.payload.token;
+      const decodedToken = jwtDecode(token);
 
-        state.user = {
-          role: decodedToken.role,
-          id: decodedToken.id,
-          sub: decodedToken.sub,
-        };
+      state.token = token;
+      state.user = { 
+        role: decodedToken.role, 
+        id: decodedToken.id, 
+        sub: decodedToken.sub 
+      };
 
-        state.isAuthenticated = true;
-        state.isAdmin = decodedToken.role === "LIBRARIAN";
-        state.isUser = decodedToken.role === "USER";
-        state.adminOnly = state.isAuthenticated && state.isAdmin;
+      state.isAuthenticated = true;
+      state.isAdmin = decodedToken.role === "LIBRARIAN";
+      state.isUser = decodedToken.role === "USER";
+      state.adminOnly = state.isAuthenticated && state.isAdmin;
 
-        localStorage.setItem("token", action.payload.token);
+      setTimeout(() => {
+        localStorage.setItem("token", token);
         localStorage.setItem("role", decodedToken.role);
-      })
-      .addCase(authenticateUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+      }, 0);
+    })
+    .addCase(authenticateUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+
       // Register user
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
