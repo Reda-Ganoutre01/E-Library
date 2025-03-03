@@ -5,8 +5,8 @@ class UserService {
         this.http = axios.create({ baseURL: "http://localhost:8080/api/v1/users" });
     }
 
-    async getAllUsers(page, pageSize) {
-        return this.http.get(`/?page=${page}&size=${pageSize}`);
+    async getAllUsers(page, pageSize,sortBy) {
+        return this.http.get(`/?page=${page}&size=${pageSize}&sortBy=${sortBy}`);
     }
 }
 

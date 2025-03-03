@@ -1,95 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import UserService from '../../../services/UserService';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Pagination from "../../../components/pagination/Pagination";
+import { useNavigate } from "react-router-dom";
+import fetchUsers from "../../../features/user/actions/fetchUsers";
+import { THead } from "../../../components/Table/THead";
+import { TBody } from "../../../components/Table/TBody";
 
 export default function ManageUsers() {
-  const token = localStorage.getItem('token');
-  const [users, setUsers] = useState([]);
-  const [page, setPage] = useState(0); 
-  const [totalPages, setTotalPages] = useState(0); 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const columns = ["id", "username", "email", "full_name", "role"];
+  const { users } = useSelector((state) => state.users);
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await UserService.getAllUsers(token, page);
-        setUsers(response.content); 
-        setTotalPages(response.page.totalPages); 
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
+    fetchData(currentPage);
+  }, [currentPage]);
 
-    fetchUsers();
-  }, [token, page]); // Re-fetch users when page changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page - 1);
+    fetchData(page - 1);
+  };
 
-  // Handle page change
-  const handlePageChange = (newPage) => {
-    if (newPage >= 0 && newPage < totalPages) {
-      setPage(newPage);
+  const fetchData = useCallback(
+    (page) => {
+      dispatch(fetchUsers({ page, size: 5, sortBy: "id" }));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (users?.page?.totalPages) {
+      setTotalPages(users.page.totalPages);
     }
+  }, [users]);
+
+  const handleUpdate = (id) => {
+    console.log("Edit user with ID:", id);
+  };
+
+  const handleDelete = (id) => {
+    console.log("Delete user with ID:", id);
   };
 
   return (
-    <div className="container m-13">
-      <div className='py-10'>
-        <div className="flex items-center justify-center text-black text-2xl font-semibold mb-6">
-          <h1 className="underline">Manage Users</h1>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <div className="py-8">
+        {/* Header & Add User Button */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-semibold text-gray-800">Manage Users</h1>
+          <button
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
+            onClick={() => navigate("/admin/users/add")}
+          >
+            + Add New User
+          </button>
         </div>
 
-        <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
-          <table className="min-w-full table-auto">
-            <thead className="bg-gray-800 text-white">
-              <tr>
-                <th className="px-4 py-2 text-left">Username</th>
-                <th className="px-4 py-2 text-left">Email</th>
-                <th className="px-4 py-2 text-left">Full Name</th>
-                <th className="px-4 py-2 text-left">Role</th>
-                <th className="px-4 py-2 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id} className="border-b hover:bg-gray-100">
-                  <td className="px-4 py-2">{user.username}</td>
-                  <td className="px-4 py-2">{user.email}</td>
-                  <td className="px-4 py-2">{user.fullName || 'N/A'}</td>
-                  <td className="px-4 py-2">{user.role}</td>
-                  <td className="px-4 py-2 flex items-center space-x-2">
-                    <button
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-                    >
-                      <FaEdit className="inline-block mr-2" />
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
-                    >
-                      <FaTrash className="inline-block mr-2" />
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+        {/* Users Table */}
+        <div className="overflow-x-auto bg-white shadow-xl rounded-lg">
+          <table className="min-w-full table-auto border-collapse text-sm">
+            <THead columns={columns} />
+            <TBody data={users?.content || []} columns={columns} editLine={handleUpdate} dropLine={handleDelete} />
           </table>
         </div>
 
-        {/* Pagination controls */}
+        {/* Pagination */}
         <div className="flex justify-center mt-6">
-          <button
-            className="px-4 py-2 bg-gray-300 rounded-l-md hover:bg-gray-400 disabled:opacity-50"
-            onClick={() => handlePageChange(page - 1)}
-            disabled={page === 0}
-          >
-            Previous
-          </button>
-          <span className="px-4 py-2">{`Page ${page + 1} of ${totalPages}`}</span>
-          <button
-            className="px-4 py-2 bg-gray-300 rounded-r-md hover:bg-gray-400 disabled:opacity-50"
-            onClick={() => handlePageChange(page + 1)}
-            disabled={page === totalPages - 1}
-          >
-            Next
-          </button>
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </div>
       </div>
     </div>

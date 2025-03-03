@@ -5,7 +5,7 @@ const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await UserService.getAllUsers(payload.page, payload.size);
+      const response = await UserService.getAllUsers(payload.page, payload.size,payload.sortBy);
 
       return {
         users: response.data|| [],  
