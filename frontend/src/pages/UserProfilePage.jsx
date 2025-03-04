@@ -92,14 +92,14 @@ export default function UserProfile() {
         <button onClick={handleLogout} className="px-5 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300">
           Logout
         </button>
-        <button onClick={() => setShowModal(true)} className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
+        <button onClick={() => setShowModal(true)} className="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300">
           Edit
         </button>
         <button onClick={handleDelete} className="px-5 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-900 transition duration-300">
           Delete Profile
         </button>
       </div>
-
+    {/* Modal */}
       {showModal && (
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <div className="p-6">

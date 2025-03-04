@@ -11,7 +11,7 @@ export default function RegisterForm() {
   const { loading, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: "",
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
   });
@@ -56,13 +56,13 @@ export default function RegisterForm() {
           <FormInput
             label="Full Name"
             type="text"
-            name="fullname"
-            value={formData.fullname}
+            name="fullName"
+            value={formData.fullName}
             onChange={handleInputChange}
             icon={UserIcon}
             placeholder="Enter your full name"
             required
-            error={errors.fullname}
+            error={errors.fullName}
           />
 
           {/* Email Field */}
