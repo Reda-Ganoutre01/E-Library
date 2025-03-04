@@ -122,7 +122,7 @@ public class BookController
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping("/deleted/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable Long id)
     {
         try

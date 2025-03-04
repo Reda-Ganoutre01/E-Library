@@ -1,7 +1,12 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { getImgUrl } from "../../utils/getImgUrl";
+import DropItem from "./DropItem";
 
 export function TBody({ data, columns, editLine, dropLine }) {
+  const handleDelete = (id) => {
+    dropLine(id);
+  };
+
   return (
     <tbody>
       {data.map((line) => (
@@ -10,10 +15,7 @@ export function TBody({ data, columns, editLine, dropLine }) {
             <td key={column} className="px-4 py-2 text-center">
               {column === "cover" ? (
                 <img
-                  src={getImgUrl(line[column])
-                   
-
-                  } 
+                  src={getImgUrl(line[column]) || "/default-cover.jpg"}
                   alt="Book Cover"
                   className="w-16 h-20 object-cover rounded shadow"
                   onError={(e) => (e.target.src = "/default-cover.jpg")} // Fallback image if URL is broken
@@ -31,13 +33,7 @@ export function TBody({ data, columns, editLine, dropLine }) {
               <FaEdit className="inline-block mr-2" />
               Edit
             </button>
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
-              onClick={() => dropLine(line["id"])}
-            >
-              <FaTrash className="inline-block mr-2" />
-              Delete
-            </button>
+            <DropItem onDelete={() => handleDelete(line["id"])} />
           </td>
         </tr>
       ))}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { THead } from "../../../components/Table/THead";
 import { TBody } from "../../../components/Table/TBody";
 import fetchCategories from "../../../features/category/actions/fetchCategories";
+import deleteCategory from "../../../features/category/actions/deleteCategory";
 
 export default function ManageCategories() {
   const dispatch = useDispatch();
@@ -43,9 +44,8 @@ export default function ManageCategories() {
 
  
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete This category? ")) {
-      dispatch((id));
-    }
+      dispatch(deleteCategory(id));
+
   };
 
   return (

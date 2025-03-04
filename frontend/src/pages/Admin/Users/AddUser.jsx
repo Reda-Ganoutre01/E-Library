@@ -1,13 +1,14 @@
-import  { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../../features/user/actions/addUser'; 
+import { useState } from "react";
+import addUser from "../../../features/user/actions/addUser";
+import Modal from "../../../components/Modal/Modal";
+import { useDispatch } from "react-redux";
 
-export default function AddUser() {
+export default function AddUser({ showModal, setShowModal }) {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    full_name: '',
+    fullName: '',
     role: '',
   });
 
@@ -26,77 +27,56 @@ export default function AddUser() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <center>
-          <h1 className="text-2xl font-bold text-gray-700 mb-4">Add User</h1>
-        </center>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="username" className="text-gray-600">Username</label>
-            <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Username"
-            className="px-4 py-2 border border-gray-300 rounded-md"
-            required
-            />
-            
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-gray-600">Email</label>
-          
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email"
-              className="px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="full_name" className="text-gray-600">Full Name</label>
+    <>
+      {/* Modal */}
+      {showModal && (
+        <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
+          <div className="p-6">
+            <h2 className="text-xl font-semibold mb-4">Add New User</h2>
+            <label className="block mb-2 text-gray-700">Username:</label>
             <input
               type="text"
-              name="full_name"
-              value={formData.full_name}
+              className="w-full p-2 border rounded-lg mb-4"
+              value={formData.username}
               onChange={handleChange}
-              placeholder="Full Name"
-              className="px-4 py-2 border border-gray-300 rounded-md"
-              required
+              name="username"
             />
-          </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="role" className="text-gray-600">Role</label>
-            <select
-              id="role"
-              name="role"
-              value={formData.role}
+            <label className="block mb-2 text-gray-700">Full Name:</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded-lg mb-4"
+              value={formData.fullName}
               onChange={handleChange}
-              className="px-4 py-2 border border-gray-300 rounded-md"
-              required
-            >
-              <option disabled>Select a role</option>
-              <option value="user">USER</option>
-              <option value="admin">LIBRARIAN</option>
-            </select>
-          </div>
+              name="fullName"
+            />
 
-          <button
-            type="submit"
-            className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          >
-            Add User
-          </button>
-        </form>
-      </div>
-    </div>
+            <label className="block mb-2 text-gray-700">Email:</label>
+            <input
+              type="email"
+              className="w-full p-2 border rounded-lg mb-4"
+              value={formData.email}
+              onChange={handleChange}
+              name="email"
+            />
+
+            <div className="flex justify-end">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-300 mr-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 }

@@ -30,8 +30,15 @@ class BookService {
     async getBook(id) {
         return this.http.get(`/${id}`)
     }
+    async addBook(book) {
+        return this.http.post("/", book);
+    }
+
+    async updateBook(id, book) {
+        return this.http.put(`/update/${id}`, book);
+    }
     async deleteBook(id) {
-        return this.http.delete(`/${id}`)
+        return this.http.delete(`/delete/${id}`)
     }
 }
 

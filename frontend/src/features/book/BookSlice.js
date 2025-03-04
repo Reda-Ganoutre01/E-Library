@@ -5,6 +5,8 @@ import fetchBooksByCategory from "./actions/fetchBooksByCategory";
 import fetchSearchBooks from "./actions/fetchSearchBooks";
 import fetchBook from "./actions/fetchBook";
 import { createSlice } from "@reduxjs/toolkit";
+import addBook from "./actions/addBook";
+import deleteBook from "./actions/deleteBook";
 
 const BookSlice = createSlice({
     name: "book",
@@ -25,6 +27,7 @@ const BookSlice = createSlice({
         loadingBooksByCategory: false,
         loadingSearchBooks: false,
         loadingborrowRecordBook:false,
+        loadingAddBook:false,
 
         errorBooks: null,
         errorLatestBooks: null,
@@ -33,6 +36,7 @@ const BookSlice = createSlice({
         errorBooksByCategory: null,
         errorSearchBooks: null,
         errorborrowRecordBook:null,
+        errorAddBook:null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -120,8 +124,32 @@ const BookSlice = createSlice({
             .addCase(fetchSearchBooks.rejected, (state, action) => {
                 state.loadingSearchBooks = false;
                 state.errorSearchBooks = action.payload;
+            })
+            // Add Book
+            .addCase(addBook.pending, (state) => {
+                state.loadingAddBook = true;
+                state.errorAddBook = null;
+            })
+            .addCase(addBook.fulfilled, (state, action) => {
+                state.loadingAddBook = false;
+                state.books.push(action.payload);
+            })
+            .addCase(addBook.rejected, (state, action) => {
+                state.loadingAddBook = false;
+                state.errorAddBook = action.payload;
+            })
+            // Delete Book
+            .addCase(deleteBook.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(deleteBook.fulfilled, (state, action) => {
+                state.loading = false;
+                state.books = state.books.filter((e) => e.id !== action.payload.id);
+            })
+            .addCase(deleteBook.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
-            // Fetch Books By Category
 
     },
 });

@@ -6,8 +6,11 @@ import fetchUsers from "../../../features/user/actions/fetchUsers";
 import { THead } from "../../../components/Table/THead";
 import { TBody } from "../../../components/Table/TBody";
 import deleteUser from "../../../features/user/actions/deleteUser";
+import AddUser from "./AddUser";
 
 export default function ManageUsers() {
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,21 +19,16 @@ export default function ManageUsers() {
   const columns = ["id", "username", "email", "full_name", "role"];
   const { users } = useSelector((state) => state.users);
 
-  useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page - 1);
-    fetchData(page - 1);
-  };
-
   const fetchData = useCallback(
     (page) => {
       dispatch(fetchUsers({ page, size: 5, sortBy: "id" }));
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage, fetchData]);
 
   useEffect(() => {
     if (users?.page?.totalPages) {
@@ -42,22 +40,21 @@ export default function ManageUsers() {
     console.log("Edit user with ID:", id);
   };
 
- 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete This User? ")) {
-      dispatch(deleteUser(id));
-    }
+    dispatch(deleteUser(id));
+    window.location.reload();
+
   };
 
   return (
+    <>
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
       <div className="py-8">
-        {/* Header & Add User Button */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-semibold text-gray-800">Manage Users</h1>
           <button
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-            onClick={() => navigate("/admin/users/add")}
+            onClick={() =>setShowModal(true)}
           >
             + Add New User
           </button>
@@ -67,15 +64,27 @@ export default function ManageUsers() {
         <div className="overflow-x-auto bg-white shadow-xl rounded-lg">
           <table className="min-w-full table-auto border-collapse text-sm">
             <THead columns={columns} />
-            <TBody data={users?.content || []} columns={columns} editLine={handleUpdate} dropLine={handleDelete} />
+            <TBody
+              data={users?.content || []}
+              columns={columns}
+              editLine={handleUpdate}
+              dropLine={handleDelete}
+            />
           </table>
         </div>
 
         {/* Pagination */}
         <div className="flex justify-center mt-6">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </div>
     </div>
+    <AddUser showModal={showModal} setShowModal={setShowModal}/>
+    </>
+    
   );
 }

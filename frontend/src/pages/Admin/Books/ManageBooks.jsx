@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../../components/pagination/Pagination";
-import { useNavigate } from "react-router-dom";
 import fetchBooks from "../../../features/book/actions/fetchBooks";
 import { THead } from "../../../components/Table/THead";
 import { TBody } from "../../../components/Table/TBody";
+import AddBook from "./AddBook";
+import deleteBook from "../../../features/book/actions/deleteBook";
 
 export default function ManageBooks() {
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -42,10 +44,12 @@ export default function ManageBooks() {
   };
 
   const handleDelete = (id) => {
-    console.log("Delete book with ID:", id);
+    dispatch(deleteBook(id));
+    window.location.reload();
   };
 
   return (
+    <>
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
       <div className="py-8">
         {/* Header */}
@@ -53,7 +57,7 @@ export default function ManageBooks() {
           <h1 className="text-3xl font-semibold text-gray-800">Manage Books</h1>
           <button
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-            onClick={() => navigate("/admin/books/add")}
+            onClick={() =>setShowModal(true)}
           >
             + Add New Book
           </button>
@@ -73,5 +77,9 @@ export default function ManageBooks() {
         </div>
       </div>
     </div>
+        <AddBook showModal={showModal} setShowModal={setShowModal}/>
+    
+    </>
+    
   );
 }

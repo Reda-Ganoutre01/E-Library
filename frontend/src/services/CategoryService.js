@@ -12,8 +12,18 @@ class CategoryService {
         }
         return this.http.get(url);
     }
-    async deleteCategories(id) {
-        return this.http.delete(`/${id}`)
-    }}
+    async addCategory(category) {
+        return this.http.post("/", category);
+    }
+
+    async updateCategory(id, category) {
+        return this.http.put(`/update/${id}`, category);
+    }
+
+    async deleteCategory(id) {
+        return this.http.delete(`/delete/${id}`);
+    }
+}
+
 
 export default new CategoryService();
