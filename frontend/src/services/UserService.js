@@ -20,7 +20,7 @@ class UserService {
         return this.http.post(`/`, userData); 
     }
     async updateUser(userId, userData) {
-        return this.http.put(`/${userId}`, userData)
+        return this.http.put(`/update/${userId}`, userData);
     }
     async deleteUser(userId) {
         return this.http.delete(`/${userId}`)

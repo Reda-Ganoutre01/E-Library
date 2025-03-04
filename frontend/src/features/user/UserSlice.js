@@ -3,7 +3,7 @@ import fetchUsers from "./actions/fetchUsers";
 import fetchUser from "./actions/fetchUser";
 import updateUser from "./actions/updateUser";
 import deleteUser from "./actions/deleteUser";
-import { addUser } from "./actions/addUser";
+import  addUser  from "./actions/addUser";
 
 const UserSlice = createSlice({
   name: "user",

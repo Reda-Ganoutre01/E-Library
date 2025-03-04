@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import UserService from '../../../services/UserService';
 
-export const addUser = createAsyncThunk(
+const addUser = createAsyncThunk(
   'user/addUser', async (userData, {rejectWithValue}) => {
     try {
       const response = await UserService.addUser(userData);  
@@ -11,3 +11,5 @@ export const addUser = createAsyncThunk(
       }
   }
 );
+
+export default addUser;

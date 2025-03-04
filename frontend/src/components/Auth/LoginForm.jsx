@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LockClosedIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../Form/FormInput";
@@ -6,13 +6,13 @@ import Btn from "../Form/Btn";
 import { useDispatch, useSelector } from "react-redux";
 import authenticateUser from "../../features/auth/actions/authenticateUser";
 import ErrorMessage from "../Form/ErrorMessage";
-import { jwtDecode } from "jwt-decode"; // Ajout de l'import
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [credentials, setCredentials] = useState({ username: "reda", password: "1234" });
-  const [errors, setErrors] = useState({}); // Définition de errors
+  const [credentials, setCredentials] = useState({ username: "reda1", password: "1234" });
+  const [errors, setErrors] = useState({}); 
 
   const { isAuthenticated, error, user } = useSelector((state) => state.auth);
 
