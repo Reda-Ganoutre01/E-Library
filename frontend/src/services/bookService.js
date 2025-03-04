@@ -1,33 +1,25 @@
 import axios from "axios";
 
-class BookService
-{
-    constructor()
-    {
-        this.http = axios.create({baseURL : "http://localhost:8080/api/v1/books"});
+class BookService {
+    constructor() {
+        this.http = axios.create({ baseURL: "http://localhost:8080/api/v1/books" });
 
     }
-    async getAllBooks(page , pageSize,sortBy)
-    {
-        return this.http.get(`/?page=${page}&size=${pageSize}&sortBy=${sortBy}`);
-
+    
+    async getAllBooks(page = null, pageSize = null, sortBy = null) {
+        let url = "/";
+        if (page !== null && pageSize !== null && sortBy !== null) {
+            url += `?page=${page}&size=${pageSize}&sortBy=${sortBy}`;
+        }
+        return this.http.get(url);
     }
-    async getTopBooks()
-    {
+    async getTopBooks() {
         return this.http.get("/topbooks");
     }
-    async getLatestBooks()
-    {
+    async getLatestBooks() {
         return this.http.get("/latest")
     }
-    // async getBooksByCategory(category)
-    // {
-    //     return this.http.get(`/category=${category}`)
-    // }
-    // async searchBooks(search)
-    // {
-    //     return this.http.get(`/search=${search}`)
-    // }
+
     async getBooksByCategory(category) {
         return this.http.get(`/category/${category}`);
     }
@@ -35,9 +27,11 @@ class BookService
     async searchBooks(search) {
         return this.http.get(`/search/${search}`);
     }
-    async getBook(id)
-    {
+    async getBook(id) {
         return this.http.get(`/${id}`)
+    }
+    async deleteBook(id) {
+        return this.http.delete(`/${id}`)
     }
 }
 

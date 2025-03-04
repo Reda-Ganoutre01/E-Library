@@ -41,8 +41,11 @@ export default function ManageCategories() {
     console.log("Edit category with ID:", id);
   };
 
+ 
   const handleDelete = (id) => {
-    console.log("Delete category with ID:", id);
+    if (window.confirm("Are you sure you want to delete This category? ")) {
+      dispatch((id));
+    }
   };
 
   return (
@@ -53,7 +56,7 @@ export default function ManageCategories() {
           <h1 className="text-3xl font-semibold text-gray-800">Manage Categories</h1>
           <button
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-            onClick={() => navigate("/admin/categories/add")}
+            onClick={() => navigate("/admin/categorys/add")}
           >
             + Add New Category
           </button>

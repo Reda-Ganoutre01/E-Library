@@ -26,6 +26,9 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(registerUser(formData));
+    navigate("/profile");
+
+
   };
 
   return (

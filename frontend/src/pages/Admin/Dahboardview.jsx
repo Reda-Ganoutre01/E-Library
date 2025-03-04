@@ -1,13 +1,14 @@
 import { useState } from "react";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, } from "react-redux";
+import { useDispatch, useSelector, } from "react-redux";
 import { logout } from "../../features/auth/AuthSlice";
 
 
 const DashboardView = () => {
   const [open, setOpen] = useState(false);
-  const Admin_username=localStorage.getItem("username")
+  // const Admin_username=localStorage.getItem("username")
+  const { user } = useSelector((state) => state.auth);
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const showProfile = () => setOpen(!open);
@@ -32,7 +33,7 @@ const DashboardView = () => {
        
 
           <div className="flex items-center gap-[15px] relative cursor-pointer" onClick={showProfile}>
-            <p className="text-gray-700 font-semibold">{Admin_username && Admin_username}</p>
+            <p className="text-gray-700 font-semibold">{user?.sub}</p>
             <div className="h-[36px] w-[36x] rounded-full bg-[#4E73DF] flex items-center justify-center">
               <AccountCircleRoundedIcon className="text-white" fontSize="large" />
             </div>

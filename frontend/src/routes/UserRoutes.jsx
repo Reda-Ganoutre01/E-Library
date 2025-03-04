@@ -24,8 +24,7 @@
       <Route path="/books/:category" element={<Search />} />
       <Route path="/books/bookdetails/:id" element={<BookDetails />} />
       <Route path="/contact" element={<Contact />} />
-      {/* {isAuthenticated && <Route path="/profile" element={<Profile />} />} */}
-      { <Route path="/profile" element={<Profile />} />}
+      {isAuthenticated && <Route path="/profile" element={<Profile />} />}
 
     </Routes>
   );

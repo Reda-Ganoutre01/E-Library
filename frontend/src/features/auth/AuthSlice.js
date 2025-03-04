@@ -45,7 +45,7 @@ const AuthSlice = createSlice({
       state.user = { 
         role: decodedToken.role, 
         id: decodedToken.id, 
-        sub: decodedToken.sub 
+        sub: decodedToken.sub
       };
 
       state.isAuthenticated = true;

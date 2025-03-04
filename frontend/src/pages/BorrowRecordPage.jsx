@@ -1,9 +1,10 @@
 
 export default function BorrowRecordPage() {
-  console.log('hello')
   return (
     <>
-      
+      <center>
+        <h1>BorrowRecordPage</h1>
+      </center>
     </>
   )
 }

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import fetchUsers from "../../../features/user/actions/fetchUsers";
 import { THead } from "../../../components/Table/THead";
 import { TBody } from "../../../components/Table/TBody";
+import deleteUser from "../../../features/user/actions/deleteUser";
 
 export default function ManageUsers() {
   const dispatch = useDispatch();
@@ -41,8 +42,11 @@ export default function ManageUsers() {
     console.log("Edit user with ID:", id);
   };
 
+ 
   const handleDelete = (id) => {
-    console.log("Delete user with ID:", id);
+    if (window.confirm("Are you sure you want to delete This User? ")) {
+      dispatch(deleteUser(id));
+    }
   };
 
   return (

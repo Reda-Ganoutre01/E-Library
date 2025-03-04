@@ -1,10 +1,22 @@
+import { useSelector } from "react-redux";
 import { getImgUrl } from "../../utils/getImgUrl";
+import { useNavigate } from "react-router-dom";
 
 export default function BookDetails({id,book}) {
- 
+
+  const {isAuthenticated}=useSelector((state)=>state.auth)
+  const navigate=useNavigate()
 
   const handleBorrow = () => {
-    alert(`You have borrowed the book: ${book.title}`);
+    if(isAuthenticated){
+      alert(`You have borrowed the book: ${book.title}`);
+
+    }
+    else{
+      navigate('/login')
+    }
+
+
   };
 
   if (!book) {
@@ -42,6 +54,9 @@ export default function BookDetails({id,book}) {
         >
           {book.copies > 0 ? 'Borrow Book' : 'Out of Stock'}
         </button>
+        
+        
+        
       </div>
     </div>
   );
