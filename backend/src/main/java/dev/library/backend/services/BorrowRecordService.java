@@ -1,7 +1,9 @@
 package dev.library.backend.services;
 
+import dev.library.backend.dto.mappers.BookMapper;
 import dev.library.backend.dto.mappers.BorrowRecordMapper;
 import dev.library.backend.dto.requests.BorrowRecordRequestDto;
+import dev.library.backend.dto.response.BookResponseDto;
 import dev.library.backend.dto.response.BorrowRecordResponseDto;
 import dev.library.backend.entities.Book;
 import dev.library.backend.entities.BorrowRecord;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -29,6 +32,7 @@ public class BorrowRecordService
     private final BorrowRecordMapper borrowRecordMapper;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
     public Page<BorrowRecordResponseDto> getBorrowRecords(int page , int size , String sortBy , String sortOrder)
     {
@@ -90,11 +94,11 @@ public class BorrowRecordService
         return this.borrowRecordMapper.toDataTransferObject(this.borrowRecordRepository.save(borrowRecord));
     }
 
-    public  List<BorrowRecordResponseDto> getUserBorrowRecords(Long userid){
-        List<BorrowRecord> borrowRecords=this.borrowRecordRepository.getUserBrrowRecord(userid);
-        return borrowRecords.stream()
-                .map(this.borrowRecordMapper::toDataTransferObject)
-                .toList();
-
+    public List<BookResponseDto> getBooksByUserId(Long userId) {
+        List<BorrowRecord> borrowRecords = this.borrowRecordRepository.findByUserId(userId);
+        List<Book> books = borrowRecords.stream()
+                .map(BorrowRecord::getBook)
+                .collect(Collectors.toList());
+        return this.bookMapper.toDataTransferObjects(books);
     }
 }

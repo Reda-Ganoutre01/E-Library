@@ -2,6 +2,8 @@ package dev.library.backend.controllers;
 
 import dev.library.backend.dto.requests.UserRequestDto;
 import dev.library.backend.dto.response.UserResponseDto;
+import dev.library.backend.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +13,9 @@ import dev.library.backend.services.UserService;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
     public final UserService userService;
-    @Autowired
-    public UserController(UserService userService)
-    {
-        this.userService = userService;
-    }
     @GetMapping("/")
     public ResponseEntity<?> getAllUsers(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size , @RequestParam(defaultValue = "fullName") String sortBy, @RequestParam(defaultValue = "asc") String direction)
     {
@@ -69,7 +67,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id)
     {
         try

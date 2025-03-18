@@ -1,6 +1,6 @@
 package dev.library.backend.entities;
 
-import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User implements UserDetails , Serializable {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +44,10 @@ public class User implements UserDetails , Serializable {
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'USER'")
     private Role role;
+
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.DETACH , orphanRemoval = true)
+    @JsonBackReference
+    private List<Message> messages;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()

@@ -9,5 +9,6 @@ public class BorrowRecordRequestDto {
     private Long userId;
     private Long bookId;
     private Status status;
+    private LocalDateTime borrowDate;
     private LocalDateTime returnDate;
 }

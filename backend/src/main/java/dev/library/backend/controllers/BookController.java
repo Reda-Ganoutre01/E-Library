@@ -56,7 +56,7 @@ public class BookController
         }
     }
 
-    @GetMapping("/search/{search}")
+    @GetMapping("/search={search}")
     public ResponseEntity<?> getBookBySearch(@PathVariable String search)
     {
         try
@@ -88,6 +88,24 @@ public class BookController
         }
     }
 
+    @PutMapping(value = "/update/{bookId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public ResponseEntity<?> updateBook(
+        @PathVariable Long bookId,
+        @RequestPart("bookRequestDto") String bookRequestDtoJson,
+        @RequestPart(value = "file", required = false) MultipartFile file) {
+    try {
+    
+        ObjectMapper objectMapper = new ObjectMapper();
+        BookRequestDto bookRequestDto = objectMapper.readValue(bookRequestDtoJson, BookRequestDto.class);
+
+
+        BookResponseDto updatedBook = this.bookService.updateBook(bookId, bookRequestDto, file);
+        return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
     @GetMapping("/latest")
     public ResponseEntity<?> getLatestBooks() {
         try
@@ -113,7 +131,7 @@ public class BookController
     }
 
 
-    @GetMapping("/category/{category}")
+    @GetMapping("/category={category}")
     public ResponseEntity<?> getBooksByCategory(@PathVariable String category) {
         try {
             List<BookResponseDto> books = this.bookService.getBooksByCategories(category);

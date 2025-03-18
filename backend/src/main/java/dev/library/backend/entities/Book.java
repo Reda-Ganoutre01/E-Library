@@ -21,6 +21,7 @@ public class Book implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String cover;
     private String title;
 
@@ -33,6 +34,7 @@ public class Book implements Serializable
 
     private String author;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String isbn;

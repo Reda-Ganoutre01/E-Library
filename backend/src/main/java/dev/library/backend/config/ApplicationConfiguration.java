@@ -16,11 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@EnableScheduling
 @EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired    private UserRepository userRepository;
     @Bean
     public UserDetailsService userDetailsService() {
         return this.userRepository::findByUsername;
