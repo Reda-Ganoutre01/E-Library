@@ -1,89 +1,83 @@
-import { Menu } from "./Menu"
-import PersonIcon from "@mui/icons-material/Person";
-import BookIcon from '@mui/icons-material/Book';
-import { FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaBook, FaSignInAlt } from "react-icons/fa";
+import { MdAdminPanelSettings, MdContactSupport } from "react-icons/md";
+import { FaTag } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import fetchCategories from "../../features/category/actions/fetchCategories";
+import { useContext, useEffect } from "react";
+import fetchCategories from "../../features/category/actions/fetchCategories.js";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { logout } from "../../features/auth/AuthReducer.js";
+import NavLink from "./NavLink.jsx";
+
 
 export default function NavLinks() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {isAuthenticated}=useSelector((state)=>state.auth)
-  const [isSticky, setIsSticky] = useState(false);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector(
     (state) => state.categories
   );
- 
 
   useEffect(() => {
     dispatch(fetchCategories());
-}, [dispatch]);
+  }, [dispatch]);
 
- 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.reload();
+  };
+
   return (
-    <>
-      <div className="hidden sm:flex items-center gap-6">
-        <ul className="flex items-center space-x-6">
-          {Menu.map((menu) => (
-            <li key={menu.id}>
-              <Link
-                to={menu.link}
-                className="py-2 hover:text-primary transition duration-200"
-              >
-                {menu.name}
-              </Link>
-            </li>
-          ))}
-
-          <li className="group relative cursor-pointer">
-            <Link to={"#"} className="flex items-center gap-2">
-              Categories <FaCaretDown className="transition duration-300 group-hover:-rotate-180" />
-            </Link>
-            <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-md p-2 rounded-md w-40">
-              <ul>
-                {
-                  categories?.content?.map((category) => (
-                    <li
-                      key={category.id}
-                      className="p-2 hover:text-primary rounded-md"
-                    >
-                      <Link to={`/books/${category.name}`}>{category.name}</Link>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-          </li>
-        </ul>
-        {isAuthenticated && <Link to={"/borrowRecord"} onClick={() => setIsMobileMenuOpen(false)}>
-          <BookIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
-        </Link>}
-        {isAuthenticated && <Link to={"/profile"} onClick={() => setIsMobileMenuOpen(false)}>
-          <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
-        </Link>}
-        {!isAuthenticated  && <Link to={"/login"} onClick={() => setIsMobileMenuOpen(false)}>
-          <PersonIcon className="cursor-pointer text-gray-600 hover:text-blue-600 transition duration-200" />
-        </Link>}
-      </div>
-
-      <button
-        className="sm:hidden"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle navigation"
-      >
-        {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-      </button>
-    </>
-  )
+    <ul className="menu menu-horizontal px-1 gap-2">
+      <NavLink>
+        <Link to={"/books"}>
+          <FaBook className={"size-5"} />
+          <span>Books</span>
+        </Link>
+      </NavLink>
+      <NavLink>
+        <Link to={"/contact"}>
+          <MdContactSupport className={"size-5"} />
+          <span>Contact</span>
+        </Link>
+      </NavLink>
+      {user?.role === "LIBRARIAN" ? (
+        <NavLink className="flex flex-row items-center">
+          <Link to="/admin">
+            <MdAdminPanelSettings className={"size-6"} />
+            <span>Admin</span>
+          </Link>
+        </NavLink>
+      ) : null}
+      <NavLink>
+        <details>
+          <summary>
+            <FaTag className={"size-5"} />
+            <span>Categories</span>
+          </summary>
+          <ul className="rounded-t-none p-2 z-[2]">
+            {categories?.content?.map((category) => {
+              return (
+                <li key={category.id}>
+                  <span>{category.name}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      </NavLink>
+      {!isAuthenticated ? (
+        <Link to={"/login"} className={"btn btn-sm btn-primary"}>
+          <FaSignInAlt />
+          <span>Sign in</span>
+        </Link>
+      ) : (
+        <button
+          onClick={handleLogout}
+          className={"btn btn-sm bg-error border-none font-bold text-white"}
+        >
+          Sign out
+        </button>
+      )}
+    </ul>
+  );
 }

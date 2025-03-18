@@ -1,16 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import bookService from "../../../services/bookService";
+import BookService from "../../../services/BookService";
 
-const fetchTopBooks = createAsyncThunk(
-    "book/fetchTopBooks",
-    async (_, { rejectWithValue }) => {
-      try {
-        const response = await bookService.getTopBooks();
+
+const fetchTopBooks = createAsyncThunk('book/fetchTopBooks', async (_ , {rejectWithValue}) => {
+    try
+    {
+        const response = await BookService.getTopBooks();
         return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response?.data || error.message);
-      }
     }
-  );
-  
+    catch (error)
+    {
+        rejectWithValue(error.response?.data || error.message);
+    }
+})
+
 export default fetchTopBooks;

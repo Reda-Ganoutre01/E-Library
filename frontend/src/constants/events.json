@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Author Meet & Greet",
+    "image" : "https://litbooks.com.my/wp-content/uploads/2018/08/zaheera-scaled.jpg",
+    "description": "Meet bestselling authors and get your books signed!",
+    "date": "2025-03-15",
+    "time": "15:00 - 17:00",
+    "icon": "📚"
+  },
+  {
+    "title": "Creative Writing Workshop",
+    "image" : "https://www.strathmore.org/media/twtlc1kp/creative-writing-workshop.jpg",
+    "description": "Sharpen your storytelling skills with expert guidance.",
+    "date": "2025-04-05",
+    "time": "14:00 - 16:00",
+    "icon": "🎨"
+  },
+  {
+    "title": "Story time for Kids",
+    "image" : "https://blog.kaplanco.com/hubfs/Imported_Blog_Media/engage-children-during-storytime_a.jpg",
+    "description": "A fun-filled reading session for young book lovers.",
+    "date": "Every Saturday",
+    "time": "10:00 - 11:00",
+    "icon": "📖"
+  },
+  {
+    "title": "Tech & Coding Bootcamp",
+    "image" : "https://erepublic.brightspotcdn.com/dims4/default/435a65a/2147483647/strip/true/crop/1167x609+0+85/resize/840x438!/quality/90/?url=http%3A%2F%2Ferepublic-brightspot.s3.us-west-2.amazonaws.com%2Fa5%2F43%2Ffe15da7c3958b38a19557b6f7af0%2Fcoding-bootcamp.jpg",
+    "description": "Learn the basics of web development and programming.",
+    "date": "2025-04-20",
+    "time": "13:00 - 15:30",
+    "icon": "💻"
+  }
+]

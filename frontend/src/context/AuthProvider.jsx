@@ -1,20 +1,52 @@
-import {AuthContext} from "./AuthContext.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import {useContext} from "react";
-import authenticateUser from "../features/auth/actions/authenticateUser.js";
-import {logout} from "../features/auth/AuthSlice.js";
+import { AuthContext } from "./AuthContext.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import authenticateUser from "../features/auth/actions/authenticateUser";
+import registerUser from "../features/auth/actions/registerUser";
+import isTokenExpired from "../utils/isTokenExpired.js"
+import { useEffect , useMemo } from "react";
 
+export default function AuthProvider({ children }) {
+  const dispatch = useDispatch();
+  const { user, isAuthenticated, token } = useSelector((state) => state.auth);
 
-export default function AuthProvider({children}) {
+  /**
+   * Handles user login by dispatching the authentication action.
+   *
+   * @param {Object} credentials - The user's login credentials.
+   */
+  const login = (credentials) => {
+    dispatch(authenticateUser(credentials));
+  };
 
-    const dispatch = useDispatch();
-    const {user , isAuthenticated} = useSelector((state) => state.auth);
+  /**
+   * Handles user registration by dispatching the registration action.
+   *
+   * @param {Object} credentials - The user's registration credentials.
+   */
+  const register = (credentials) => {
+    dispatch(registerUser(credentials));
+  };
 
-    const login = (credentials) => {
-        dispatch(authenticateUser(credentials))
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  useEffect(() => {
+    if (token && isTokenExpired(token)) {
+      handleLogout();
     }
+  }, [token]);
 
-    return <AuthContext.Provider value={{user : user , login: login , isAuthenticated: isAuthenticated}}>
-        {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      user,
+      login,
+      isAuthenticated,
+      register,
+      logout: handleLogout,
+    }),
+    [user, isAuthenticated, token]
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

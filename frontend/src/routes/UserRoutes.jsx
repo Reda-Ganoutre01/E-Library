@@ -1,32 +1,38 @@
-  import { Routes, Route } from "react-router-dom";
-  import { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
 
-  // User pages
-  const Home = lazy(() => import("../pages/HomePage.jsx"));
-  const Login = lazy(() => import("../pages/LoginPage.jsx"));
-  const Register = lazy(() => import("../pages/RegisterPage.jsx"));
-  const Books = lazy(() => import("../pages/BooksPage.jsx"));
-  const BookDetails = lazy(() => import("../pages/BookPage.jsx"));
-  const Profile = lazy(() => import("../pages/UserProfilePage.jsx"));
-  const Contact = lazy(() => import("../pages/ContactPage.jsx"));
-  const Search = lazy(() => import("../pages/SearchPage.jsx"));
-  const BorrowedRecord = lazy(() => import("../pages/BorrowRecordPage.jsx"));
+import lazyComponent from "../utils/lazyComponent.js";
+import ProtectedRoute from "../utils/ProtectedRoute.jsx";
 
+const HomePage = lazyComponent(() => import("../pages/user/HomePage.jsx"));
+const BooksPage = lazyComponent(() => import("../pages/user/BooksPage.jsx"));
+const LoginPage = lazyComponent(() => import("../pages/auth/LoginPage.jsx"));
+const RegisterPage = lazyComponent(() =>
+  import("../pages/auth/RegisterPage.jsx")
+);
+const ContactPage = lazyComponent(() =>
+  import("../pages/user/ContactPage.jsx")
+);
+const BookPage = lazyComponent(() => import("../pages/user/BookPage.jsx"));
+const ProfilePage = lazyComponent(() =>
+  import("../pages/user/ProfilePage.jsx")
+);
+const BorrowPage = lazyComponent(() => import("../pages/user/BorrowPage.jsx"));
 
-  const UserRoutes = ({ isAuthenticated }) => (
+export default function UserRoutes() {
+  return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      {!isAuthenticated && <Route path="/login" element={<Login />} />}
-      {!isAuthenticated && <Route path="/register" element={<Register />} />}
-      <Route path="/books" element={<Books />} />
-      {isAuthenticated && <Route path="/borrowRecord" element={<BorrowedRecord />} />}
-      <Route path="/books/:search" element={<Search />} />
-      <Route path="/books/:category" element={<Search />} />
-      <Route path="/books/bookdetails/:id" element={<BookDetails />} />
-      <Route path="/contact" element={<Contact />} />
-      {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/books" element={<BooksPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/books/:id" element={<BookPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
 
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/borrow/:id" element={<BorrowPage />} />
+      </Route>
     </Routes>
   );
-
-  export default UserRoutes;
+}

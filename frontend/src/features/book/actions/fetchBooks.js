@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import bookService from "../../../services/bookService";
+import BookService from "../../../services/BookService";
 
 
 const fetchBooks = createAsyncThunk('book/fetchBooks', async (payload , {rejectWithValue}) => {
     try
     {
-        const response = await bookService.getAllBooks(payload.page , payload.size , payload.sortBy);
+        const response = await BookService.getAllBooks(payload.page , payload.size , payload.sortBy);
         return response.data;
     }
     catch (error)

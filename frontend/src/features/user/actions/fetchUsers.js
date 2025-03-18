@@ -3,16 +3,12 @@ import UserService from "../../../services/UserService";
 
 const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
-  async (payload, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await UserService.getAllUsers(payload.page, payload.size,payload.sortBy);
-
-      return {
-        users: response.data|| [],  
-        totalCount: response.data?.page?.totalElements || 0,  
-      };
+      const response = await UserService.getUsers();
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      rejectWithValue(error.response?.data || error.message);
     }
   }
 );

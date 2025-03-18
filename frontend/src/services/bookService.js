@@ -1,45 +1,55 @@
 import axios from "axios";
 
 class BookService {
-    constructor() {
-        this.http = axios.create({ baseURL: "http://localhost:8080/api/v1/books" });
+  constructor() {
+    this.http = axios.create({ baseURL: "/api/v1/books" });
 
-    }
-    
-    async getAllBooks(page = null, pageSize = null, sortBy = null) {
-        let url = "/";
-        if (page !== null && pageSize !== null && sortBy !== null) {
-            url += `?page=${page}&size=${pageSize}&sortBy=${sortBy}`;
-        }
-        return this.http.get(url);
-    }
-    async getTopBooks() {
-        return this.http.get("/topbooks");
-    }
-    async getLatestBooks() {
-        return this.http.get("/latest")
-    }
+    this.http.interceptors.request.use(config => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    });
+  }
 
-    async getBooksByCategory(category) {
-        return this.http.get(`/category/${category}`);
-    }
+  async getAllBooks(page, size, sortBy) {
+    return this.http.get(`/?page=${page}&size=${size}&sortBy=${sortBy}`);
+  }
 
-    async searchBooks(search) {
-        return this.http.get(`/search/${search}`);
-    }
-    async getBook(id) {
-        return this.http.get(`/${id}`)
-    }
-    async addBook(book) {
-        return this.http.post("/", book);
-    }
+  async getTopBooks() {
+    return this.http.get("/topBooks");
+  }
 
-    async updateBook(id, book) {
-        return this.http.put(`/update/${id}`, book);
-    }
-    async deleteBook(id) {
-        return this.http.delete(`/delete/${id}`)
-    }
+  async getLatestBooks() {
+    return this.http.get("/latest");
+  }
+
+  async getBooksByCategory(category) {
+    return this.http.get(`/category=${category}`);
+  }
+
+  async getBook(id) {
+    return this.http.get(`/${Number(id)}`);
+  }
+
+  async getBooksBySearch(search) {
+    return this.http.get(`/search=${search}`);
+  }
+
+  async updateBook(id, data) {
+    return this.http.put(`/update/${Number(id)}`, data);
+  }
+
+  async deleteBook(id) {
+    return this.http.delete(`/delete/${Number(id)}`);
+  }
+
+  async createBook(data) {
+    return this.http.post("/create", data);
+  }
 }
 
 export default new BookService();

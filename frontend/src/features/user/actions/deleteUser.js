@@ -3,12 +3,12 @@ import UserService from "../../../services/UserService";
 
 const deleteUser = createAsyncThunk(
   "user/deleteUser",
-  async (id, { rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
-      const response = await UserService.deleteUser(id);
+      const response = await UserService.deleteUser(payload.id);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

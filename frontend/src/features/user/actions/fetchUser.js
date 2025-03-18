@@ -1,16 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import UserService from "../../../services/UserService";
+import UserService from "../../../services/UserService"
 
-const fetchUser = createAsyncThunk(
+const fetchUserById = createAsyncThunk(
   "user/fetchUser",
-  async (username, { rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
-      const response = await UserService.getUserProfile(username);
+      const response = await UserService.getUserById(payload.id);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
-export default fetchUser;
+export default fetchUserById;

@@ -1,28 +1,13 @@
+import logo from "../../assets/logo.png";
 
-import BrandFooter from "./BrandFooter";
-import { CategoryFooter } from "./CategoryFooter";
-import { CopyrightFooter } from "./CopyrightFooter";
-import { ServiceFooter } from "./ServiceFooter";
-import { SocialLinksFooter } from "./SocialLinksFooter";
-
-function Footer() {
-
+export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12">
-      <div className="max-w-screen-xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-          <BrandFooter />
-
-          <ServiceFooter />
-
-          <CategoryFooter />
-          <SocialLinksFooter />
-
-        </div>
-        <CopyrightFooter />
-      </div>
+    <footer className="footer sm:footer-horizontal footer-center bg-base-100 text-base-content p-4">
+      <aside>
+        <p className={'font-bold font-[poppins]'}>
+          Copyright © {new Date().getFullYear()} - All right reserved by MOHAMED LAFROUH & REDA GANOUTRE
+        </p>
+      </aside>
     </footer>
   );
 }
-
-export default Footer;

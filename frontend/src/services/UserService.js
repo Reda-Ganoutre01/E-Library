@@ -1,34 +1,39 @@
 import axios from "axios";
 
 class UserService {
-    constructor() {
-        this.http = axios.create({ baseURL: "http://localhost:8080/api/v1/users" });
-    }
+  constructor() {
+    this.http = axios.create({ baseURL: "/api/v1/users" });
 
- 
-    async getAllUsers(page = null, pageSize = null, sortBy = null) {
-        let url = "/";
-        if (page !== null && pageSize !== null && sortBy !== null) {
-            url += `?page=${page}&size=${pageSize}&sortBy=${sortBy}`;
-        }
-        return this.http.get(url);
-    }
-    async getUserProfile(username) {
-        return this.http.get(`/profile/${username}`)
-    }
-    async addUser(userData) {
-        return this.http.post(`/`, userData); 
-    }
-    async updateUser(userId, userData) {
-        return this.http.put(`/update/${userId}`, userData);
-    }
-    async deleteUser(userId) {
-        return this.http.delete(`/${userId}`)
-    }
+    this.http.interceptors.request.use(config => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    });
+  }
 
+  async getUsers() {
+    return this.http.get("/");
+  }
 
+  async getUserById(id) {
+    return this.http.get(`/${id}`);
+  }
+
+  async createUser(user) {
+    return this.http.post("/create", user);
+  }
+
+  async updateUser(id, user) {
+    return this.http.put(`/update/${id}`, user);
+  }
+
+  async deleteUser(id) {
+    return this.http.delete(`/delete/${Number(id)}`);
+  }
 }
 
 export default new UserService();
-
-
