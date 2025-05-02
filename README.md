@@ -100,7 +100,7 @@ The application uses a MySQL database to store:
 1. Clone the repository:
    
    ```bash
-   git clone https://github.com/0xSikrox/ALMS.git
+   git clone https://github.com/Reda-Ganoutre01/Advanced-Library-Management-System.git
    ```
 3. Navigate to the backend directory:
    
