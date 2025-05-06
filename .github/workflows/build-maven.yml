@@ -1,40 +1,48 @@
-name: Build Java Backend
+name: Build and Release Spring Boot App
 
 on:
   push:
-    branches:
-      - main  # Trigger the workflow on push to the main branch
-  pull_request:
-    branches:
-      - main  # Trigger the workflow on pull requests to the main branch
+    tags:
+      - 'v*' 
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Java environment
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'  # Specify the Java version
-          distribution: 'temurin'  # Use Temurin JDK
+          java-version: '17' 
+          distribution: 'temurin'
 
-      # Navigate to the backend directory
-      - name: Navigate to backend directory
-        run: cd backend
+      - name: Build the JAR file
+        run: ./mvnw clean package -DskipTests
 
-      # Build the Java project using Maven
-      - name: Build with Maven
-        run: mvn clean package  # This will create the target directory
+      - name: Get the version from pom.xml
+        id: version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      # Optionally, you can upload the target directory as an artifact
-      - name: Upload target directory as artifact
-        uses: actions/upload-artifact@v3
+      - name: Create GitHub Release
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+        uses: softprops/action-gh-release@v1
         with:
-          name: target
-          path: backend/target
+          tag_name: ${{ github.ref }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: "Spring Boot App Release ${{ steps.version.outputs.version }}"
+          draft: false
+          prerelease: false
+
+      - name: Upload JAR as a release asset
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/E-Library-${{ steps.version.outputs.version }}.jar
+          asset_name: E-Library-${{ steps.version.outputs.version }}.jar
+          asset_content_type: application/java-archive
