@@ -4,15 +4,19 @@ class UserService {
   constructor() {
     this.http = axios.create({ baseURL: "/api/v1/users" });
 
-    this.http.interceptors.request.use(config => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+    this.http.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem("token");
+        console.log("Authorization Token:", token);
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
-      return config;
-    }, error => {
-      return Promise.reject(error);
-    });
+    );
   }
 
   async getUsers() {
@@ -24,9 +28,9 @@ class UserService {
   }
 
   async createUser(user) {
+    console.log("Creating User with Payload:", user);
     return this.http.post("/create", user);
-  }
-
+}
   async updateUser(id, user) {
     return this.http.put(`/update/${id}`, user);
   }

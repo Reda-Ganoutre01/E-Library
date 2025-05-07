@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import dev.library.backend.services.UserService;
@@ -40,7 +41,7 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('LIBRARIAN')") 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserRequestDto user)
     {
