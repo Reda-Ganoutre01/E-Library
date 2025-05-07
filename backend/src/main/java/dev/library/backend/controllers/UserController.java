@@ -41,7 +41,7 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('LIBRARIAN')") 
+    @PreAuthorize("hasRole('LIBRARIAN')")
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserRequestDto user)
     {
