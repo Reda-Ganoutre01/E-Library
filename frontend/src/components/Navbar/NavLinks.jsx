@@ -58,7 +58,8 @@ export default function NavLinks() {
             {categories?.content?.map((category) => {
               return (
                 <li key={category.id}>
-                  <span>{category.name}</span>
+                  <Link to={`/booksbycategory/${category.name}`}> <span>{category.name}</span></Link>
+                 
                 </li>
               );
             })}

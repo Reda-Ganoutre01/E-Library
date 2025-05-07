@@ -6,28 +6,7 @@ import Pagination                           from "../../components/pagination/Pa
 import BooksList     from "../../components/book/BooksList.jsx";
 import PageNavigator from "../../components/navigation/PageNavigator.jsx";
 
-/**
- * BooksPage Component
- *
- * This component displays a paginated list of books from the E-Library.
- * It fetches book data from the Redux store and manages pagination.
- *
- * Features:
- * - Fetches books with sorting and pagination.
- * - Uses Redux (`useDispatch`, `useSelector`) for state management.
- * - Implements a loading state while fetching books.
- * - Provides pagination for navigating through book pages.
- *
- * State:
- * - `currentPage` (number): The current page number.
- * - `totalPages` (number): The total number of pages.
- *
- * Handlers:
- * - `handlePageChange(page)`: Updates `currentPage` and triggers data fetch.
- * - `fetchData(page)`: Dispatches action to fetch books for the given page.
- *
- * @returns {JSX.Element} The rendered Books page.
- */
+
 export default function BooksPage() {
 
     document.title = `E-Library - Books`;

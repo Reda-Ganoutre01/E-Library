@@ -7,6 +7,7 @@ import createBook from "./actions/createBook.js";
 import { createSlice } from "@reduxjs/toolkit";
 import fetchBook from "./actions/fetchBook.js";
 import deleteBook from "./actions/deleteBook.js"; 
+import fetchBooksByCategory from "./actions/fetchBooksByCategory.js";
 
 const BookSlice = createSlice({
   name: "book",
@@ -16,18 +17,25 @@ const BookSlice = createSlice({
     latestBooks: [],
     topBooks: [],
     searchedBooks: [],
+    BookByCategories: [],
+
 
     loadingBooks: false,
     loadingLatestBooks: false,
     loadingTopBooks: false,
     loadingBook: false,
     loadingSearchedBooks: false,
+    loadingBooksByCategory: false,
 
+
+    
     errorBooks: null,
     errorLatestBooks: null,
     errorTopBooks: null,
     errorBook: null,
     errorSearchedBooks: null,
+    errorBooksByCategory: null,
+
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -94,6 +102,19 @@ const BookSlice = createSlice({
     builder.addCase(fetchBooksBySearch.rejected, (state, action) => {
       state.loadingBook = false;
       state.errorSearchedBooks = action.payload;
+    });
+   // by category
+      builder.addCase(fetchBooksByCategory.pending, (state) => {
+        state.loadingBooksByCategory = true;
+        state.errorBooksByCategory = null; // Reset error state
+    });
+    builder.addCase(fetchBooksByCategory.fulfilled, (state, action) => {
+        state.loadingBooksByCategory = false;
+        state.BookByCategories = action.payload; 
+    });
+    builder.addCase(fetchBooksByCategory.rejected, (state, action) => {
+        state.loadingBooksByCategory = false;
+        state.errorBooksByCategory = action.payload; 
     });
 
     builder.addCase(createBook.pending, (state) => {

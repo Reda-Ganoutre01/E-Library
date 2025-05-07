@@ -13,10 +13,13 @@ const ContactPage = lazyComponent(() =>
   import("../pages/user/ContactPage.jsx")
 );
 const BookPage = lazyComponent(() => import("../pages/user/BookPage.jsx"));
+const BooksByCategory = lazyComponent(() => import("../pages/user/BookByCategories.jsx"));
+
 const ProfilePage = lazyComponent(() =>
   import("../pages/user/ProfilePage.jsx")
 );
 const BorrowPage = lazyComponent(() => import("../pages/user/BorrowPage.jsx"));
+
 
 export default function UserRoutes() {
   return (
@@ -26,6 +29,7 @@ export default function UserRoutes() {
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/books/:id" element={<BookPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/booksbycategory/:category" element={<BooksByCategory />} />
 
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
