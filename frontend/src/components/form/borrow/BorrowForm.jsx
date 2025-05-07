@@ -75,6 +75,7 @@ export default function BorrowForm({ book }) {
             className="btn btn-sm btn-success font-bold flex items-center"
             onClick={handleBorrow}
             disabled={loading}
+            id="btnborrowConfirm"
           >
             <FaCheck className="size-4" />
             {loading ? "Processing..." : "Confirm Borrow"}

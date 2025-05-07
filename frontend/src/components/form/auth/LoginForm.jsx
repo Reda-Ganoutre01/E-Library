@@ -69,7 +69,7 @@ export default function LoginForm({
           </p>
         )}
         <div className="card-actions flex mt-4 justify-center">
-          <button className="btn btn-primary w-full" disabled={loading}>
+          <button className="btn btn-primary w-full" disabled={loading} id="btn-signin"> 
             {loading ? "Signing in..." : "Sign in"}
           </button>
           <span>

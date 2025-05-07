@@ -20,7 +20,9 @@ export default function BookDetails({ book }) {
                 <p>
                     <span className={'badge badge-outline badge-primary'}>{book.category}</span> - <span className={'font-bold'}>{book.author}</span>
                 </p>
-                <Link to={`/borrow/${book.id}`} className="btn btn-success font-bold flex items-center">
+                <Link to={`/borrow/${book.id}`} className="btn btn-success font-bold flex items-center"
+                    id="btnborrow"
+                >
                     <IoMdAddCircle className="size-6" />
                     Borrow
                 </Link>
