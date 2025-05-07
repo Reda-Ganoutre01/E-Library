@@ -5,7 +5,7 @@ import Avatar from "./Avatar.jsx";
 
 export default function Profile() {
     const {user} = useContext(AuthContext)
-    return <Link className="avatar avatar-placeholder" to={"/profile"}>
+    return <Link className="avatar avatar-placeholder" to={"/profile"} id="profile-link">
            <Avatar size={20} username={user.sub} textSize={'xl'} />
     </Link>
 }

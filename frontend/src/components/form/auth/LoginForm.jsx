@@ -74,7 +74,7 @@ export default function LoginForm({
           </button>
           <span>
             New to the platform ?{" "}
-            <Link to="/register" className="font-bold text-success">
+            <Link to="/register" className="font-bold text-success" id="btn-register">
               Sign Up
             </Link>
           </span>

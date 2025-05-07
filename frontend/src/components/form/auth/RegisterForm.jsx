@@ -79,7 +79,7 @@ export default function RegisterForm({
           </p>
         )}
         <div className="card-actions flex mt-4 justify-center">
-          <button className="btn btn-primary w-full" disabled={loading}>
+          <button className="btn btn-primary w-full" disabled={loading} id="btn-SignUp">
             {loading ? "Signing up..." : "Sign Up"}
           </button>
           <span>

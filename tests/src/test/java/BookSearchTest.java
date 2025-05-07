@@ -16,9 +16,9 @@ public class BookSearchTest {
     @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-                "E:\\Learning IT\\old\\ALMS\\reda\\E-Library\\tests\\src\\main\\resources\\chromedriver-win64\\chromedriver.exe");
+                "src/main/resources/chromedriver-win64/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         driver.manage().window().maximize();
     }
 

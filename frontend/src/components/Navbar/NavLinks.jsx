@@ -24,6 +24,7 @@ export default function NavLinks() {
   const handleLogout = () => {
     dispatch(logout());
     window.location.reload();
+    navigate("/");
   };
 
   return (
@@ -67,7 +68,7 @@ export default function NavLinks() {
         </details>
       </NavLink>
       {!isAuthenticated ? (
-        <Link to={"/login"} className={"btn btn-sm btn-primary"}>
+        <Link to={"/login"} className={"btn btn-sm btn-primary"} id="btn-login">
           <FaSignInAlt />
           <span>Sign in</span>
         </Link>
@@ -75,6 +76,7 @@ export default function NavLinks() {
         <button
           onClick={handleLogout}
           className={"btn btn-sm bg-error border-none font-bold text-white"}
+          id="btn-logout"
         >
           Sign out
         </button>
