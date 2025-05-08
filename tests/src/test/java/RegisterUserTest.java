@@ -51,7 +51,7 @@ public class RegisterUserTest {
     fullNameField.sendKeys("Reda Ganoutre" + randomNumber);
 
     WebElement emailField = driver.findElement(By.name("email"));
-    emailField.sendKeys("reda@gmail.com");
+    emailField.sendKeys("reda"+randomNumber+"@gmail.com");
 
     WebElement passwordField = driver.findElement(By.name("password"));
     passwordField.sendKeys("1234");
