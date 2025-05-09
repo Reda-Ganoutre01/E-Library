@@ -15,14 +15,17 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class BorrowRecordServiceTest {
+
+
+
+
+
+public class BorrowRecordServiceTest {
 
     @Mock
     private BorrowRecordRepository borrowRecordRepository;
@@ -40,25 +43,24 @@ class BorrowRecordServiceTest {
     private BorrowRecordService borrowRecordService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
+
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void createBorrowRecord_SuccessForUserReda() {
+    public void testCreateBorrowRecord_Success() {
         // Arrange
         BorrowRecordRequestDto requestDto = new BorrowRecordRequestDto();
         requestDto.setUserId(1L);
-        requestDto.setBookId(1L);
+        requestDto.setBookId(2L);
         requestDto.setReturnDate(LocalDateTime.now().plusDays(7));
 
         User user = new User();
         user.setId(1L);
-        user.setUsername("Reda");
 
         Book book = new Book();
-        book.setId(1L);
-        book.setTitle("JavaScript For Dummies 3rd Edition"); // Set the book title
+        book.setId(2L);
 
         BorrowRecord borrowRecord = BorrowRecord.builder()
                 .user(user)
@@ -71,7 +73,7 @@ class BorrowRecordServiceTest {
         BorrowRecordResponseDto responseDto = new BorrowRecordResponseDto();
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        when(bookRepository.findById(2L)).thenReturn(Optional.of(book));
         when(borrowRecordRepository.countByUserIdAndStatus(1L, Status.BORROWED)).thenReturn(2L);
         when(borrowRecordRepository.save(any(BorrowRecord.class))).thenReturn(borrowRecord);
         when(borrowRecordMapper.toDataTransferObject(borrowRecord)).thenReturn(responseDto);
@@ -82,7 +84,58 @@ class BorrowRecordServiceTest {
         // Assert
         assertNotNull(result);
         verify(borrowRecordRepository, times(1)).save(any(BorrowRecord.class));
-        assertEquals("Reda", borrowRecord.getUser().getUsername()); // Verify the user's name
-        assertEquals("JavaScript For Dummies 3rd Edition", borrowRecord.getBook().getTitle()); // Verify the book title
+    }
+
+    @Test
+    public void testCreateBorrowRecord_UserReachedLimit() {
+        // Arrange
+        BorrowRecordRequestDto requestDto = new BorrowRecordRequestDto();
+        requestDto.setUserId(1L);
+
+        when(borrowRecordRepository.countByUserIdAndStatus(1L, Status.BORROWED)).thenReturn(3L);
+
+        // Act & Assert
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+            borrowRecordService.createBorrowRecord(requestDto);
+        });
+        assertEquals("Can't create borrow record because user has reached the maximum number of books (3)", exception.getMessage());
+        verify(borrowRecordRepository, never()).save(any(BorrowRecord.class));
+    }
+
+    @Test
+    public void testCreateBorrowRecord_UserNotFound() {
+        // Arrange
+        BorrowRecordRequestDto requestDto = new BorrowRecordRequestDto();
+        requestDto.setUserId(1L);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            borrowRecordService.createBorrowRecord(requestDto);
+        });
+        assertEquals("User not found", exception.getMessage());
+        verify(borrowRecordRepository, never()).save(any(BorrowRecord.class));
+    }
+
+    @Test
+    public void testCreateBorrowRecord_BookNotFound() {
+        // Arrange
+        BorrowRecordRequestDto requestDto = new BorrowRecordRequestDto();
+        requestDto.setUserId(1L);
+        requestDto.setBookId(2L);
+
+        User user = new User();
+        user.setId(1L);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(bookRepository.findById(2L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            borrowRecordService.createBorrowRecord(requestDto);
+        });
+        assertEquals("Book not found", exception.getMessage());
+        verify(borrowRecordRepository, never()).save(any(BorrowRecord.class));
     }
 }

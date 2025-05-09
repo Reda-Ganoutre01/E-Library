@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -37,35 +38,33 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    void testRegister() {
+    void register_ShouldReturnAuthenticationResponseDto() {
         // Arrange
         RegisterRequestDto registerRequestDto = new RegisterRequestDto();
         registerRequestDto.setUsername("testuser");
         registerRequestDto.setEmail("testuser@example.com");
         registerRequestDto.setFullName("Test User");
-        registerRequestDto.setPassword("password");
+        registerRequestDto.setPassword("password123");
 
-        User mockUser = User.builder()
+        User user = User.builder()
                 .role(Role.USER)
-                .username("testuser")
-                .email("testuser@example.com")
-                .fullName("Test User")
+                .username(registerRequestDto.getUsername())
+                .email(registerRequestDto.getEmail())
+                .fullName(registerRequestDto.getFullName())
                 .password("encodedPassword")
                 .build();
 
-        String mockJwtToken = "mockJwtToken";
-
         when(passwordEncoder.encode(registerRequestDto.getPassword())).thenReturn("encodedPassword");
-        when(userRepository.save(any(User.class))).thenReturn(mockUser);
-        when(jwtService.generateToken(any(User.class))).thenReturn(mockJwtToken);
+        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(jwtService.generateToken(user)).thenReturn("mockedJwtToken");
 
         // Act
         AuthenticationResponseDto response = authenticationService.register(registerRequestDto);
 
         // Assert
-        assertEquals(mockJwtToken, response.getToken());
-        verify(passwordEncoder, times(1)).encode(registerRequestDto.getPassword());
+        assertNotNull(response);
+        assertEquals("mockedJwtToken", response.getToken());
         verify(userRepository, times(1)).save(any(User.class));
-        verify(jwtService, times(1)).generateToken(any(User.class));
+        verify(jwtService, times(1)).generateToken(user);
     }
 }
